@@ -7,5 +7,4 @@ Mostafa
 Amr
 Malak
 Yasmine
-!Karim
-utffziguhlij
+Karim
