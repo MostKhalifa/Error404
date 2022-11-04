@@ -43,6 +43,7 @@ const CoursesSchema = new Schema
             {
                 type:Boolean,
                 required :true,
+                default: false
             },
             Percentage: 
             {
@@ -97,7 +98,8 @@ const CoursesSchema = new Schema
                     type:Number,
                     required: true,
                     max: 5,
-                    min:0
+                    min:0,
+                    default: 0
                 },
                 reviewedBy:
                 {
