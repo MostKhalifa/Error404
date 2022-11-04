@@ -13,3 +13,8 @@ app.listen(port, () => {
      })
 app.use(express.json());
 app.use(express.urlencoded({extended: false}))
+//Routing the incoming requests to there corresponding router file
+app.use("/Course",require("./Routes/coursesRoutes"));
+app.use("/Instructor",require("./Routes/instructorRoutes"));
+app.use("/Trainee",require("./Routes/traineeRoutes"));
+app.use("/Admin",require("./Routes/adminRoutes"));
