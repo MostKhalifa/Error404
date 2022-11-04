@@ -5,47 +5,47 @@ const Courses = require('./Courses');
 const CorporateTraineeSchema = new Schema
 (
     {
-        FirstName: 
+        firstName: 
         {
             type: String,
             required: true,
         },
-        LastName:
+        lastName:
         {
             type: String,
             required: true,
         },
-        Email: 
+        email: 
         {
             type: String,
             required: true
         },
-        Username: 
+        username: 
         {
             type: String,
             required: true,
         },
-        Password: 
+        password: 
         {
             type: String,
             required: true
         },
-        Gender: 
+        gender: 
         {
             type: Boolean,
             required: true
         },
-        Country: 
+        country: 
         {
             type: String,
             required: true,
         },
-        Corporate: 
+        corporate: 
         {
             type: String,
             required: true,
         },   
-        Courses:
+        courses:
         [
             {
                 CourseID: 
