@@ -3,7 +3,7 @@ const Courses = require('../Models/Courses')
 
 //view course title along with total hours and rating ( requirement 7)
 const getCourse = aysncHandler(async(req,res)=>{
-    const course = await Courses.find().select('CourseTitle NumberOfHours Reviews[1]');
+    const course = await Courses.find().select('CourseTitle NumberOfHours Reviews');
     const temp = '';
     // for (let i = 0; i < course.length; i++) {
     //     temp += 'Course title: '+course[i].CourseTitle + "<br>"
