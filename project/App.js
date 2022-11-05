@@ -13,5 +13,5 @@ app.listen(port, () => {
      })
 app.use(express.json());
 app.use(express.urlencoded({extended: false}))
-app.use("/Instructor",require("./Routes/instructorRoutes"));
+app.use("/instructor",require("./Routes/instructorRoutes"));
 app.use('/admin' , require('./Routes/adminRoutes'));
