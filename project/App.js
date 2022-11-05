@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 const express = require("express");
+const course = require("./Models/Courses");
+const Courses = require('./Models/Courses');
 const app = express();
 const MongoURI = 'mongodb+srv://Error404:Error404TeamNotFound@jalp.jnqmtan.mongodb.net/?retryWrites=true&w=majority' ;
 const port = process.env.PORT || "8000";
@@ -14,7 +16,8 @@ app.listen(port, () => {
 app.use(express.json());
 app.use(express.urlencoded({extended: false}))
 //Routing the incoming requests to there corresponding router file
-app.use("/Course",require("./Routes/coursesRoutes"));
 app.use("/Instructor",require("./Routes/instructorRoutes"));
-app.use("/Trainee",require("./Routes/traineeRoutes"));
-app.use("/Admin",require("./Routes/adminRoutes"));
+app.post("/add",(req,res)=>{
+   course.create(req.body);
+    res.send("data added");
+});

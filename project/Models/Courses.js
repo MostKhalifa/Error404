@@ -19,7 +19,7 @@ const CoursesSchema = new Schema
         },
         NumberOfHours:
         {
-        type: Number,
+            type: Number,
             required: true,
         },
         Contract: 
