@@ -17,7 +17,3 @@ app.use(express.json());
 app.use(express.urlencoded({extended: false}))
 //Routing the incoming requests to there corresponding router file
 app.use("/Instructor",require("./Routes/instructorRoutes"));
-app.post("/add",(req,res)=>{
-   course.create(req.body);
-    res.send("data added");
-});
