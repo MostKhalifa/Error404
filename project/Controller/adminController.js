@@ -1,9 +1,9 @@
 const asyncHandler = require('express-async-handler');
-//const bcrypt = require("bcryptjs");
+const bcrypt = require("bcryptjs");
 const admins = require('../Models/AdminSchema');
 const corporateTrainee = require('../Models/CorporateTrainee');
 const instructor = require('../Models/InstructorSchema');
-
+const saltRounds = 10;
 // Adding another Admin (requirement 55)
 /* Request body
 {"username" : "",
@@ -22,6 +22,8 @@ exports.addAdmin = asyncHandler (
         res.status(409).send("Username already in use");
         return;
     };
+    const hashedPwd = await bcrypt.hash(req.body.password, saltRounds);
+    req.body.password = hashedPwd;
     admins.create(req.body);
     res.status(201).send('New Admin created');
 });
@@ -48,6 +50,8 @@ exports.addCorporateTrainee = asyncHandler (
         res.status(409).send("Username already in use");
         return;
     }
+    const hashedPwd = await bcrypt.hash(req.body.password, saltRounds);
+    req.body.password = hashedPwd;
     corporateTrainee.create(req.body);
     res.status(201).send('New Corporate Trainee created');
 });
@@ -73,7 +77,13 @@ exports.addInstructor = asyncHandler (
         res.status(409).send("Username already in use");
         return;
     }
+    const hashedPwd = await bcrypt.hash(req.body.password, saltRounds);
+    req.body.password = hashedPwd;
     instructor.create(req.body);
     res.status(201).send('New Instructor created');
 });
+
+
+
+
 
