@@ -12,4 +12,8 @@ app.listen(port, () => {
        console.log(`Listening to requests on http://localhost:${port}`);
      })
 app.use(express.json());
-app.use(express.urlencoded({extended: false}))
+
+app.use('/course', require('./Routes/coursesRoutes'));
+app.use("/instructor",require("./Routes/instructorRoutes"));
+app.use('/admin' , require('./Routes/adminRoutes'));
+
