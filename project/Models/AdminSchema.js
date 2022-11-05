@@ -24,3 +24,4 @@ const AdminSchema = new Schema
 //Modeling the AdminSchema in the MongoDb Cluster and exporting into into usable variable  
 const Admin = mongoose.model('Admin', AdminSchema );
 module.exports = Admin;
+//pushtest
