@@ -15,6 +15,5 @@ app.listen(port, () => {
      })
 app.use(express.json());
 app.use(express.urlencoded({extended: false}))
-//Routing the incoming requests to there corresponding router file
 app.use("/Instructor",require("./Routes/instructorRoutes"));
 app.use('/admin' , require('./Routes/adminRoutes'));
