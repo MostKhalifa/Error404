@@ -13,5 +13,7 @@ app.listen(port, () => {
      })
 app.use(express.json());
 app.use(express.urlencoded({extended: false}))
+//mapping to adminRoutes
 app.use("/Instructor",require("./Routes/instructorRoutes"));
+//mapping to adminRoutes
 app.use('/admin' , require('./Routes/adminRoutes'));
