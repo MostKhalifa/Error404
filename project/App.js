@@ -1,7 +1,5 @@
 const mongoose = require('mongoose');
 const express = require("express");
-const course = require("./Models/Courses");
-const Courses = require('./Models/Courses');
 const app = express();
 const MongoURI = 'mongodb+srv://Error404:Error404TeamNotFound@jalp.jnqmtan.mongodb.net/?retryWrites=true&w=majority' ;
 const port = process.env.PORT || "8000";
