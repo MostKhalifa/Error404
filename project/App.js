@@ -14,12 +14,5 @@ app.listen(port, () => {
 app.use(express.json());
 app.use(express.urlencoded({extended: false}))
 
-// Starting server
-app.listen(port, () => {
-  console.log(`Listening to requests on http://localhost:${port}`);
-})
+app.use('/course', require('./Routes/coursesRoutes'));
 
-app.use(express.json())
-app.use(express.urlencoded({extended: false}))
-
-app.use('/user', require('./Routes/coursesRoutes'));
