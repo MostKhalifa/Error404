@@ -1,4 +1,5 @@
 const asyncHandler = require('express-async-handler');
+//const bcrypt = require("bcryptjs");
 const admins = require('../Models/AdminSchema');
 const corporateTrainee = require('../Models/CorporateTrainee');
 const instructor = require('../Models/InstructorSchema');
@@ -12,14 +13,15 @@ const instructor = require('../Models/InstructorSchema');
 */
 exports.addAdmin = asyncHandler (
     async (req , res) =>{
-    if(admins.findOne({email : req.params.email})){
+    if(await admins.findOne({email : req.body.email})){
         res.status(409).send("Email already in use");
         return;
-    }
-    if(admins.findOne({usesrname : req.params.username})){
+    };
+    
+    if(await admins.findOne({username : req.body.username})){
         res.status(409).send("Username already in use");
         return;
-    }
+    };
     admins.create(req.body);
     res.status(201).send('New Admin created');
 });
@@ -38,11 +40,11 @@ exports.addAdmin = asyncHandler (
 */
 exports.addCorporateTrainee = asyncHandler (
     async (req , res) =>{
-    if(corporateTrainee.findOne({email : req.params.email})){
+    if(await corporateTrainee.findOne({email : req.body.email})){
         res.status(409).send("Email already in use");
         return;
     }
-    if(corporateTrainee.findOne({usesrname : req.params.username})){
+    if(await corporateTrainee.findOne({username : req.body.username})){
         res.status(409).send("Username already in use");
         return;
     }
@@ -63,12 +65,11 @@ exports.addCorporateTrainee = asyncHandler (
 */
 exports.addInstructor = asyncHandler (
     async (req , res) =>{
-//    if(instructor.findOne( {$or : [{email : req.params.email} , {username : req.params.username}]})){
-    if(instructor.findOne({email : req.params.email})){
+    if(await instructor.findOne({email : req.body.email})){
         res.status(409).send("Email already in use");
         return;
     }
-    if(instructor.findOne({usesrname : req.params.username})){
+    if(await instructor.findOne({username : req.body.username})){
         res.status(409).send("Username already in use");
         return;
     }
