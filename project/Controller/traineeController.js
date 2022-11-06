@@ -1,5 +1,3 @@
-
-
 const aysncHandler = require('express-async-handler') 
 const IndividualTrainee = require('../Models/IndividualTrainee')
 const CorporateTrainee = require('../Models/CorporateTrainee')
