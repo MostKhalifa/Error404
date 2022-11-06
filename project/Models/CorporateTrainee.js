@@ -48,7 +48,7 @@ const CorporateTraineeSchema = new Schema
         courses:
         [
             {
-                CourseID: 
+                courseID: 
                 {
                     type: Schema.Types.ObjectId,
                     required: true,
