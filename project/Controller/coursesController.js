@@ -78,5 +78,5 @@ const searchForCoursebyInstructor = aysncHandler(async(req,res)=>{
     getCourse,
     viewCoursePrice,
     searchForCoursebyInstructor
->>>>>>> 978144c841dbc5aa814ca69f1b8fc10e09a0b567
+
   }
