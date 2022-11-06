@@ -3,49 +3,49 @@ const CorporateTrainee = require('./CorporateTrainee');
 const IndividualTrainee = require('./IndividualTrainee');
 const Instructor = require('./InstructorSchema');
 const Schema = mongoose.Schema;
+
 //Creating the CoursesSchema
 const CoursesSchema = new Schema
 (
     {
-        CourseTitle:    
+        courseTitle:    
         {
             type: String,
             required: true,
         },
-        Price: 
+        price: 
         {
             type: Number,
             required: true,
         },
-        NumberOfHours:
+        numberOfHours:
         {
-        type: Number,
+            type: Number,
             required: true,
         },
-        Contract: 
+        contract: 
         {
             type: String,
             required: true,
         },
-        CertifcateForm: 
+        certifcateForm: 
         {
             type: String,
         },
-        CourseSubject: 
+        courseSubject: 
         {
             type: String,
             required:true,
             enum:['Maths','Tech','Science']
         },
-        Discount:
+        discount:
         {
-            Avaliable : 
+            avaliable : 
             {
                 type:Boolean,
                 required :true,
-                default: false
             },
-            Percentage: 
+            percentage: 
             {
                 type:Number,
                 required : true,
@@ -53,7 +53,7 @@ const CoursesSchema = new Schema
                 max:1,
             }
         },
-        Instructors:
+        instructors:
         [
             {
                 instructorName:
@@ -69,7 +69,7 @@ const CoursesSchema = new Schema
                 },
             }
         ],
-        EnrolledTrainees:
+        enrolledTrainees:
         [
             {
                 traineeId:
@@ -78,7 +78,7 @@ const CoursesSchema = new Schema
                     required: true,
                     refPath: 'TraineeType'                
                 },
-                TraineeType:
+                traineeType:
                 {
                     type:String,
                     required:true,
@@ -86,7 +86,7 @@ const CoursesSchema = new Schema
                 }
             }
         ],
-        Reviews:
+        reviews:
         [
             {
                 review:
@@ -98,8 +98,7 @@ const CoursesSchema = new Schema
                     type:Number,
                     required: true,
                     max: 5,
-                    min:0,
-                    default: 0
+                    min:0
                 },
                 reviewedBy:
                 {
@@ -107,7 +106,7 @@ const CoursesSchema = new Schema
                     required :true,
                     refPath: 'TraineeType'
                 },
-                TraineeType:
+                traineeType:
                 {
                     type:String,
                     required:true,

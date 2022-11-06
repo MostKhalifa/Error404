@@ -3,9 +3,8 @@
 An ACL project
 
 By:
-
-Mostafa Khalifa
-Amr Nader
+Amr
+Mostafa
 Malak
 Yasmine
 !Karim
