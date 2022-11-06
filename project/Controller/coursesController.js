@@ -1,16 +1,12 @@
-<<<<<<< HEAD
+
 const aysncHandler = require('express-async-handler') 
 const Courses = require('../Models/Courses')
+
+
 
 //view course title along with total hours and rating ( requirement 7)
 const getCourse = aysncHandler(async(req,res)=>{
     const course = await Courses.find().select('CourseTitle NumberOfHours Reviews');
-    const temp = '';
-    // for (let i = 0; i < course.length; i++) {
-    //     temp += 'Course title: '+course[i].CourseTitle + "<br>"
-    //             +'Total Hours: '+course[i].NumberOfHours+ "<br>"
-    //             +'Course Review: '+course[i].Reviews+ "<br>" + "<br>";
-    //   }
 
     res.status(200).json(course);
     
@@ -27,15 +23,6 @@ const viewCoursePrice = aysncHandler(async (req, res) => {
     res.status(200).json(temp);
   })
 
-  
-
-  module.exports = {
-    getCourse,
-    viewCoursePrice,
-=======
-const aysncHandler = require('express-async-handler'); 
-const Courses = require('../Models/Courses')
-//app.use(bodyParser.urlencoded())
 
 const filterCourseSubject = aysncHandler(async(req,res)=>{
     const course = await Courses.find({}).select('CourseTitle CourseSubject chapters Price Discount')
@@ -89,6 +76,8 @@ const searchForCoursebyInstructor = aysncHandler(async(req,res)=>{
     filterCoursePrice,
     searchForCoursebyTitle,
     searchForCoursebySubject,
+    searchForCoursebyInstructor,
+    getCourse,
+    viewCoursePrice,
     searchForCoursebyInstructor
->>>>>>> 978144c841dbc5aa814ca69f1b8fc10e09a0b567
   }
