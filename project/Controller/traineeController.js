@@ -1,5 +1,3 @@
-<<<<<<< Updated upstream
-=======
 
 
 const aysncHandler = require('express-async-handler') 
@@ -24,6 +22,7 @@ const setIndividualIraineeCountry = aysncHandler(async (req, res) => {
  // Coorporate Trainee can select his/her country (requirement 6)
 // add the individual Trainee id with the url to change the country of a certain individual Trainee
 const setCorporateTraineeCountry = aysncHandler(async (req, res) => {
+  console.log("testttttttttttt")
   console.log(req.body)
     const trainee = await CorporateTrainee.findById(req.params.id)
   
@@ -33,6 +32,7 @@ const setCorporateTraineeCountry = aysncHandler(async (req, res) => {
     const updatedtrainee = await CorporateTrainee.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
     })
+    console.log("testttttttttttt")
     console.log(req.body)
     res.status(200).json(updatedtrainee)
   })
@@ -42,4 +42,3 @@ const setCorporateTraineeCountry = aysncHandler(async (req, res) => {
     setIndividualIraineeCountry ,
     setCorporateTraineeCountry
   }
->>>>>>> Stashed changes

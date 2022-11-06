@@ -2,6 +2,8 @@
 const aysncHandler = require('express-async-handler') 
 const Courses = require('../Models/Courses')
 
+
+
 //view course title along with total hours and rating ( requirement 7)
 const getCourse = aysncHandler(async(req,res)=>{
     const course = await Courses.find().select('CourseTitle NumberOfHours Reviews');
@@ -78,5 +80,4 @@ const searchForCoursebyInstructor = aysncHandler(async(req,res)=>{
     getCourse,
     viewCoursePrice,
     searchForCoursebyInstructor
-
   }
