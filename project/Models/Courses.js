@@ -65,7 +65,7 @@ const CoursesSchema = new Schema
                 {
                     type:Schema.Types.ObjectId,
                     required: true,
-                    ref:'Instructor'
+                    ref: Instructor
                 },
             }
         ],
