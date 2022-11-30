@@ -2,11 +2,6 @@ const { query } = require('express');
 const asyncHandler = require('express-async-handler');
 const { parseInt } = require('lodash');
 const { default: mongoose } = require('mongoose');
-const readline = require("readline");
-const interface = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout
-});
 const Courses = require("../Models/Courses");
 const Instructor = require('../Models/InstructorSchema');
 //create a new course
@@ -16,47 +11,27 @@ const createNewCourse = asyncHandler
     { 
             const  instructorId = req.params.id ;
             const  {courseTitle,price,numberOfHours,contract,certifcateForm,courseSubject,discount,instructors,enrolledTrainees,reviews,chapters} = req.body;
-
             // check if id is valid.
-            if(!mongoose.Types.ObjectId.isValid(instructorId))
+            let instructorFound = Instructor.find({instructorId:instructorId});
+            if(instructorFound!=1)
             {
-               return res.status(404).send("the id given is in a invalid form ");
+                res.status(404).send("the insttuctor is not found"); 
             }
-
-            // check to see if the instructor adding the course, exists.
-              await Instructor.findById(instructorId, (err, instructor)=>{
-                 if(err){
-                     return res.status(404).send({message:"Instructor not found!"});
-                    }
-                }).clone();
-                
-            // check to see if instructors added as authors for the courses, exist.
-            for (let i = 0; i < instructors.length; i++) {
-                const instructorId = instructors[i].instructorId;
-                await Instructor.findById(instructorId, (err, instructor)=>{
-                if(err){
-                    return res.status(404).send({message:"Co-Instructors not found!"});
+            instructorFound2=null;
+            for(let i =0 ; i<instructors.length;i++)
+            {
+                instructorFound2=   Instructor.find({instructorId: instructors[i].instructorId});
+                if(instructorFound2!=1)
+                {
+                    res.status(404).send("the insttuctor is not found"); 
                 }
-                }).clone();
             }
-            console.log("All Instructors found!"); 
-            
-            await interface.question(contract + " yes/no", function(ans) {
-                if (ans == "y" || ans == "yes") {
-                    const course =  Courses.create({courseTitle: courseTitle,price: price,numberOfHours: numberOfHours,contract: contract,certifcateForm: certifcateForm,courseSubject: courseSubject,discount: discount,instructors: instructors,enrolledTrainees: enrolledTrainees,reviews: reviews,chapters: chapters});
-                    res.status(200).send("Course Created");
-                } else {
-                    return res.status(404).send({message:"You need to accept the contract, in order to add the course!"});
-                }
+            instructors.push(instructorFound);
+            const course =  Courses.create({courseTitle: courseTitle,price: price,numberOfHours: numberOfHours,contract: contract,certifcateForm: certifcateForm,courseSubject: courseSubject,discount: discount,instructors: instructorFound,enrolledTrainees: enrolledTrainees,reviews: reviews,chapters: chapters});
+            res.status(200).send("Course Created");
                 // pause the interface so the program can exit
-                interface.pause();
-            });
-            
-            //add the course to the database.
-
-    
-    }
-);
+             
+    });
 //View all Courses given by the instructor j
 const viewAllInstructorCourses = asyncHandler
 (

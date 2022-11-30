@@ -11,6 +11,6 @@ const
 router.route("/ViewAllCourses/:id").get(viewAllInstructorCourses);
 router.route("/FilterCourses/:id").get(filterInstructorCourses);
 router.route("/SearchCourses/:id").get(searchInstructorCourses);
-router.route("/AddCourse/:id").put(createNewCourse);
+router.route("/AddCourse/:id").post(createNewCourse);
 
 module.exports = router;
