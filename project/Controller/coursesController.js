@@ -3,7 +3,7 @@ const Courses = require('../Models/Courses')
 
 //view course title along with total hours and rating ( requirement 7)
 const getCourse = aysncHandler(async(req,res)=>{
-    const course = await Courses.find().select('CourseTitle NumberOfHours Reviews');
+    const course = await Courses.find().select('courseTitle numberOfHours reviews');
 
     res.status(200).json(course);
     
@@ -16,7 +16,7 @@ const viewCoursePrice = aysncHandler(async (req, res) => {
     if (!course) {
       res.status(400)
     }
-    const temp = course.Price;
+    const temp = course.price;
     res.status(200).json(temp);
   })
 
