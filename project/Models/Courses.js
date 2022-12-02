@@ -3,6 +3,7 @@ const CorporateTrainee = require('./CorporateTrainee');
 const IndividualTrainee = require('./IndividualTrainee');
 const Instructor = require('./InstructorSchema');
 const Schema = mongoose.Schema;
+
 //Creating the CoursesSchema
 const CoursesSchema = new Schema
 (
@@ -64,7 +65,7 @@ const CoursesSchema = new Schema
                 {
                     type:Schema.Types.ObjectId,
                     required: true,
-                    ref:'Instructor'
+                    ref: Instructor
                 },
             }
         ],

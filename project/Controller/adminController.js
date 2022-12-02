@@ -4,6 +4,7 @@ const admins = require('../Models/AdminSchema');
 const corporateTrainee = require('../Models/CorporateTrainee');
 const instructor = require('../Models/InstructorSchema');
 const saltRounds = 10;
+
 // Adding another Admin (requirement 55)
 /* Request body
 {"username" : "",
@@ -82,8 +83,3 @@ exports.addInstructor = asyncHandler (
     instructor.create(req.body);
     res.status(201).send('New Instructor created');
 });
-
-
-
-
-
