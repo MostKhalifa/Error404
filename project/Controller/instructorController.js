@@ -154,8 +154,59 @@ const searchInstructorCourses = asyncHandler
             }  
                                  
 );
+
+// Instructor can view his/her ratings on their Courses
+// Instructor need to view the course ratings and reviews for all its courses
+const getInstructorCourseRatings = asyncHandler(async (req, res) => {
+    const instructor = await Instructor.findById(req.params.id)
+    if (!instructor ) {
+        res.status(400)
+      }     
+    console.log(instructor.courses);
+      const result = [];
+      for (let i = 0; i < instructor.courses.length; i++) {
+        console.log(instructor.courses[i]);
+        var id = mongoose.Types.ObjectId(instructor.courses[i]);
+        const course = await Courses.findById(id);
+        console.log(course);
+        if(!course){
+            res.status(400);
+        }
+        const info= course.select('reviews');
+        result[i]=info;
+    }
+    res.status(200).json(result)
+  })
+
+  //Instructor can upload a video link from Youtube under each subtitle and enter a short description of the video 
+  //post method
+  //Instructor will change a specific course so I need to have both instructor id and course id 
+  // However this mean that instructor changes to the course will be global is that coreect ??
+  const setInstructorCourseVideoandDescription = asyncHandler(async (req, res) => {
+    const instructor = await Instructor.findById(req.params.id1)
+    if (!instructor ) {
+        res.status(400)
+      }
+    const course = await Courses.findById(req.parameter.id2)
+    if (!course ) {
+      res.status(400)
+    }
+  
+    const updatedCourse = await Courses.findByIdAndUpdate(req.parameter.id2, req.body, {
+      new: true,
+    })
+    res.status(200).json(updatedCourse);
+  });
+
+
 module.exports={
-    viewAllInstructorCourses,filterInstructorCourses,searchInstructorCourses,createNewCourse,setInstructorCountry
+    viewAllInstructorCourses,
+    filterInstructorCourses,
+    searchInstructorCourses,
+    createNewCourse,
+    setInstructorCountry,
+    getInstructorCourseRatings,
+    setInstructorCourseVideoandDescription
 };
 /* Sample test data for createNewCourses:
 {
