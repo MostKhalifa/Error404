@@ -1,0 +1,8 @@
+.radioOption +label
+{
+    color: lightgray;
+}
+.radioOption:checked +label
+{
+    color: #303c6c;
+}
