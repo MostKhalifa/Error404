@@ -4,6 +4,21 @@ const { parseInt } = require('lodash');
 const { default: mongoose } = require('mongoose');
 const Courses = require("../Models/Courses");
 const Instructor = require('../Models/InstructorSchema');
+
+
+const setInstructorCountry = asyncHandler(async (req, res) => {
+    const instructor = await Instructor.findById(req.params.id)
+  
+    if (!instructor) {
+      res.status(400)
+    }
+  
+    const updatedInstructor = await Instructor.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+    })
+    res.status(200).json(updatedInstructor);
+  });
+
 //create a new course
 const createNewCourse = asyncHandler
 (
@@ -140,7 +155,7 @@ const searchInstructorCourses = asyncHandler
                                  
 );
 module.exports={
-    viewAllInstructorCourses,filterInstructorCourses,searchInstructorCourses,createNewCourse
+    viewAllInstructorCourses,filterInstructorCourses,searchInstructorCourses,createNewCourse,setInstructorCountry
 };
 /* Sample test data for createNewCourses:
 {

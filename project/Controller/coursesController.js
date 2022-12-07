@@ -3,7 +3,7 @@ const Courses = require('../Models/Courses')
 
 //view course title along with total hours and rating ( requirement 7)
 const getCourse = aysncHandler(async(req,res)=>{
-    const course = await Courses.find().select('CourseTitle NumberOfHours Reviews');
+    const course = await Courses.find().select('courseTitle numberOfHours reviews');
 
     res.status(200).json(course);
     
@@ -16,52 +16,52 @@ const viewCoursePrice = aysncHandler(async (req, res) => {
     if (!course) {
       res.status(400)
     }
-    const temp = course.Price;
+    const temp = course.price;
     res.status(200).json(temp);
   })
 
 
 const filterCourseSubject = aysncHandler(async(req,res)=>{
-    const course = await Courses.find({}).select('CourseTitle CourseSubject chapters Price Discount')
+    const course = await Courses.find({}).select('courseTitle courseSubject chapters price discount')
     res.send(course)
    //res.status(200).json(course)
 })
 
 const filterCourseRating = aysncHandler(async(req,res)=>{
-    const course = await Courses.find({}).select('CourseTitle Reviews chapters Price Discount')
+    const course = await Courses.find({}).select(' reviews ')
     res.status(200).json(course)
 })
 const filterCourseSubjectRating = aysncHandler(async(req,res)=>{
-    const course = await Courses.find({}).select('CourseTitle CourseSubject Reviews chapters Price Discount')
+    const course = await Courses.find({}).select('courseTitle courseSubject reviews chapters price discount')
     res.status(200).json(course)
 })
 
 const filterCoursePrice = aysncHandler(async(req,res)=>{
-    const course = await Courses.find({}).select('CourseTitle Price chapters Price Discount')
+    const course = await Courses.find({}).select('courseTitle price chapters discount')
     res.status(200).json(course)
 })
 //Searching By Title
 const searchForCoursebyTitle = aysncHandler(async(req,res)=>{
-  const {CourseTitle} = req.body;
-  if(!CourseTitle)
+  const {courseTitle} = req.body;
+  if(!courseTitle)
     res.status(400).json({error:error.message})
-  const course = await Courses.find({CourseTitle: CourseTitle}).select('CourseTitle CourseSubject chapters Price Discount')
+  const course = await Courses.find({courseTitle: courseTitle}).select('courseTitle courseSubject chapters price discount')
   return res.status(200).json(course)
 })
 //Searching By Subject
 const searchForCoursebySubject = aysncHandler(async(req,res)=>{
-  const {CourseSubject} = req.body;
-  if(!CourseSubject)
+  const {courseSubject} = req.body;
+  if(!courseSubject)
     res.status(400).json({error:error.message})
-  const course = await Courses.find({CourseSubject: CourseSubject}).select('CourseTitle CourseSubject chapters Price Discount')
+  const course = await Courses.find({courseSubject: courseSubject}).select('courseTitle courseSubject chapters price discount')
   return res.status(200).json(course)
 })
 //Searching By Instructor
 const searchForCoursebyInstructor = aysncHandler(async(req,res)=>{
-  const {Instructors} = req.body;
-  if(!Instructors)
+  const {instructors} = req.body;
+  if(!instructors)
     res.status(400).json({error:error.message})
-  const course = await Courses.find({Instructors: Instructors}).select('CourseTitle CourseSubject Instructors chapters Price Discount')
+  const course = await Courses.find({instructors: instructors}).select('courseTitle courseSubject instructors chapters price discount')
   return res.status(200).json(course)
 })
 
