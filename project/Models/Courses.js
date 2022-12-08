@@ -13,12 +13,12 @@ const CoursesSchema = new Schema
             type: String,
             required: true,
         },
-        courseDescripation:    
+        courseDescription:    
         {
             type: String,
             required: true,
         },
-        courseDescripationVideo:    
+        courseDescriptionVideo:    
         {
             type: String,
             required: true,
@@ -38,7 +38,7 @@ const CoursesSchema = new Schema
             type: String,
             required: true,
         },
-        certifcateForm: 
+        certificateForm: 
         {
             type: String,
         },
