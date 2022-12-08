@@ -3,6 +3,7 @@ import Button from "./assests/button";
 import TextBox from "./assests/textbox";
 import RadioBox from "./assests/radioBox";
 import YoutubeVideo from "./assests/youtubeVideo";
+import UploadCourseDescripation from "./instructorViews/uploadCourseDescripation";
 import { useState } from "react";
 import {FaHome} from "react-icons/fa";
 import { Rating,Switch,CircularProgress } from '@mui/material';
@@ -12,7 +13,8 @@ function App()
   const [textBox,setTextBox]=useState("");
   return(
       <div className="App">
-        <CircularProgress></CircularProgress>
+        <UploadCourseDescripation></UploadCourseDescripation>
+        {/* <CircularProgress></CircularProgress>
         <YoutubeVideo src={"lDjZA0wodGQ"} width={"300"} height={"300"} title={"video"}></YoutubeVideo>
         <Switch className="test" defaultChecked={true}></Switch>
         <Switch className="test"></Switch>
@@ -34,7 +36,7 @@ function App()
         <br/>
         <RadioBox options={["karim","omar"]} groupname="brothers"  handler={(change)=>setRadioBox(change.target.value)}/>
         <br/>
-        <label>{radioBox}</label>
+        <label>{radioBox}</label> */}
       </div>
   );
 }
