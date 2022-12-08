@@ -5,6 +5,33 @@ const { default: mongoose } = require('mongoose');
 const Courses = require("../Models/Courses");
 const Instructor = require('../Models/InstructorSchema');
 
+
+// just a helper mthod and not part of the requirements 
+///
+const setInstructor = asyncHandler(async(req,res)=>{
+  
+    // console.log(req.body);
+   const {firstName,lastName,email,username,password,gender,country,reviews,courses} = req.body
+    const it = await Instructor.create({
+        firstName,
+        lastName,
+        email,
+        username,
+        password,
+        gender,
+        country,
+        reviews,
+        courses
+    })
+  
+    if (it) {
+     res.status(201)
+   } else {
+     res.status(400)
+   }
+   
+  })
+
 const setInstructorCountry = asyncHandler(async (req, res) => {
     const instructor = await Instructor.findById(req.params.id)
   
@@ -17,6 +44,7 @@ const setInstructorCountry = asyncHandler(async (req, res) => {
     })
     res.status(200).json(updatedInstructor);
   });
+
 //create a new course
 const createNewCourse = asyncHandler
 (
@@ -175,8 +203,45 @@ const searchInstructorCourses = asyncHandler
             }  
                                  
 );
+
+
+// Instructor can view his/her ratings on their Courses
+// Instructor need to view the course ratings and reviews for all its courses
+const getInstructorCourseRatings = asyncHandler(async (req, res) => {
+    const instructor = await Instructor.findById(req.params.id);
+    var x =0;
+    const result = "";
+    if (!instructor ) {
+      res.status(400)
+    }
+      for (let i = 0; i < instructor.courses.length; i++) {
+        result += "course"+" "+(i+1)+"\n"
+        var id = instructor.courses[i].CourseID
+        const course = await Courses.findById(id).select('reviews')
+        result+=course+""
+    }
+    res.status(200).json(result)
+  })
+
+  //Instructor can upload a video link from Youtube under each subtitle and enter a short description of the video 
+  //post method
+  //Instructor will change a specific course so I need to have both instructor id and course id 
+  // However this mean that instructor changes to the course will be global is that coreect ??
+  const setInstructorCourseVideoandDescription = asyncHandler(async (req, res) => {
+    const course = await Courses.findById(req.params.id)
+    if (!course ) {
+      res.status(400)
+    }
+    const updatedCourse = await Courses.findByIdAndUpdate(req.parameter.id, req.body, {
+      new: true,
+    })
+    res.status(200).json(updatedCourse);
+  });
+
+
 module.exports={
-    viewAllInstructorCourses,filterInstructorCourses,searchInstructorCourses,createNewCourse,setInstructorCountry
+    viewAllInstructorCourses,filterInstructorCourses,searchInstructorCourses,createNewCourse,setInstructorCountry,
+    getInstructorCourseRatings,setInstructorCourseVideoandDescription,setInstructor
 };
 /* Sample test data for createNewCourses:
 {
