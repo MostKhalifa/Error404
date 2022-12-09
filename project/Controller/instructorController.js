@@ -5,7 +5,6 @@ const { default: mongoose } = require('mongoose');
 const Courses = require("../Models/Courses");
 const Instructor = require('../Models/InstructorSchema');
 
-
 const setInstructorCountry = asyncHandler(async (req, res) => {
     const instructor = await Instructor.findById(req.params.id)
   
@@ -18,41 +17,64 @@ const setInstructorCountry = asyncHandler(async (req, res) => {
     })
     res.status(200).json(updatedInstructor);
   });
-
 //create a new course
 const createNewCourse = asyncHandler
 (
     async (req,res) =>
     { 
             const  instructorId = req.params.id ;
-            const  {courseTitle,price,numberOfHours,contract,certifcateForm,courseSubject,discount,instructors,enrolledTrainees,reviews,chapters} = req.body;
+            if(!mongoose.Types.ObjectId.isValid(instructorId))
+            {
+                res.status(404).send("the id given is in a invalid form ");
+            }
+            const  {courseTitle,courseDescripation,courseDescripationVideo,price,numberOfHours,contract,certifcateForm,courseSubject,discount,enrolledTrainees,reviews,chapters} = req.body;
             // check if id is valid.
-            let instructorFound = Instructor.find({instructorId:instructorId});
-            if(instructorFound!=1)
+            let instructorFound = await Instructor.find({_id:mongoose.Types.ObjectId(instructorId)},{firstName:1,lastName:1});
+            if(instructorFound.length!=1)
             {
                 res.status(404).send("the insttuctor is not found"); 
             }
-            instructorFound2=null;
-            for(let i =0 ; i<instructors.length;i++)
+            const exists = (await Courses.find({courseTitle:courseTitle,"instructor.instructorId":mongoose.Types.ObjectId(instructorId)})).length>0?true:false;
+            console.log(exists);
+            if(exists)
             {
-                instructorFound2=   Instructor.find({instructorId: instructors[i].instructorId});
-                if(instructorFound2!=1)
+                res.status(404).send("the course already exists");   
+                return;
+            }
+            for(let i=0;i<=chapters.length;i++)
+            {
+                for(let j=i+1;j<=chapters.length;j++)
                 {
-                    res.status(404).send("the insttuctor is not found"); 
+                    if(chapters[i].chapterTitle===chapters[j].chapterTitle)
+                    {
+                        res.status(404).send("chapter number:" +i +"chapter number: "+j +"have the same name please rename either and try again");
+                    }
                 }
             }
-            instructors.push(instructorFound);
-            const course =  Courses.create({courseTitle: courseTitle,price: price,numberOfHours: numberOfHours,contract: contract,certifcateForm: certifcateForm,courseSubject: courseSubject,discount: discount,instructors: instructorFound,enrolledTrainees: enrolledTrainees,reviews: reviews,chapters: chapters});
-            res.status(200).send("Course Created");
-                // pause the interface so the program can exit
-             
+            Courses.create
+            ({
+                courseTitle: courseTitle,
+                courseDescripation: courseDescripation,
+                courseDescripationVideo:courseDescripationVideo,
+                price: price,
+                numberOfHours: numberOfHours,
+                contract: contract,
+                certifcateForm: certifcateForm,
+                courseSubject: courseSubject,
+                discount: discount,
+                instructor:{instructorId,instructorName:instructorFound[0].firstName+instructorFound[0].lastName},
+                enrolledTrainees: enrolledTrainees,
+                reviews: reviews,
+                chapters: chapters
+            });
+            res.status(200).send("course created");
     });
 //View all Courses given by the instructor j
 const viewAllInstructorCourses = asyncHandler
 (
     async (req,res) =>
             {
-                let courseTitles =[];
+            let courseTitles =[];
             const  instructorId = req.params.id ;
             if(!mongoose.Types.ObjectId.isValid(instructorId))
             {
@@ -63,7 +85,7 @@ const viewAllInstructorCourses = asyncHandler
             {
                 res.status(404).send("the insttuctor is not found");
             }
-            const instructorCourses = (await Courses.find({instructors : {$elemMatch : {instructorId :mongoose.Types.ObjectId(instructorId) }}})).forEach
+            const instructorCourses = (await Courses.find({"instructor.instructorId":mongoose.Types.ObjectId(instructorId)})).forEach
             (
                 (course)=>
                 {
@@ -94,14 +116,14 @@ const filterInstructorCourses = asyncHandler
             {
                 return res.status(404).send("the insttuctor is not found");
             }
-            let query ={instructors : {$elemMatch : {instructorId : instructorId }}};
+            let query ={"instructor.instructorId":mongoose.Types.ObjectId(instructorId)};
             if(subject!=null)
             {
-                query= {courseSubject: subject ,price: {$gte :price} ,instructors : {$elemMatch : {instructorId : instructorId }}}
+                query= {courseSubject: subject ,price: {$gte :price} ,"instructor.instructorId":mongoose.Types.ObjectId(instructorId)}
             }
             else
             {
-                query= {price: {$gte :price} ,instructors : {$elemMatch : {instructorId : instructorId }}}     
+                query= {price: {$gte :price} ,"instructor.instructorId":mongoose.Types.ObjectId(instructorId)}     
             }
             const instructorCourses = (await Courses.find(query)).forEach
             (
@@ -126,7 +148,6 @@ const searchInstructorCourses = asyncHandler
             const instructorId = req.params.id ;
             const title = req.query.Title||null;
             const subject = req.query.Subject||null;
-            const instructorName = req.query.InstName||null;
             console.log(req.query);
             console.log(title);
             if(!mongoose.Types.ObjectId.isValid(instructorId))
@@ -138,7 +159,7 @@ const searchInstructorCourses = asyncHandler
             {
                 res.status(404).send("the insttuctor is not found");
             }
-            const instructorCourses = (await Courses.find({$or:[{ courseSubject:subject },{courseTitle:title},{instructors : {$elemMatch : {instructorName : instructorName }}}],instructors : {$elemMatch : {instructorId : instructorId }}})).forEach
+            const instructorCourses = (await Courses.find({$or:[{ courseSubject:subject },{courseTitle:title}],"instructor.instructorId":mongoose.Types.ObjectId(instructorId)})).forEach
                         (
                             (course)=>
                                 {

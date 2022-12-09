@@ -13,6 +13,16 @@ const CoursesSchema = new Schema
             type: String,
             required: true,
         },
+        courseDescription:    
+        {
+            type: String,
+            required: true,
+        },
+        courseDescriptionVideo:    
+        {
+            type: String,
+            required: true,
+        },
         price: 
         {
             type: Number,
@@ -28,7 +38,7 @@ const CoursesSchema = new Schema
             type: String,
             required: true,
         },
-        certifcateForm: 
+        certificateForm: 
         {
             type: String,
         },
@@ -53,8 +63,7 @@ const CoursesSchema = new Schema
                 max:1,
             }
         },
-        instructors:
-        [
+        instructor:
             {
                 instructorName:
                 {
@@ -68,7 +77,7 @@ const CoursesSchema = new Schema
                     ref: Instructor
                 },
             }
-        ],
+        ,
         enrolledTrainees:
         [
             {
@@ -120,8 +129,7 @@ const CoursesSchema = new Schema
                 chapterTitle: 
                 {
                     type:String,
-                    required:true,
-                    unique:true
+                    required:true
                 }, 
                 chapterVideo: 
                 {
