@@ -58,10 +58,10 @@ const searchForCoursebySubject = aysncHandler(async(req,res)=>{
 })
 //Searching By Instructor
 const searchForCoursebyInstructor = aysncHandler(async(req,res)=>{
-  const {instructors} = req.body;
-  if(!instructors)
+  const {instructor} = req.body;
+  if(!instructor)
     res.status(400).json({error:error.message})
-  const course = await Courses.find({instructors: instructors}).select('courseTitle courseSubject instructors chapters price discount')
+  const course = await Courses.find({instructor: instructor}).select('courseTitle courseSubject instructor chapters price discount')
   return res.status(200).json(course)
 })
 
