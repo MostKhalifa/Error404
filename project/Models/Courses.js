@@ -76,8 +76,7 @@ const CoursesSchema = new Schema
                     required: true,
                     ref: Instructor
                 },
-            }
-        ,
+            },
         enrolledTrainees:
         [
             {
