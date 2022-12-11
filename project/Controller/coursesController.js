@@ -10,19 +10,19 @@ const getCourseChapter = aysncHandler(async(req,res)=>{
   let query ={_id:mongoose.Types.ObjectId(courseID)};
   if(chapter!=null)
   {
-      query= {_id:mongoose.Types.ObjectId(courseID)}
+      query= {_id:mongoose.Types.ObjectId(courseID) , chapter: chapter}
       
         await (await Courses.find(query)).forEach(
-          (course) => {
-             ( course.find(query)).forEach(
-              (exercise) =>{
-                res.status(200).json(exercise.answers);
-              }
-            );
-      });
-    //     (course) => {
-    //   res.status(200).json(course.chapters);
-    // });
+      //     (course) => {
+      //        ( course.find(query)).forEach(
+      //         (exercise) =>{
+      //           res.status(200).json(exercise.answers);
+      //         }
+      //       );
+      // });
+        (course) => {
+      res.status(200).send(course.chapters);
+    });
       return;
   }
   const course = await Courses.find(query);
