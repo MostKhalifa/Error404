@@ -1,13 +1,19 @@
 import React, { useState } from "react";
+import axios from 'axios';
+import { useParams } from "react-router-dom";
+  
 import "./traineeViews.css"
 import Courses from "../../../../Models/Courses";
 
 
-const Exercises = () => {
+const Exercises = () => {  
 
-Courses.CoursesSchema.chapter.exercise.questionHead
-Courses.CoursesSchema.chapter.exercise.answers.answerBody
-Courses.CoursesSchema.chapter.exercise.answers.valid
+    axios.get(`/getCourseChapter`)
+    .then(res => {
+      const persons = res.data;
+      this.setState({ persons });
+    })
+
 
     const [showResult, setShowResult] = useState(false);
     const [score , setScore] = useState(0);

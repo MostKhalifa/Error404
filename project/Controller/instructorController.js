@@ -114,7 +114,7 @@ const filterInstructorCourses = asyncHandler
             let instructorFound = await Instructor.find({_id :mongoose.Types.ObjectId(instructorId) });
             if(instructorFound.length!=1)
             {
-                return res.status(404).send("the insttuctor is not found");
+                return res.status(404).send("the instructor is not found");
             }
             let query ={"instructor.instructorId":mongoose.Types.ObjectId(instructorId)};
             if(subject!=null)
@@ -134,7 +134,7 @@ const filterInstructorCourses = asyncHandler
             );
             if(coursesFiltered.length==0)
             {
-                return res.status(200).send("no course given by you matches  your filter");
+                return res.status(200).send("no course given by you matches your filter");
             }
             res.status(200).json(coursesFiltered);
             

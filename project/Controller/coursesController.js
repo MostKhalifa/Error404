@@ -1,5 +1,40 @@
 const aysncHandler = require('express-async-handler') 
+const { default: mongoose } = require('mongoose');
 const Courses = require('../Models/Courses')
+
+//for Mostafa bdl el elmwgood
+const getCourseChapter = aysncHandler(async(req,res)=>{
+  const courseID = req.params.id ;
+  const chapter = req.query.chapter||null;
+  console.log(chapter)
+  let query ={_id:mongoose.Types.ObjectId(courseID)};
+  if(chapter!=null)
+  {
+      query= {_id:mongoose.Types.ObjectId(courseID)}
+      
+        await (await Courses.find(query)).forEach(
+          (course) => {
+             ( course.find(query)).forEach(
+              (exercise) =>{
+                res.status(200).json(exercise.answers);
+              }
+            );
+      });
+    //     (course) => {
+    //   res.status(200).json(course.chapters);
+    // });
+      return;
+  }
+  const course = await Courses.find(query);
+  res.status(200).json(course);
+  
+})
+
+const getExercise = aysncHandler(async(req,res)=>{
+const course = getCourseChapter;
+res.json(course.exercise);
+})
+
 
 //view course title along with total hours and rating ( requirement 7)
 const getCourse = aysncHandler(async(req,res)=>{
@@ -76,5 +111,7 @@ const searchForCoursebyInstructor = aysncHandler(async(req,res)=>{
     searchForCoursebyInstructor,
     getCourse,
     viewCoursePrice,
-    searchForCoursebyInstructor
+    searchForCoursebyInstructor,
+    getCourseChapter,
+    getExercise
   }
