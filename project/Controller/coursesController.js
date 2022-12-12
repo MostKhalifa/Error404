@@ -11,30 +11,23 @@ const getCourseChapter = aysncHandler(async(req,res)=>{
   if(chapter!=null)
   {
       query= {_id:mongoose.Types.ObjectId(courseID) , chapter: chapter}
-      
-        await (await Courses.find(query)).forEach(
-      //     (course) => {
-      //        ( course.find(query)).forEach(
-      //         (exercise) =>{
-      //           res.status(200).json(exercise.answers);
-      //         }
-      //       );
-      // });
-        (course) => {
-      res.status(200).send(course.chapters);
-    });
+      const course = await Courses.findOne(query);
+      let exerciseNumbers = [];
+      (await course.chapters).forEach
+      (
+        (exercises)=> 
+        {
+          exerciseNumbers.push(exercises);
+        }
+    );
+    res.status(200).json(exerciseNumbers);
+      // res.status(200).json(course.chapters[2]);
       return;
   }
-  const course = await Courses.find(query);
+  const course = await Courses.findOne(query);
   res.status(200).json(course);
   
 })
-
-const getExercise = aysncHandler(async(req,res)=>{
-const course = getCourseChapter;
-res.json(course.exercise);
-})
-
 
 //view course title along with total hours and rating ( requirement 7)
 const getCourse = aysncHandler(async(req,res)=>{
@@ -112,6 +105,5 @@ const searchForCoursebyInstructor = aysncHandler(async(req,res)=>{
     getCourse,
     viewCoursePrice,
     searchForCoursebyInstructor,
-    getCourseChapter,
-    getExercise
+    getCourseChapter
   }

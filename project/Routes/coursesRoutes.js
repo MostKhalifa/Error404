@@ -11,13 +11,10 @@ const {
     searchForCoursebyTitle,
     searchForCoursebySubject,
     searchForCoursebyInstructor,
-    getCourseChapter,
-    getExercise
+    getCourseChapter
   } = require('../Controller/coursesController')
 
   router.route('/getCoursesChapter/:id').get(getCourseChapter)
-  router.route('/getExercise').get(getExercise)
-  
   router.route('/getCourses').get(getCourse)
   router.route('/getCoursePrice/:id').get(viewCoursePrice)
   router.route('/filterCourseSubject').get(filterCourseSubject)
