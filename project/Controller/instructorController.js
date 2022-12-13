@@ -4,7 +4,6 @@ const { parseInt } = require('lodash');
 const { default: mongoose } = require('mongoose');
 const Courses = require("../Models/Courses");
 const Instructor = require('../Models/InstructorSchema');
-
 const setInstructorCountry = asyncHandler(async (req, res) => {
     const instructor = await Instructor.findById(req.params.id)
   
@@ -175,8 +174,26 @@ const searchInstructorCourses = asyncHandler
             }  
                                  
 );
+const getRating=asyncHandler
+(
+    async (req,res)=>
+    {
+        const  instructorId = req.params.id ;
+        if(!mongoose.Types.ObjectId.isValid(instructorId))
+        {
+           return res.status(404).send("the id given is in a invalid form ");
+        }   
+        let instructorFound = await Instructor.find({_id :mongoose.Types.ObjectId(instructorId)},{reviews:1});
+        if(instructorFound.length!=1)
+        {
+            return res.status(404).send("the insttuctor is not found");
+        }
+        res.status(202).send(instructorFound)
+       
+    }
+    )
 module.exports={
-    viewAllInstructorCourses,filterInstructorCourses,searchInstructorCourses,createNewCourse,setInstructorCountry
+    viewAllInstructorCourses,filterInstructorCourses,searchInstructorCourses,createNewCourse,setInstructorCountry,getRating
 };
 /* Sample test data for createNewCourses:
 {

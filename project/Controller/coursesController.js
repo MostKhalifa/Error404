@@ -1,6 +1,7 @@
-const aysncHandler = require('express-async-handler') 
+const aysncHandler = require('express-async-handler'); 
+const { default: mongoose } = require('mongoose');
+const moongoose = require('moongoose');
 const Courses = require('../Models/Courses')
-
 //view course title along with total hours and rating ( requirement 7)
 const getCourse = aysncHandler(async(req,res)=>{
     const course = await Courses.find().select('courseTitle numberOfHours reviews');
@@ -65,8 +66,41 @@ const searchForCoursebyInstructor = aysncHandler(async(req,res)=>{
   return res.status(200).json(course)
 })
 
+const updateCourseDescription = aysncHandler(async (req,res)=>
+{
+  const courseId= req.params.id;
+  if(!mongoose.Types.ObjectId.isValid(courseId))
+  {
+    res.status(404).send("the course id given is in an invalid form");
+  }
+  const courseDescription= req.body.courseDescription;
+  const courseDescriptionVideo=req.body.courseDescriptionVideo;
+  if((await Courses.find({_id:courseId})).length!=0)
+  {
+    await Courses.findByIdAndUpdate(req.params.id,{courseDescription:req.body.courseDescription,courseDescriptionVideo:req.body.src});
+    res.status(200).send({id:req.params.id,courseDescription:req.body.courseDescription,src:req.body.src});
+  }
+  else
+  {
+    res.status(404).send("no course with the id :" +courseId+" was found");
+  }
+})
+const getCourseDescription =aysncHandler(async(req,res)=>{
+  const courseId= req.params.id;
+  if(!mongoose.Types.ObjectId.isValid(courseId))
+  {
+    res.status(404).send("the course id given is in an invalid form");
+  }
+  const course = await Courses.find({_id:courseId},{courseDescription:1,courseDescriptionVideo:1});
+  if(course.length==0)
+  {
+    res.status(404).send("the course id :"+courseId+"doesnt exist")
+  }
+  res.status(200).send(course);  
+})
 
-  module.exports = {
+  module.exports = 
+  {
     filterCourseSubject,
     filterCourseRating,
     filterCourseSubjectRating,
@@ -76,5 +110,7 @@ const searchForCoursebyInstructor = aysncHandler(async(req,res)=>{
     searchForCoursebyInstructor,
     getCourse,
     viewCoursePrice,
-    searchForCoursebyInstructor
+    searchForCoursebyInstructor,
+    updateCourseDescription,
+    getCourseDescription
   }
