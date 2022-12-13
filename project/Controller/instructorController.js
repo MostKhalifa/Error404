@@ -209,16 +209,18 @@ const searchInstructorCourses = asyncHandler
 // Instructor need to view the course ratings and reviews for all its courses
 const getInstructorCourseRatings = asyncHandler(async (req, res) => {
     const instructor = await Instructor.findById(req.params.id);
-    var x =0;
-    const result = "";
+    let j=0;
+    const result = [];
     if (!instructor ) {
       res.status(400)
     }
       for (let i = 0; i < instructor.courses.length; i++) {
-        result += "course"+" "+(i+1)+"\n"
+      //  result += "course"+" "+(i+1)+"\n"
         var id = instructor.courses[i].CourseID
-        const course = await Courses.findById(id).select('reviews')
-        result+=course+""
+        const course = await Courses.findById(id).select('courseTitle reviews')
+        result[j]=course
+        j++;
+       // result+=course+""
     }
     res.status(200).json(result)
   })
@@ -228,14 +230,50 @@ const getInstructorCourseRatings = asyncHandler(async (req, res) => {
   //Instructor will change a specific course so I need to have both instructor id and course id 
   // However this mean that instructor changes to the course will be global is that coreect ??
   const setInstructorCourseVideoandDescription = asyncHandler(async (req, res) => {
+    const id=req.params.id
     const course = await Courses.findById(req.params.id)
     if (!course ) {
       res.status(400)
     }
-    const updatedCourse = await Courses.findByIdAndUpdate(req.parameter.id, req.body, {
-      new: true,
-    })
-    res.status(200).json(updatedCourse);
+    const chaptersTemp = [];
+    const {chapterTitle,chapterVideo,instructorNotes} = req.body
+    console.log(chapterTitle);
+    console.log(chapterVideo);
+    console.log(instructorNotes);
+    for (let i = 0; i < course.chapters.length; i++) {
+        //  result += "course"+" "+(i+1)+"\n"
+         if(course.chapters[i].chapterTitle==chapterTitle){
+            const totalHours= course.chapters[i].totalHours
+            const tempEX = course.chapters[i].exercise
+            const chapt =course.chapters[i].chaptersAssessments
+            const newchapter = {
+                chapterTitle: chapterTitle ,
+                chapterVideo: chapterVideo ,
+                instructorNotes: instructorNotes ,
+                totalHours: totalHours,
+                exercise : tempEX ,
+                chaptersAssessments : chapt
+            }
+            console.log(newchapter)
+            chaptersTemp[i]=newchapter
+            console.log(chaptersTemp[i])
+         }
+         else{
+            chaptersTemp[i]=course.chapters[i]
+         }
+        }
+
+       const resa= await Courses.findByIdAndUpdate(req.params.id, { chapters: chaptersTemp } , {
+            new: true,
+          })
+
+    // const updatedCourse = await Courses.findByIdAndUpdate(req.params.id, chaptersTemp, {
+    //   new: true,
+    // })
+    if(resa)
+    res.status(200).send("Done");
+    else 
+    res.status(400)
   });
 
 

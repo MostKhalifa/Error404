@@ -117,7 +117,7 @@ const setCorporateTraineeCountry = aysncHandler(async (req, res) => {
         res.status(404).send("You are not registered in the course"); 
     else{
     
-    const course = await Courses.findById(req.query.id1).select('courseTitle numberOfHours reviews certifcateForm courseSubject discount instructors reviews chapters');
+    const course = await Courses.findById(req.query.id1).select('courseTitle numberOfHours reviews certifcateForm courseSubject discount instructor reviews chapters');
     res.status(200).json(course)
   }
     // console.log(course)
@@ -158,7 +158,7 @@ const setCorporateTraineeCountry = aysncHandler(async (req, res) => {
         res.status(404).send("You are not registered in the course"); 
     else{
     
-    const course = await Courses.findById(req.query.id1).select('courseTitle numberOfHours reviews certifcateForm courseSubject discount instructors reviews chapters');
+    const course = await Courses.findById(req.query.id1).select('courseTitle courseDescripation courseDescripationVideo price numberOfHours contract reviews certifcateForm courseSubject discount instructor reviews chapters');
     res.status(200).json(course)
     }
   })
