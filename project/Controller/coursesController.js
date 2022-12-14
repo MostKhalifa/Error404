@@ -168,7 +168,6 @@ const getCourseDescription =asyncHandler(async(req,res)=>{
     viewCoursePrice,
     searchForCourse,
     rateaCourse,
-
     updateCourseDescription,
     getCourseDescription
   }
