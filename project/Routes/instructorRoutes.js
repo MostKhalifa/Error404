@@ -5,12 +5,12 @@ const
         createNewCourse,
         viewAllInstructorCourses,
         filterInstructorCourses,
-        searchInstructorCourses
+        rateAnInstructor,
     }= require("../Controller/instructorController");
 router.route('/setCountry/:id').put(setInstructorCountry);
 router.route("/ViewAllCourses/:id").get(viewAllInstructorCourses);
 router.route("/FilterCourses/:id").get(filterInstructorCourses);
-router.route("/SearchCourses/:id").get(searchInstructorCourses);
 router.route("/AddCourse/:id").post(createNewCourse);
+router.route('/rateAnInstructor/:id').put(rateAnInstructor);
 
 module.exports = router;

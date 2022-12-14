@@ -175,8 +175,46 @@ const searchInstructorCourses = asyncHandler
             }  
                                  
 );
+
+const rateAnInstructor = asyncHandler(async (req, res) => {
+    const instructorRate = await Instructor.findById(req.params.id)
+    req.query.reviewerID
+    const {rating,review}=req.body
+    if (!instructorRate) {
+      res.status(400).send("Instructor not found!");
+    }
+    if ((!rating) && (!review)) {
+      res.status(400).send("Please fill in the field");
+    }
+    if (!rating){
+      res.status(400).send("Please enter the rating");
+    }
+    if((!review)){
+      const ratedInstructor = await Instructor.findByIdAndUpdate(req.params.id, 
+        {"reviews.rating":rating},
+        {"reviews.reviewedBy":req.query.reviewerID},
+         {new: true,})
+    res.status(200).json(ratedInstructor)   
+    }
+    else{
+      const ratedInstructor = await Instructor.findByIdAndUpdate(req.params.id,
+        {"reviews.review":review}, 
+        {"reviews.rating":rating},
+        {"reviews.reviewedBy":req.query.reviewerID},
+         {new: true,})
+         res.status(200).json(ratedInstructor)   
+    }
+   })
+  
+
+
 module.exports={
-    viewAllInstructorCourses,filterInstructorCourses,searchInstructorCourses,createNewCourse,setInstructorCountry
+    viewAllInstructorCourses,
+    filterInstructorCourses,
+    searchInstructorCourses,
+    createNewCourse,
+    setInstructorCountry,
+    rateAnInstructor
 };
 /* Sample test data for createNewCourses:
 {
