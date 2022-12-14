@@ -127,7 +127,7 @@ const rateaCourse = asyncHandler(async (req, res) => {
   }
  })
 
-const updateCourseDescription = aysncHandler(async (req,res)=>
+const updateCourseDescription = asyncHandler(async (req,res)=>
 {
   const courseId= req.params.id;
   if(!mongoose.Types.ObjectId.isValid(courseId))
@@ -146,7 +146,7 @@ const updateCourseDescription = aysncHandler(async (req,res)=>
     res.status(404).send("no course with the id :" +courseId+" was found");
   }
 })
-const getCourseDescription =aysncHandler(async(req,res)=>{
+const getCourseDescription =asyncHandler(async(req,res)=>{
   const courseId= req.params.id;
   if(!mongoose.Types.ObjectId.isValid(courseId))
   {
