@@ -1,10 +1,10 @@
-const aysncHandler = require('express-async-handler') 
+const asyncHandler = require('express-async-handler') 
 const IndividualTrainee = require('../Models/IndividualTrainee')
 const CorporateTrainee = require('../Models/CorporateTrainee')
 
 // individual Trainee can select his/her country (requirement 6)
 // add the individual Trainee id with the url to change the country of a certain individual Trainee
-const setIndividualIraineeCountry = aysncHandler(async (req, res) => {
+const setIndividualIraineeCountry = asyncHandler(async (req, res) => {
     const trainee = await IndividualTrainee.findById(req.params.id)
   
     if (!trainee) {
@@ -19,7 +19,7 @@ const setIndividualIraineeCountry = aysncHandler(async (req, res) => {
 
  // Coorporate Trainee can select his/her country (requirement 6)
 // add the individual Trainee id with the url to change the country of a certain individual Trainee
-const setCorporateTraineeCountry = aysncHandler(async (req, res) => {
+const setCorporateTraineeCountry = asyncHandler(async (req, res) => {
   console.log("testttttttttttt")
   console.log(req.body)
     const trainee = await CorporateTrainee.findById(req.params.id)
@@ -35,8 +35,13 @@ const setCorporateTraineeCountry = aysncHandler(async (req, res) => {
     res.status(200).json(updatedtrainee)
   })
 
+  
+
+
+
 
   module.exports = {
     setIndividualIraineeCountry ,
-    setCorporateTraineeCountry
+    setCorporateTraineeCountry,
+
   }

@@ -7,5 +7,7 @@ const {
 
   router.route('/IndividualTrainee/setCountry/:id').put(setIndividualIraineeCountry)
   router.route('/CorporateTrainee/setCountry/:id').put(setCorporateTraineeCountry)
+ 
+
 
   module.exports = router;
