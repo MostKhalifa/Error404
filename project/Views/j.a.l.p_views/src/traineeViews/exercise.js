@@ -12,6 +12,16 @@ const Exercises = () => {
         axios.get("course/getCoursesChapter/639114e227ba150662d88096?chapter=the Physics of neuro-chemistry")
         .then((res) => {
             console.log(res.data)
+            let exercisesNumber = [];
+            res.forEach
+            (
+              (chapters)=> 
+              {
+                exercisesNumber.push(chapters);
+              }
+          );
+          
+
             setExercises(res.data);
         })
         .catch(error => console.error('error'))

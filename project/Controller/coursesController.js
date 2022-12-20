@@ -12,16 +12,15 @@ const getCourseChapter = aysncHandler(async(req,res)=>{
   {
       query= {_id:mongoose.Types.ObjectId(courseID) , chapter: chapter}
       const course = await Courses.findOne(query);
-      let exerciseNumbers = [];
+      let chapterNumber = [];
       (await course.chapters).forEach
       (
         (exercises)=> 
         {
-          exerciseNumbers.push(exercises);
+          chapterNumber.push(exercises);
         }
     );
-    res.status(200).json(exerciseNumbers);
-      // res.status(200).json(course.chapters[2]);
+    res.status(200).json(chapterNumber);
       return;
   }
   const course = await Courses.findOne(query);
