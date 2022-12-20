@@ -20,7 +20,8 @@ const getCourseChapter = aysncHandler(async(req,res)=>{
           chapterNumber.push(exercises);
         }
     );
-    res.status(200).json(chapterNumber);
+
+    res.status(200).json(course.chapters);
       return;
   }
   const course = await Courses.findOne(query);
