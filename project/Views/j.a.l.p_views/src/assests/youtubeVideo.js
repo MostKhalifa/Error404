@@ -10,5 +10,4 @@ function YoutubeVideo({src,height,width,title}) {
         allowFullScreen>
         </iframe>);
 }
-
 export default YoutubeVideo;

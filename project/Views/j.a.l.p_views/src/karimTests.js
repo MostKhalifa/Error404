@@ -19,7 +19,7 @@ function KarimTests()
     exercises.push(exercise);
     SetExercises(exercises);
     window.location.reload(false)
-    console.log(exercises)
+    console.log(exercises)  
   }
   return(
       <div className="App">

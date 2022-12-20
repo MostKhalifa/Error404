@@ -1,43 +1,14 @@
-import "./assests/button"
+
 import {BrowserRouter as Router, Routes,Route } from 'react-router-dom';
-import Button from "./assests/button";
-import TextBox from "./assests/textbox";
-import RadioBox from "./assests/radioBox";
-import YoutubeVideo from "./assests/youtubeVideo";
-import { useState } from "react";
-import {FaHome} from "react-icons/fa";
-import { Rating,Switch,CircularProgress } from '@mui/material';
 import UploadCourseDescription from "./pages/UploadCourseDescription";
 import InstructorCourses from "./pages/InstructorCourses";
 import CTcourseInfo from "./pages/CTcourseInfo";
 import UpdateCourseDescription from "./pages/UpdateCourseDescription";
-import { Fragment,} from "react";
-import {ThemeProvider,createTheme} from '@mui/material';
 import KarimTests from "./karimTests"
-const theme =createTheme(
-  {
-    palette:
-    {
-    primary:{
-      main:'#303c6c',
-      contrastText:'#f4976c'  	
-    },
-    secondary:{
-      main:'#f4976c',
-      contrastText:'#303c6c'  	
-    },
-    text:
-    {
-      primary:'#f4976c',
-      secondary:'#303c6c'
-    }
-    }
-  }
-);
+
 function App() 
 {
-  // const [radioBox,setRadioBox]=useState("");
-  // const [textBox,setTextBox]=useState("");
+ 
   return(
       <div className="App">
         {
@@ -48,6 +19,7 @@ function App()
           <Route path='/ViewInstructorRatingsonCourses' element={<InstructorCourses/>}/>
           <Route path='/uploadLinkAndDescription' element={<UploadCourseDescription/>}/>
           <Route path='/updateLinkAndDescription' element={<UpdateCourseDescription />}/>
+          <Route path='/karimTests' element={<KarimTests />}/>
         </Routes>
         </div>
       </Router>

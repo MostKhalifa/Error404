@@ -8,7 +8,6 @@ const {
     filterCoursePrice,
     searchForCourse,
     rateaCourse,
-,
     updateCourseDescription,
     getCourseDescription
   } = require('../Controller/coursesController')

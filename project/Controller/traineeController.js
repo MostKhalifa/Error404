@@ -38,7 +38,7 @@ const setCorporateTraineeCountry = asyncHandler(async (req, res) => {
   })
 
   //just a helper method for me // not from the requirements 
-  const setIndvidualTrainee = aysncHandler(async(req,res)=>{
+  const setIndvidualTrainee = asyncHandler(async(req,res)=>{
   
     // console.log(req.body);
    const {firstName,lastName,email,username,password,gender,country,courses,wallet} = req.body
@@ -65,7 +65,7 @@ const setCorporateTraineeCountry = asyncHandler(async (req, res) => {
  ////////////////////////////////////////////
  //just a helper method for meee
 
- const setCorperateTrainee = aysncHandler(async(req,res)=>{
+ const setCorperateTrainee = asyncHandler(async(req,res)=>{
   
   // console.log(req.body);
  const {firstName,lastName,email,username,password,gender,country,corporate,courses} = req.body
@@ -94,7 +94,7 @@ const setCorporateTraineeCountry = asyncHandler(async (req, res) => {
   // Hence I need both trainee id and course id 
   // the question is for the same course it will apeear similarly for all enrolled trainees ??
   // Also I need to esnure that they are viewing the courses that they are registered in
-  const getIndividualIraineeCourseInfo = aysncHandler(async (req, res) => {
+  const getIndividualIraineeCourseInfo = asyncHandler(async (req, res) => {
     const trainee = await IndividualTrainee.findById(req.params.id);
     var x =0;
     console.log(trainee)
@@ -135,7 +135,7 @@ const setCorporateTraineeCountry = asyncHandler(async (req, res) => {
 
   //Corporate trainee can open all the items inside a course he/she is registered for including video and excericies 
 
-  const getCorporateIraineeCourseInfo = aysncHandler(async (req, res) => {
+  const getCorporateIraineeCourseInfo = asyncHandler(async (req, res) => {
     const trainee = await CorporateTrainee.findById(req.params.id);
     var x =0;
     console.log(trainee)
@@ -158,7 +158,7 @@ const setCorporateTraineeCountry = asyncHandler(async (req, res) => {
         res.status(404).send("You are not registered in the course"); 
     else{
     
-    const course = await Courses.findById(req.query.id1).select('courseTitle courseDescripation courseDescripationVideo price numberOfHours contract reviews certifcateForm courseSubject discount instructor reviews chapters');
+    const course = await Courses.findById(req.query.id1).select('courseTitle courseDescription courseDescriptionVideo price numberOfHours contract reviews certifcateForm courseSubject discount instructor reviews chapters');
     res.status(200).json(course)
     }
   })
@@ -166,11 +166,10 @@ const setCorporateTraineeCountry = asyncHandler(async (req, res) => {
 
 
   module.exports = {
-    setIndividualIraineeCountry ,
+    setIndividualIraineeCountry,
     setCorporateTraineeCountry,
     getIndividualIraineeCourseInfo,
     getCorporateIraineeCourseInfo,
     setIndvidualTrainee,
     setCorperateTrainee,
-
   }

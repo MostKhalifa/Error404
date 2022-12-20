@@ -5,7 +5,7 @@ const
         createNewCourse,
         viewAllInstructorCourses,
         filterInstructorCourses,
-        rateAnInstructor,,
+        rateAnInstructor,
         getRating,
         getInstructorCourseRatings,
         setInstructorCourseVideoandDescription,
