@@ -160,6 +160,33 @@ const getCourseDescription =asyncHandler(async(req,res)=>{
   res.status(200).send(course);  
 })
 
+//for Mostafa bdl el elmwgood
+const getCourseChapter = asyncHandler(async(req,res)=>{
+  const courseID = req.params.id ;
+  const chapter = req.query.chapter||null;
+  console.log(chapter)
+  let query ={_id:mongoose.Types.ObjectId(courseID)};
+  if(chapter!=null)
+  {
+      query= {_id:mongoose.Types.ObjectId(courseID) , chapter: chapter}
+      const course = await Courses.findOne(query);
+      let chapterNumber = [];
+      (await course.chapters).forEach
+      (
+        (exercises)=> 
+        {
+          chapterNumber.push(exercises);
+        }
+    );
+
+    res.status(200).json(course.chapters);
+      return;
+  }
+  const course = await Courses.findOne(query);
+  res.status(200).json(course);
+  
+})
+
   module.exports = {
    
     filterCourseSubjectRating,
@@ -169,5 +196,6 @@ const getCourseDescription =asyncHandler(async(req,res)=>{
     searchForCourse,
     rateaCourse,
     updateCourseDescription,
-    getCourseDescription
+    getCourseDescription,
+    getCourseChapter
   }

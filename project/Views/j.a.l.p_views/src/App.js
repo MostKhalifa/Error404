@@ -5,6 +5,7 @@ import InstructorCourses from "./pages/InstructorCourses";
 import CTcourseInfo from "./pages/CTcourseInfo";
 import UpdateCourseDescription from "./pages/UpdateCourseDescription";
 import KarimTests from "./karimTests"
+import Exercises from './traineeViews/exercise';
 
 function App() 
 {
@@ -20,6 +21,7 @@ function App()
           <Route path='/uploadLinkAndDescription' element={<UploadCourseDescription/>}/>
           <Route path='/updateLinkAndDescription' element={<UpdateCourseDescription />}/>
           <Route path='/karimTests' element={<KarimTests />}/>
+          <Route path='/exercise' element={<Exercises/>}/>
         </Routes>
         </div>
       </Router>

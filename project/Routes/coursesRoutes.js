@@ -9,7 +9,8 @@ const {
     searchForCourse,
     rateaCourse,
     updateCourseDescription,
-    getCourseDescription
+    getCourseDescription,
+    getCourseChapter
   } = require('../Controller/coursesController')
 
   router.route('/getCourses').get(getCourse)
@@ -19,6 +20,7 @@ const {
   router.route('/searchForCourse').get(searchForCourse)
   router.route('/rateaCourse/:id').put(rateaCourse)
    router.route('/updateCourseDescription/:id').patch(updateCourseDescription)
+   router.route('/getCoursesChapter/:id').get(getCourseChapter)
 
   router.route('/getCourseDescription/:id').get(getCourseDescription)
   module.exports = router
