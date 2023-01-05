@@ -3,3 +3,28 @@
 *{
   font-family: "QuickSand";
 }
+/*scrollBar*/
+::-webkit-scrollbar 
+{
+    width: 10px;
+}
+  
+::-webkit-scrollbar-track 
+{
+    background: #e8e8e8;
+    
+    border-radius: 200px;
+}
+  
+::-webkit-scrollbar-thumb 
+{
+    background: #f4976c;
+    
+    border-radius: 200px;
+}
+::-webkit-scrollbar-thumb:hover 
+{
+    background: #303c6c;
+    
+    border-radius: 200px;
+}

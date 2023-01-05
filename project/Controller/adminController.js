@@ -41,6 +41,7 @@ exports.addAdmin = asyncHandler (
 "corporate" : ""
 }
 */
+
 exports.addCorporateTrainee = asyncHandler (
     async (req , res) =>{
     if(await corporateTrainee.findOne({email : req.body.email})){

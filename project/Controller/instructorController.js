@@ -5,6 +5,32 @@ const { default: mongoose } = require('mongoose');
 const Courses = require("../Models/Courses");
 const Instructor = require('../Models/InstructorSchema');
 
+// just a helper mthod and not part of the requirements 
+///
+const setInstructor = asyncHandler(async(req,res)=>{
+  
+    // console.log(req.body);
+   const {firstName,lastName,email,username,password,gender,country,reviews,courses} = req.body
+    const it = await Instructor.create({
+        firstName,
+        lastName,
+        email,
+        username,
+        password,
+        gender,
+        country,
+        reviews,
+        courses
+    })
+  
+    if (it) {
+     res.status(201)
+   } else {
+     res.status(400)
+   }
+   
+  })
+
 const setInstructorCountry = asyncHandler(async (req, res) => {
     const instructor = await Instructor.findById(req.params.id)
   
@@ -17,6 +43,7 @@ const setInstructorCountry = asyncHandler(async (req, res) => {
     })
     res.status(200).json(updatedInstructor);
   });
+
 //create a new course
 const createNewCourse = asyncHandler
 (
@@ -175,8 +202,139 @@ const searchInstructorCourses = asyncHandler
             }  
                                  
 );
+
+
+// Instructor can view his/her ratings on their Courses
+// Instructor need to view the course ratings and reviews for all its courses
+const getInstructorCourseRatings = asyncHandler(async (req, res) => {
+    const instructor = await Instructor.findById(req.params.id);
+    let j=0;
+    const result = [];
+    if (!instructor ) {
+      res.status(400)
+    }
+      for (let i = 0; i < instructor.courses.length; i++) {
+      //  result += "course"+" "+(i+1)+"\n"
+        var id = instructor.courses[i].CourseID
+        const course = await Courses.findById(id).select('courseTitle reviews')
+        result[j]=course
+        j++;
+       // result+=course+""
+    }
+    res.status(200).json(result)
+  })
+
+  //Instructor can upload a video link from Youtube under each subtitle and enter a short description of the video 
+  //post method
+  //Instructor will change a specific course so I need to have both instructor id and course id 
+  // However this mean that instructor changes to the course will be global is that coreect ??
+  const setInstructorCourseVideoandDescription = asyncHandler(async (req, res) => {
+    const id=req.params.id
+    const course = await Courses.findById(req.params.id)
+    if (!course ) {
+      res.status(400)
+    }
+    const chaptersTemp = [];
+    const {chapterTitle,chapterVideo,instructorNotes} = req.body
+    console.log(chapterTitle);
+    console.log(chapterVideo);
+    console.log(instructorNotes);
+    for (let i = 0; i < course.chapters.length; i++) {
+        //  result += "course"+" "+(i+1)+"\n"
+         if(course.chapters[i].chapterTitle==chapterTitle){
+            const totalHours= course.chapters[i].totalHours
+            const tempEX = course.chapters[i].exercise
+            const chapt =course.chapters[i].chaptersAssessments
+            const newchapter = {
+                chapterTitle: chapterTitle ,
+                chapterVideo: chapterVideo ,
+                instructorNotes: instructorNotes ,
+                totalHours: totalHours,
+                exercise : tempEX ,
+                chaptersAssessments : chapt
+            }
+            console.log(newchapter)
+            chaptersTemp[i]=newchapter
+            console.log(chaptersTemp[i])
+         }
+         else{
+            chaptersTemp[i]=course.chapters[i]
+         }
+        }
+
+       const resa= await Courses.findByIdAndUpdate(req.params.id, { chapters: chaptersTemp } , {
+            new: true,
+          })
+
+    // const updatedCourse = await Courses.findByIdAndUpdate(req.params.id, chaptersTemp, {
+    //   new: true,
+    // })
+    if(resa)
+    res.status(200).send("Done");
+    else 
+    res.status(400)
+  });
+
+
+
+const rateAnInstructor = asyncHandler(async (req, res) => {
+    const instructorRate = await Instructor.findById(req.params.id)
+    req.query.reviewerID
+    const {rating,review}=req.body
+    if (!instructorRate) {
+      res.status(400).send("Instructor not found!");
+    }
+    if ((!rating) && (!review)) {
+      res.status(400).send("Please fill in the field");
+    }
+    if (!rating){
+      res.status(400).send("Please enter the rating");
+    }
+    if((!review)){
+      const ratedInstructor = await Instructor.findByIdAndUpdate(req.params.id, 
+        {"reviews.rating":rating},
+        {"reviews.reviewedBy":req.query.reviewerID},
+         {new: true,})
+    res.status(200).json(ratedInstructor)   
+    }
+    else{
+      const ratedInstructor = await Instructor.findByIdAndUpdate(req.params.id,
+        {"reviews.review":review}, 
+        {"reviews.rating":rating},
+        {"reviews.reviewedBy":req.query.reviewerID},
+         {new: true,})
+         res.status(200).json(ratedInstructor)   
+    }
+   })
+  
+
+
+const getRating=asyncHandler
+(
+    async (req,res)=>
+    {
+        const  instructorId = req.params.id ;
+        if(!mongoose.Types.ObjectId.isValid(instructorId))
+        {
+           return res.status(404).send("the id given is in a invalid form ");
+        }   
+        let instructorFound = await Instructor.find({_id :mongoose.Types.ObjectId(instructorId)},{reviews:1});
+        if(instructorFound.length!=1)
+        {
+            return res.status(404).send("the insttuctor is not found");
+        }
+        res.status(202).send(instructorFound)
+       
+    }
+    )
 module.exports={
-    viewAllInstructorCourses,filterInstructorCourses,searchInstructorCourses,createNewCourse,setInstructorCountry
+    viewAllInstructorCourses,
+    filterInstructorCourses,
+    searchInstructorCourses,
+    createNewCourse,
+    setInstructorCountry,
+    getInstructorCourseRatings,setInstructorCourseVideoandDescription,setInstructor,
+    rateAnInstructor,getRating
 };
 /* Sample test data for createNewCourses:
 {

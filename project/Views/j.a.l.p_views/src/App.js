@@ -1,6 +1,10 @@
 
 import {BrowserRouter as Router, Routes,Route } from 'react-router-dom';
-
+import UploadCourseDescription from "./pages/UploadCourseDescription";
+import InstructorCourses from "./pages/InstructorCourses";
+import CTcourseInfo from "./pages/CTcourseInfo";
+import UpdateCourseDescription from "./pages/UpdateCourseDescription";
+import KarimTests from "./karimTests"
 import Exercises from './traineeViews/exercise';
 
 function App() 
@@ -12,8 +16,12 @@ function App()
         <Router>
         <div className='container'>
           <Routes>
-
-          <Route path='/exercise' element={<Exercises />}/>
+          <Route path='/CTcourseInfo' element={<CTcourseInfo/>}/>
+          <Route path='/ViewInstructorRatingsonCourses' element={<InstructorCourses/>}/>
+          <Route path='/uploadLinkAndDescription' element={<UploadCourseDescription/>}/>
+          <Route path='/updateLinkAndDescription' element={<UpdateCourseDescription />}/>
+          <Route path='/karimTests' element={<KarimTests />}/>
+          <Route path='/exercise' element={<Exercises/>}/>
         </Routes>
         </div>
       </Router>

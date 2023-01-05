@@ -3,7 +3,6 @@ const CorporateTrainee = require('./CorporateTrainee');
 const IndividualTrainee = require('./IndividualTrainee');
 const Instructor = require('./InstructorSchema');
 const Schema = mongoose.Schema;
-
 //Creating the CoursesSchema
 const CoursesSchema = new Schema
 (
