@@ -22,20 +22,28 @@ const Exercises = () => {
       }, []);
 
 
+
+
     const [showResult, setShowResult] = useState(false);
     const [score , setScore] = useState(0);
     const [currentQuestion, setCurrentQuestion] = useState(0);
+    const [wrongAnswers , setWrongAnswer] = useState(null);
+    const idiot = [];
 
-    const answerClicked = (valid) => {
+    const answerClicked = (question , valid) => {
+        console.log(idiot);
         if(valid){
             setScore(score  + 1);
         }
-
-        if(currentQuestion + 1 < exercises.length){
+        if(!valid){
+           idiot.push(question);
+        }
+        if(currentQuestion + 1< exercises.length){
             setCurrentQuestion(currentQuestion  + 1);
         }
         else{
             setShowResult(true);
+            setWrongAnswer(idiot);
         }
     }
 
@@ -43,12 +51,14 @@ const Exercises = () => {
         setScore(0);
         setCurrentQuestion(0);
         setShowResult(false);
+        setWrongAnswer(null);
     }
 
     const goBack = () =>{
         setScore(0);
         setCurrentQuestion(0);
         setShowResult(false);
+        setWrongAnswer(null);
     }
 
     return (
@@ -59,8 +69,38 @@ const Exercises = () => {
                 <div className="exercise-result">
                     <h1> Result</h1>
                     {exercises&&<h2> {score} of {exercises.length} questions correct - ({( score / exercises.length)*100}%)</h2>}
-                    {/* <h2> {score} of 5 questions correct - (5%)</h2> */}
                     <p></p>
+
+                    <ul>
+                       {wrongAnswers && wrongAnswers.map((wrongAnswer) => {
+                            return(
+                                <li>{wrongAnswer.questionHead} 
+                                {'\n'}
+                                <ul>
+                                {wrongAnswer.answers.map((solution) => {
+                                    // return(
+                                        if(solution.valid){
+                                           return(
+                                            <li >{solution.answerBody}</li>
+                                            );
+                                        };
+                                    // );
+                                })}
+                                </ul>
+                                
+                                </li>
+                            );
+
+                        })}
+
+                        {/* {idiot && idiot.map((khara) => {
+                            return(
+                                <li>{khara} </li>
+                            );
+                        })} */}
+
+                    </ul>
+
                     <button onClick ={() => retakeExercise()}> Retake exercise</button>
                     <button onClick={() => goBack()}> Return to course</button>
                 </div>
@@ -72,7 +112,7 @@ const Exercises = () => {
                     <ul>
                         {exercises && exercises[currentQuestion].answers.map((answer) => {
                             return(
-                                <li key={answer.answerBody} onClick={() => answerClicked(answer.valid)}>{answer.answerBody}</li>
+                                <li key={answer.answerBody} onClick={() => answerClicked(exercises[currentQuestion] , answer.valid)}>{answer.answerBody}</li>
                             );
 
                         })}
