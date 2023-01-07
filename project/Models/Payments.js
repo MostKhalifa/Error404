@@ -1,33 +1,29 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 //Creating the Payments
-const PaymentSchema = new Schema
-(
+const PaymentSchema = new Schema(
   {
-    reason:
-    {
+    reason: {
       type: String,
       required: true,
     },
-    amount: 
-    {
+    amount: {
       type: Number,
-      required: true
+      required: true,
     },
-    client: 
-    {
+    client: {
       type: Schema.Types.ObjectId,
       required: true,
-      refPath :'clientType'
+      refPath: "clientType",
     },
-    clientType:
-    {
+    clientType: {
       type: String,
-      required:true,
-      enum:['Instructor','IndividualTrainee']
-    }
-  },{ timestamps: true }
+      required: true,
+      enum: ["Instructor", "IndividualTrainee"],
+    },
+  },
+  { timestamps: true }
 );
 //Modeling the Payments in the MongoDb Cluster and exporting into into usable variable
-const Payments = mongoose.model('Payments', PaymentSchema);
+const Payments = mongoose.model("Payments", PaymentSchema);
 module.exports = Payments;

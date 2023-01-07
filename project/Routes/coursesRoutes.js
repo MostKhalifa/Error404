@@ -1,26 +1,26 @@
-const express = require('express')
-const router = express.Router()
+const express = require("express");
+const router = express.Router();
 
 const {
-    getCourse,
-    viewCoursePrice,
-    filterCourseSubjectRating,
-    filterCoursePrice,
-    searchForCourse,
-    rateaCourse,
-    updateCourseDescription,
-    getCourseDescription,
-    getCourseChapter
-  } = require('../Controller/coursesController')
+  getCourse,
+  viewCoursePrice,
+  filterCourseSubjectRating,
+  filterCoursePrice,
+  searchForCourse,
+  rateaCourse,
+  updateCourseDescription,
+  getCourseDescription,
+  getCourseChapter,
+} = require("../Controller/coursesController");
 
-  router.route('/getCourses').get(getCourse)
-  router.route('/getCoursePrice/:id').get(viewCoursePrice)
-  router.route('/filterCourseSubjectRating').get(filterCourseSubjectRating)
-  router.route('/filterCoursePrice').get(filterCoursePrice)
-  router.route('/searchForCourse').get(searchForCourse)
-  router.route('/rateaCourse/:id').put(rateaCourse)
-   router.route('/updateCourseDescription/:id').patch(updateCourseDescription)
-   router.route('/getCoursesChapter/:id').get(getCourseChapter)
+router.route("/getCourses").get(getCourse);
+router.route("/getCoursePrice/:id").get(viewCoursePrice);
+router.route("/filterCourseSubjectRating").get(filterCourseSubjectRating);
+router.route("/filterCoursePrice").get(filterCoursePrice);
+router.route("/searchForCourse").get(searchForCourse);
+router.route("/rateaCourse/:id").put(rateaCourse);
+router.route("/updateCourseDescription/:id").patch(updateCourseDescription);
+router.route("/getCoursesChapter/:id").get(getCourseChapter);
 
-  router.route('/getCourseDescription/:id').get(getCourseDescription)
-  module.exports = router
+router.route("/getCourseDescription/:id").get(getCourseDescription);
+module.exports = router;

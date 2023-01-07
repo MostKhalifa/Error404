@@ -1,34 +1,43 @@
-
-import {BrowserRouter as Router, Routes,Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import UploadCourseDescription from "./pages/UploadCourseDescription";
 import InstructorCourses from "./pages/InstructorCourses";
 import CTcourseInfo from "./pages/CTcourseInfo";
 import UpdateCourseDescription from "./pages/UpdateCourseDescription";
-import KarimTests from "./karimTests"
-import Exercises from './traineeViews/exercise';
-
-function App() 
-{
- 
-  return(
-      <div className="App">
-        {
+import KarimTests from "./karimTests";
+import Exercises from "./traineeViews/exercise";
+import Login from "./general/login";
+import ForgetPassword from "./general/forgetPassword";
+import SignUp from "./general/signup";
+function App() {
+  return (
+    <div className="App">
+      {
         <Router>
-        <div className='container'>
-          <Routes>
-          <Route path='/CTcourseInfo' element={<CTcourseInfo/>}/>
-          <Route path='/ViewInstructorRatingsonCourses' element={<InstructorCourses/>}/>
-          <Route path='/uploadLinkAndDescription' element={<UploadCourseDescription/>}/>
-          <Route path='/updateLinkAndDescription' element={<UpdateCourseDescription />}/>
-          <Route path='/karimTests' element={<KarimTests />}/>
-          <Route path='/exercise' element={<Exercises/>}/>
-        </Routes>
-        </div>
-      </Router>
-        
-        
-        
-        
+          <div className="container">
+            <Routes>
+              <Route path="/CTcourseInfo" element={<CTcourseInfo />} />
+              <Route
+                path="/ViewInstructorRatingsonCourses"
+                element={<InstructorCourses />}
+              />
+              <Route
+                path="/uploadLinkAndDescription"
+                element={<UploadCourseDescription />}
+              />
+              <Route
+                path="/updateLinkAndDescription"
+                element={<UpdateCourseDescription />}
+              />
+              <Route path="/karimTests" element={<KarimTests />} />
+              <Route path="/exercise" element={<Exercises />} />
+              <Route  path="/" element={<Login />} />
+              <Route  path="/forgetPassword" element={<ForgetPassword/>} />
+              <Route  path="/signup" element={<SignUp/>} />
+          
+            </Routes>
+          </div>
+        </Router>
+
         /* <CircularProgress></CircularProgress>
         <YoutubeVideo src={"lDjZA0wodGQ"} width={"300"} height={"300"} title={"video"}></YoutubeVideo>
         <Switch className="test" defaultChecked={true}></Switch>
@@ -51,8 +60,9 @@ function App()
         <br/>
         <RadioBox options={["karim","omar"]} groupname="brothers"  handler={(change)=>setRadioBox(change.target.value)}/>
         <br/>
-        <label>{radioBox}</label> */}
-      </div>
+        <label>{radioBox}</label> */
+      }
+    </div>
   );
 }
 export default App;

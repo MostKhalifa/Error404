@@ -1,26 +1,24 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 //Creating the AdminSchema
-const AdminSchema = new Schema
-(
+const AdminSchema = new Schema(
   {
-    username:
-    {
+    username: {
       type: String,
       required: true,
     },
-    email: 
-    {
+    email: {
+      unique:true,
       type: String,
-      required: true
+      required: true,
     },
-    password: 
-    {
+    password: {
       type: String,
-      required: true
-    }
-  },{timestamps: true }
+      required: true,
+    },
+  },
+  { timestamps: true }
 );
-//Modeling the AdminSchema in the MongoDb Cluster and exporting into into usable variable  
-const Admin = mongoose.model('Admin', AdminSchema );
+//Modeling the AdminSchema in the MongoDb Cluster and exporting into into usable variable
+const Admin = mongoose.model("Admin", AdminSchema);
 module.exports = Admin;
