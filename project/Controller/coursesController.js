@@ -2,7 +2,7 @@ const asyncHandler = require("express-async-handler");
 const Courses = require("../Models/Courses");
 const mongoose = require("mongoose");
 
-//view course title along with total hours and rating ( requirement 7)
+//view courses title along with total hours and rating ( requirement 7)
 const getCourse = asyncHandler(async (req, res) => {
   const course = await Courses.find().select(
     "courseTitle numberOfHours reviews"
