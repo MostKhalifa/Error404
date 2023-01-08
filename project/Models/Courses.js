@@ -33,9 +33,6 @@ const CoursesSchema = new Schema(
     certificateForm: {
       type: String,
     },
-    image:{
-      type: String,  
-    },
     courseSubject: {
       type: String,
       required: true,
