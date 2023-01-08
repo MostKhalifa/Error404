@@ -2,8 +2,8 @@ const asyncHandler = require("express-async-handler");
 const Courses = require("../Models/Courses");
 const mongoose = require("mongoose");
 
-//view course title along with total hours and rating ( requirement 7)
-const getCourse = asyncHandler(async (req, res) => {
+//view courses title along with total hours and rating ( requirement 7)
+const getCourses = asyncHandler(async (req, res) => {
   const course = await Courses.find().select(
     "courseTitle numberOfHours reviews"
   );
@@ -189,14 +189,27 @@ const getCourseChapter = asyncHandler(async (req, res) => {
   res.status(200).json(course);
 });
 
+const getCourse = asyncHandler(async (req, res) => {
+  const courseId = req.query.courseId;
+  if (!mongoose.Types.ObjectId.isValid(courseId)) {
+    res.status(404).send("the id given is in a invalid form ");
+  }
+  const course = await Courses.findById(courseId);
+  if(course){ res.status(200).json(course);}
+  else{
+    res.status(404).send("pleases provide a valid course id");
+  }
+});
+
 module.exports = {
   filterCourseSubjectRating,
   filterCoursePrice,
-  getCourse,
+  getCourses,
   viewCoursePrice,
   searchForCourse,
   rateaCourse,
   updateCourseDescription,
   getCourseDescription,
   getCourseChapter,
+  getCourse,
 };

@@ -183,6 +183,17 @@ const getCorporateIraineeCourseInfo = asyncHandler(async (req, res) => {
   }
 });
 
+
+const getIndividualIrainee = asyncHandler(async (req, res) => {
+  const indTrain = await IndividualTrainee.findById(req.params.id);
+  res.send(indTrain);
+});
+
+const getCorporateIrainee = asyncHandler(async (req, res) => {
+  const corpTrain = await CorporateTrainee.findById(req.params.id);
+  res.send(corpTrain);
+});
+
 module.exports = {
   setIndividualIraineeCountry,
   setCorporateTraineeCountry,
@@ -190,4 +201,6 @@ module.exports = {
   getCorporateIraineeCourseInfo,
   setIndvidualTrainee,
   setCorperateTrainee,
+  getIndividualIrainee,
+  getCorporateIrainee,
 };
