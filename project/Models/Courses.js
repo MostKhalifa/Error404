@@ -1,203 +1,169 @@
-const mongoose = require('mongoose');
-const CorporateTrainee = require('./CorporateTrainee');
-const IndividualTrainee = require('./IndividualTrainee');
-const Instructor = require('./InstructorSchema');
+const mongoose = require("mongoose");
+const CorporateTrainee = require("./CorporateTrainee");
+const IndividualTrainee = require("./IndividualTrainee");
+const Instructor = require("./InstructorSchema");
 const Schema = mongoose.Schema;
 //Creating the CoursesSchema
-const CoursesSchema = new Schema
-(
-    {
-        courseTitle:    
-        {
-            type: String,
-            required: true,
+const CoursesSchema = new Schema(
+  {
+    courseTitle: {
+      type: String,
+      required: true,
+    },
+    courseDescription: {
+      type: String,
+      required: true,
+    },
+    courseDescriptionVideo: {
+      type: String,
+      required: true,
+    },
+    price: {
+      type: Number,
+      required: true,
+    },
+    numberOfHours: {
+      type: Number,
+      required: true,
+    },
+    contract: {
+      type: String,
+      required: true,
+    },
+    certificateForm: {
+      type: String,
+    },
+    image:{
+      type: String,  
+    },
+    courseSubject: {
+      type: String,
+      required: true,
+      enum: ["Maths", "Tech", "Science"],
+    },
+    discount: {
+      avaliable: {
+        type: Boolean,
+        required: true,
+      },
+      percentage: {
+        type: Number,
+        required: true,
+        min: 0,
+        max: 1,
+      },
+    },
+    instructor: {
+      instructorName: {
+        type: String,
+        required: true,
+      },
+      instructorId: {
+        type: Schema.Types.ObjectId,
+        required: true,
+        ref: Instructor,
+      },
+    },
+    enrolledTrainees: [
+      {
+        traineeId: {
+          type: Schema.Types.ObjectId,
+          required: true,
+          refPath: "TraineeType",
         },
-        courseDescription:    
-        {
-            type: String,
-            required: true,
+        traineeType: {
+          type: String,
+          required: true,
+          enum: ["CorporateTrainee", "IndividualTrainee"],
         },
-        courseDescriptionVideo:    
-        {
-            type: String,
-            required: true,
+      },
+    ],
+    reviews: [
+      {
+        review: {
+          type: String,
         },
-        price: 
-        {
-            type: Number,
-            required: true,
+        rating: {
+          type: Number,
+          required: true,
+          max: 5,
+          min: 0,
         },
-        numberOfHours:
-        {
-            type: Number,
-            required: true,
+        reviewedBy: {
+          type: Schema.Types.ObjectId,
+          required: true,
+          refPath: "TraineeType",
         },
-        contract: 
-        {
-            type: String,
-            required: true,
+        traineeType: {
+          type: String,
+          required: true,
+          enum: ["CorporateTrainee", "IndividualTrainee"],
         },
-        certificateForm: 
-        {
-            type: String,
+      },
+    ],
+    chapters: [
+      {
+        chapterTitle: {
+          type: String,
+          required: true,
         },
-        courseSubject: 
-        {
-            type: String,
-            required:true,
-            enum:['Maths','Tech','Science']
+        chapterVideo: {
+          type: String,
         },
-        discount:
-        {
-            avaliable : 
-            {
-                type:Boolean,
-                required :true,
+        instructorNotes: {
+          type: String,
+          required: true,
+        },
+        totalHours: {
+          type: Number,
+          required: true,
+        },
+        exercise: [
+          {
+            questionHead: {
+              type: String,
+              required: true,
             },
-            percentage: 
-            {
-                type:Number,
-                required : true,
-                min:0,
-                max:1,
-            }
-        },
-        instructor:
-            {
-                instructorName:
-                {
-                    type:String,
-                    required: true,
+            answers: [
+              {
+                answerBody: {
+                  type: String,
+                  required: true,
                 },
-                instructorId:
-                {
-                    type:Schema.Types.ObjectId,
-                    required: true,
-                    ref: Instructor
+                valid: {
+                  type: Boolean,
+                  required: true,
+                  default: false,
                 },
+              },
+            ],
+          },
+        ],
+        chaptersAssessments: [
+          {
+            questionHead: {
+              type: String,
+              required: true,
             },
-        enrolledTrainees:
-        [
-            {
-                traineeId:
-                {
-                    type:Schema.Types.ObjectId,
-                    required: true,
-                    refPath: 'TraineeType'                
+            answers: [
+              {
+                answerBody: {
+                  type: String,
+                  required: true,
                 },
-                traineeType:
-                {
-                    type:String,
-                    required:true,
-                    enum:['CorporateTrainee','IndividualTrainee']
-                }
-            }
+                valid: {
+                  type: Boolean,
+                  required: true,
+                },
+              },
+            ],
+          },
         ],
-        reviews:
-        [
-            {
-                review:
-                {
-                    type:String,
-                },
-                rating:
-                {
-                    type:Number,
-                    required: true,
-                    max: 5,
-                    min:0
-                },
-                reviewedBy:
-                {
-                    type:Schema.Types.ObjectId,
-                    required :true,
-                    refPath: 'TraineeType'
-                },
-                traineeType:
-                {
-                    type:String,
-                    required:true,
-                    enum:['CorporateTrainee','IndividualTrainee']
-                }
-            }
-        ], 
-        chapters:
-        [  
-            { 
-                chapterTitle: 
-                {
-                    type:String,
-                    required:true
-                }, 
-                chapterVideo: 
-                {
-                    type:String,
-                },
-                instructorNotes: 
-                {
-                    type:String,
-                    required:true
-                },
-                totalHours: 
-                {
-                    type:Number,
-                    required:true
-                },
-                exercise:
-                [   
-                    { 
-                        questionHead:
-                        {
-                            type:String,
-                            required:true,
-                        },
-                        answers:
-                        [
-                            {
-                                answerBody:
-                                {    
-                                    type :String,
-                                    required:true
-                                } ,
-                                valid:
-                                {
-                                    type:Boolean,
-                                    required:true,
-                                    default:false
-                                }    
-                            }
-                        ]
-                    }
-                ],
-                chaptersAssessments:
-                [     
-                    { 
-                        questionHead:
-                        {
-                            type:String,
-                            required:true,
-                        },
-                        answers:
-                        [
-                            {
-                                answerBody:
-                                {    
-                                    type :String,
-                                    required:true
-                                } ,
-                                valid:
-                                {
-                                    type:Boolean,
-                                    required:true
-                                }    
-                            }
-                        ]
-                    }      
-                ],            
-            },   
-        ],
-    }, { timestamps: true }
+      },
+    ],
+  },
+  { timestamps: true }
 );
 //Modeling the CoursesSchema in the MongoDb Cluster and exporting into into usable variable
-const Courses = mongoose.model('Courses', CoursesSchema);
+const Courses = mongoose.model("Courses", CoursesSchema);
 module.exports = Courses;

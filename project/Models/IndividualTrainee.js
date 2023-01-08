@@ -1,64 +1,58 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-const Courses = require('./Courses');
+const Courses = require("./Courses");
 //Creating the IndividualTraineeSchema
-const IndividualTraineeSchema = new Schema
-(
+const IndividualTraineeSchema = new Schema(
   {
-    firstName:
-    {
+    firstName: {
       type: String,
       required: true,
     },
-    lastName: 
-    {
+    lastName: {
       type: String,
       required: true,
     },
-    email: 
-    {
-      type: String,
-      required: true
-    },
-    username: 
-    {
+    email: {
+      unique:true,
       type: String,
       required: true,
     },
-    password: 
-    {
+    username: {
       type: String,
-      required: true
+      required: true,
     },
-    gender: 
-    {
+    password: {
+      type: String,
+      required: true,
+    },
+    gender: {
       type: Boolean,
-      required: true
+      required: true,
     },
-    country: 
-    {
+    country: {
       type: String,
       required: true,
     },
-    courses: 
-    [
-        {
-        CourseID: 
-          {
-            type: Schema.Types.ObjectId,
-            required: true,
-            ref : 'Courses'
-          }
-        }
+    courses: [
+      {
+        CourseID: {
+          type: Schema.Types.ObjectId,
+          required: true,
+          ref: "Courses",
+        },
+      },
     ],
-    wallet: 
-    {
+    wallet: {
       type: Number,
       required: true,
-      default: 0
-    }
-  }, { timestamps: true }
+      default: 0,
+    },
+  },
+  { timestamps: true }
 );
 //Modeling the IndividualTraineeSchema in the MongoDb Cluster and exporting into into usable variable
-const IndividualTrainee = mongoose.model('IndividualTrainee', IndividualTraineeSchema);
+const IndividualTrainee = mongoose.model(
+  "IndividualTrainee",
+  IndividualTraineeSchema
+);
 module.exports = IndividualTrainee;

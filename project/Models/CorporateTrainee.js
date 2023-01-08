@@ -1,63 +1,57 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-const Courses = require('./Courses');
+const Courses = require("./Courses");
 //Creating the CorporateTraineeSchema
-const CorporateTraineeSchema = new Schema
-(
-    {
-        firstName: 
-        {
-            type: String,
-            required: true,
+const CorporateTraineeSchema = new Schema(
+  {
+    firstName: {
+      type: String,
+      required: true,
+    },
+    lastName: {
+      type: String,
+      required: true,
+    },
+    email: {
+      unique:true,
+      type: String,
+      required: true,
+    },
+    username: {
+      type: String,
+      required: true,
+    },
+    password: {
+      type: String,
+      required: true,
+    },
+    gender: {
+      type: Boolean,
+      required: true,
+    },
+    country: {
+      type: String,
+      required: true,
+    },
+    corporate: {
+      type: String,
+      required: true,
+    },
+    courses: [
+      {
+        courseID: {
+          type: Schema.Types.ObjectId,
+          required: true,
+          ref: "Courses",
         },
-        lastName:
-        {
-            type: String,
-            required: true,
-        },
-        email: 
-        {
-            type: String,
-            required: true
-        },
-        username: 
-        {
-            type: String,
-            required: true,
-        },
-        password: 
-        {
-            type: String,
-            required: true
-        },
-        gender: 
-        {
-            type: Boolean,
-            required: true
-        },
-        country: 
-        {
-            type: String,
-            required: true,
-        },
-        corporate: 
-        {
-            type: String,
-            required: true,
-        },   
-        courses:
-        [
-            {
-                courseID: 
-                {
-                    type: Schema.Types.ObjectId,
-                    required: true,
-                    ref : 'Courses'
-                }
-            }
-        ],
-    }, { timestamps: true }
+      },
+    ],
+  },
+  { timestamps: true }
 );
-//Modeling the CorporateTraineeSchema in the MongoDb Cluster and exporting into into usable variable 
-const CorporateTrainee = mongoose.model('CorporateTrainee', CorporateTraineeSchema);
+//Modeling the CorporateTraineeSchema in the MongoDb Cluster and exporting into into usable variable
+const CorporateTrainee = mongoose.model(
+  "CorporateTrainee",
+  CorporateTraineeSchema
+);
 module.exports = CorporateTrainee;

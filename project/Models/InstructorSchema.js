@@ -1,72 +1,69 @@
-const mongoose = require('mongoose');
-const Courses = require('./Courses');
+const mongoose = require("mongoose");
+const Courses = require("./Courses");
 const Schema = mongoose.Schema;
 //Creating the InstructorSchema
-const InstructorSchema = new Schema
-(
+const InstructorSchema = new Schema(
   {
-    firstName:
-    {
+    firstName: {
       type: String,
       required: true,
     },
-    lastName: 
-    {
+    lastName: {
       type: String,
       required: true,
     },
-    email: 
-    {
-      type: String,
-      required: true
-    },
-    username: 
-    {
+    biography: {
       type: String,
       required: true,
     },
-    password: 
-    {
+    lastName: {
       type: String,
-      required: true
+      required: true,
     },
-    gender: 
-    {
+    email: {
+      unique:true,
+      type: String,
+      required: true,
+    },
+    username: {
+      type: String,
+      required: true,
+    },
+    password: {
+      type: String,
+      required: true,
+    },
+    gender: {
       type: Boolean,
-      required: true
+      required: true,
     },
-    country: 
-    {
+    country: {
       type: String,
       required: true,
     },
-    reviews: 
-    [
+    reviews: [
       {
-        ReviewBody: 
-        {
+        ReviewBody: {
           type: String,
         },
-        Rating : 
-        {
-          type:Number,
-          required : true
-        }
-      }
+        Rating: {
+          type: Number,
+          required: true,
+        },
+      },
     ],
-    courses: 
-    [
+    courses: [
       {
-        CourseID: 
-        {
+        CourseID: {
           type: Schema.Types.ObjectId,
           required: true,
-          ref : 'Courses'
-        }
-      }
-    ]
-  }, { timestamps: true }
+          ref: "Courses",
+        },
+      },
+    ],
+  },
+  { timestamps: true }
 );
-//Modeling the InstructorSchema in the MongoDb Cluster and exporting into into usable variable 
-const Instructor = mongoose.model('Instructor', InstructorSchema);
+//Modeling the InstructorSchema in the MongoDb Cluster and exporting into into usable variable
+const Instructor = mongoose.model("Instructor", InstructorSchema);
 module.exports = Instructor;

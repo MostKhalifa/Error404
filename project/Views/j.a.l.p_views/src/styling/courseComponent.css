@@ -1,39 +1,35 @@
-.courseComponent
-{
-    box-shadow: 0 4px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19); 
-    width: inherit;
-    border-radius: 8px;
+.courseComponent {
+  box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.24),
+    0 17px 50px 0 rgba(0, 0, 0, 0.19);
+  width: inherit;
+  border-radius: 8px;
 }
-
-.courseComponent:hover
-{
-    box-shadow: 0 16px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);  
-    box-shadow: 0 -16px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);  
+.courseComponent:hover {
+  box-shadow: 0 16px 16px 0 rgba(0, 0, 0, 0.24),
+    0 17px 50px 0 rgba(0, 0, 0, 0.19);
+  box-shadow: 0 -16px 16px 0 rgba(0, 0, 0, 0.24),
+    0 17px 50px 0 rgba(0, 0, 0, 0.19);
 }
-.UploadCourseDescriptionP
-{
-    padding-left: 10px;
-    padding-top: 10px; 
+.UploadCourseDescriptionP {
+  padding-left: 10px;
+  padding-top: 10px;
 }
-
-.viewMode{
-    font-size: large;
-    padding-left: 200px;
-    padding-bottom: 20px;
+.viewMode { 
+  width: fit-content;
+  font-size: large;
+  padding-left: 200px;
+  padding-bottom: 20px;
 }
-
-.viewModep{
-    font-size: large;
-    padding-left: 240px;
-    padding-bottom: 20px;
+.viewModep {
+  width: fit-content;
+  font-size: large;
+  padding-left: 240px;
+  padding-bottom: 20px;
 }
-.courseVideoDescripation
-{
-    margin-left: 20px;
+.courseVideoDescripation {
+  margin-left: 20px;
 }
-.answerField
-{
-    margin: auto;
-    width: fit-content;
-    
+.answerField {
+  margin: auto;
+  width: fit-content;
 }
