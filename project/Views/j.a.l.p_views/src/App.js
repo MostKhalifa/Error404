@@ -8,6 +8,8 @@ import Exercises from "./traineeViews/exercise";
 import Login from "./general/login";
 import ForgetPassword from "./general/forgetPassword";
 import SignUp from "./general/signup";
+import NavBarTrainee from "./general/navBarTrainee";
+import NavBarInstructor from "./general/navBarInstructor";
 function App() {
   return (
     <div className="App">
@@ -33,6 +35,9 @@ function App() {
               <Route  path="/" element={<Login />} />
               <Route  path="/forgetPassword" element={<ForgetPassword/>} />
               <Route  path="/signup" element={<SignUp/>} />
+              <Route  path="/navbartrainee" element={<NavBarTrainee/>} />
+              <Route  path="/navbarinstructor" element={<NavBarInstructor/>} />
+
           
             </Routes>
           </div>
