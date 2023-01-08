@@ -5,10 +5,25 @@ import YoutubeVideo from "./general/assests/youtubeVideo";
 import AddExercise from "./instructorViews/addExercise";
 import ViewRating from "./instructorViews/viewRating";
 import Login from "./general/login";
+import CourseCard from "./general/assests/courseCard";
+
+import CourseDrawer from "./general/assests/courseDrawer";
+
 function KarimTests() {
   const [exercises, SetExercises] = useState([]);
   const [src, setSrc] = useState("");
   const [courseDescription, setCourseDescription] = useState("");
+  const courses =["639114e227ba150662d88096",
+  "639114e227ba150662d88096",
+  "639114e227ba150662d88096",
+  "639114e227ba150662d88096",
+  "639114e227ba150662d88096",
+  "639114e227ba150662d88096",
+  "639114e227ba150662d88096",
+  "639114e227ba150662d88096",
+  "639114e227ba150662d88096",
+  "639114e227ba150662d88096",
+  "639114e227ba150662d88096"]
   const handleClick = (courseDescription, src) => {
     setCourseDescription(courseDescription);
     setSrc(src);
@@ -16,13 +31,15 @@ function KarimTests() {
   const handleClickAddExcersie = (exercise) => {
     exercises.push(exercise);
     SetExercises(exercises);
-    //window.location.reload(false)
     console.log(exercises);
   };
   return (
     <div className="App">
+
+      <CourseDrawer  title="my courses" courses={courses}/>
       <Login/>
-       <ViewRating instructorId={"63653e09c81ff58c1c877e6d"}></ViewRating>
+      <CourseCard courseId={"639114e227ba150662d88096"}/>       
+      <ViewRating instructorId={"63653e09c81ff58c1c877e6d"}></ViewRating>
       <AddExercise handleClick={handleClickAddExcersie}></AddExercise>
       <UpdateCourseDescription
         courseId={"639114e227ba150662d88096"}

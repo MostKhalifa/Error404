@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 const {
+  getCourses,
   getCourse,
   viewCoursePrice,
   filterCourseSubjectRating,
@@ -11,9 +12,8 @@ const {
   updateCourseDescription,
   getCourseDescription,
   getCourseChapter,
-  getCourses,
 } = require("../Controller/coursesController");
-
+router.route("/getCourse").get(getCourse);
 router.route("/getCourses").get(getCourses);
 router.route("/getCoursePrice/:id").get(viewCoursePrice);
 router.route("/filterCourseSubjectRating").get(filterCourseSubjectRating);
@@ -22,7 +22,6 @@ router.route("/searchForCourse").get(searchForCourse);
 router.route("/rateaCourse/:id").put(rateaCourse);
 router.route("/updateCourseDescription/:id").patch(updateCourseDescription);
 router.route("/getCoursesChapter/:id").get(getCourseChapter);
-router.route("/getCourse").get(getCourse);
 
 router.route("/getCourseDescription/:id").get(getCourseDescription);
 module.exports = router;

@@ -8,7 +8,6 @@ import Exercises from "./traineeViews/exercise";
 import Login from "./general/login";
 import ForgetPassword from "./general/forgetPassword";
 import SignUp from "./general/signup";
-import AdminHomePage from "./adminViews/homeAdmin";
 function App() {
   return (
     <div className="App">
@@ -34,35 +33,10 @@ function App() {
               <Route  path="/" element={<Login />} />
               <Route  path="/forgetPassword" element={<ForgetPassword/>} />
               <Route  path="/signup" element={<SignUp/>} />
-              <Route path="/homePageAdmin" element={<AdminHomePage/>}  />
-          
+              <Route  path="/viewCourse" element={<SignUp/>} />
             </Routes>
           </div>
         </Router>
-
-        /* <CircularProgress></CircularProgress>
-        <YoutubeVideo src={"lDjZA0wodGQ"} width={"300"} height={"300"} title={"video"}></YoutubeVideo>
-        <Switch className="test" defaultChecked={true}></Switch>
-        <Switch className="test"></Switch>
-        <Switch className="test" defaultChecked={true}></Switch>
-        <Rating name="half-rating" defaultValue={2.5} precision={0.5} />
-        <Button type="primary" disable = {false} content="primaryEnabledButton" onClickfunction={()=>{console.log("primaryEnabeledButton")}}/>
-        <TextBox classType="normal" inputType="text" content="textbox" disable={false} helpertext="helpertext"icon={<FaHome/>}handler={(change)=>setTextBox(change.target.value)}/>
-        <label>{textBox}</label>
-        <br/>
-        <Button type="primary" disable = {true} content="primaryDisabledButton"/>
-        <br/>
-        <Button type="secondary" disable = {false} onClickfunction={()=>{console.log("secondaryEnabeledButton")}} content="secondaryEnabledButton"/>
-        <br/>
-        <Button type="secondary" disable = {true} content="secondaryDisabledButton"/>
-        <br/>
-        <Button type="icon" disable = {false} onClickfunction={()=>{console.log("iconEnabeledButton")}} icon={<FaHome/>}/>
-        <br/>
-        <Button type="icon" disable = {true} icon={<FaHome/>}/>  
-        <br/>
-        <RadioBox options={["karim","omar"]} groupname="brothers"  handler={(change)=>setRadioBox(change.target.value)}/>
-        <br/>
-        <label>{radioBox}</label> */
       }
     </div>
   );
