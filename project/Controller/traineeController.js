@@ -194,6 +194,18 @@ const getCorporateIrainee = asyncHandler(async (req, res) => {
   res.send(corpTrain);
 });
 
+
+const getTraineeCourses = asyncHandler(async (req,res) => {
+  const indTrain = await IndividualTrainee.findById(req.params.id);
+  let arrayCourses=[];
+  for( const courseHere of indTrain.courses){
+    const tired = await (Courses.findById(courseHere.CourseID))
+    arrayCourses.push({courseId:courseHere.CourseID,courseTitle:tired.courseTitle , price: tired.price})
+
+  }
+  res.send(arrayCourses);
+})
+
 module.exports = {
   setIndividualIraineeCountry,
   setCorporateTraineeCountry,
@@ -203,4 +215,5 @@ module.exports = {
   setCorperateTrainee,
   getIndividualIrainee,
   getCorporateIrainee,
+  getTraineeCourses,
 };

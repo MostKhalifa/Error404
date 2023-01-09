@@ -9,6 +9,7 @@ const {
   setCorperateTrainee,
   getIndividualIrainee,
   getCorporateIrainee,
+  getTraineeCourses,
 } = require("../Controller/traineeController");
 router
   .route("/IndividualTrainee/setCountry/:id")
@@ -27,5 +28,6 @@ router.route("/setC").post(setCorperateTrainee);
 
 router.route("/getIndividualTrainee/:id").get(getIndividualIrainee);
 router.route("/getCorporateTrainee/:id").get(getCorporateIrainee);
+router.route("/getIndividualTraineeCourses/:id").get(getTraineeCourses);
 
 module.exports = router;

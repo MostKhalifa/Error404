@@ -1,43 +1,29 @@
 import React, { useEffect, useState } from "react";
 import axios from 'axios';
-import { set } from "lodash";
+import CourseCard from "../general/assests/courseCard";
+import { xml } from "d3";
   
 
 
 const AdminHomePage = () => {   
-    const [refundRequests , setRefundRequests] = useState(null);
-    const [traineeRefundName , setTraineeRefundName] = useState(null);
-    const [courseRefunded , setCourseRefunded] = useState(null);
+    const [refundRequests , setRefundRequests] = useState({username:null , coursename:null, courseprice:null});
+    const [username , setUserName] = useState(null);
+
+    let user = [];
+    let course = [];
+    let price = [];
+    let sum =[];
+    let [requests,setRequests]=useState([]); 
+
+    let trial = [];
 
     useEffect(() => {
-        (async () => {
+        //For  Refunds
             const allreqs = axios.get("/requests/getAllRefundRequest")
             .then((res)=>
-            {
-                res.data.forEach(async request => {
-                    const trainee = await axios.get("/trainee/getIndividualTrainee/" + request.trainee)
-                    .then((res)=>{
-                        setTraineeRefundName(res.data.username);
-                    })
-                    const courrse = await axios.get("/course/getCourse?courseId=" + request.course)
-                    .then((res)=>{
-                        setCourseRefunded(res.data.courseTitle);
-                    })
-                    if(refundRequests === null){
-                        setRefundRequests([traineeRefundName,courseRefunded]);
-                        console.log("here");
-                    }
-                    else{
-                        setRefundRequests(refundRequests => [refundRequests] + [traineeRefundName,courseRefunded]);
-                        console.log("in elses")
-                    }  
-                    console.log(refundRequests);
-    
-                });
+            {   
+                setRequests(res.data);
             })
-          })();
-        //For  Refunds
-
 
         //For Reports
 
@@ -45,25 +31,59 @@ const AdminHomePage = () => {
         
       } , []);
 
+    useEffect(() => {
 
-      
-    return(
-        <>
-        {/* <img className= 'w-[440px] h-[440px] object-cover' src='https://i.pinimg.com/550x/a8/23/0a/a8230a2a558297bc90a394ec0283ff4f.jpg' alt=""/> */}
+        for(const reqs of requests){
+            const reviewId = reqs.id;
+            const traineeId = reqs.trainee;
+            const courseId = reqs.course;
+            axios.get("/trainee/getIndividualTrainee/" + traineeId)
+            .then((res)=>{
+                user.push(res.data.username);
+            })
+            
+
+        }
+        console.log(user);
+        // requests.forEach(async (request)=>{
+        //     await axios.get("/trainee/getIndividualTrainee/" + request.trainee)
+        //     .then((res)=>{
+        //         user.push(res.data.username);
+        //     })
+        //     await axios.get("/course/getCourse?courseId=" + request.course)
+        //     .then((res)=>{
+        //         course.push(res.data.courseTitle);
+        //         price.push(res.data.price);
+        //     })
+        // })
+         //console.log(user);
+        // console.log(cour);
+        //setRefundRequests({username:user,coursename:course,courseprice:price});
+       //console.log(requests);
+             } , [requests]);
 
 
+    const getTrainee =  async (traineeID) => {
+            await axios.get("/trainee/getIndividualTrainee/" + traineeID).then((res) =>{
+            // return res.data.username;   
+            //console.log(res.data.username);             
+            return res.data.username;
+        })
+        };
+
+
+        //, getTrainee("63665a860a6c1686a07f7e28")
+            
+    return(      
         <div className="relative flex items-center">
-            <ul>
-                <li>{refundRequests}</li>
-            {/* {refundRequests && refundRequests.map((reqs) => {
+       {/* <button onClick={() => {console.log(refundRequests, getTrainee("63665a860a6c1686a07f7e28") )}}></button> */}
+            {/* {requests?.map((reqs) => {
                 return(
-                    <li key={reqs.id}>{reqs[0]}</li>
+                    // <li key={reqs.id}>{console.log(getTrainee(reqs.trainee))}</li>
+                    <li key={reqs.id}>{reqs}</li>
                 );
             })} */}
-            </ul>
-
-        </div>
-        </>
+        </div>     
     );
 }
 export default AdminHomePage;

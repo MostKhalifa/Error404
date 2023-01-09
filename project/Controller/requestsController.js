@@ -76,6 +76,20 @@ exports.getRequestAccess = asyncHandler(async (req, res) => {
   });
 
 
+exports.getClientReport = asyncHandler(async(req,res) => {
+  const clientId = req.params.clientId;
+  console.log(clientId);
+  const yourReports = await reports.find({client : clientId}
+  )
+  if(yourReports.length == 0){
+    res.send("You Do Not Have Any Reports");
+    return;
+  }
+
+  res.send(yourReports);
+})
+
+
 exports.getAllRefundRequest = asyncHandler(async (req, res) => {
     const refReq = await refundRequests.find();
     res.send(refReq);

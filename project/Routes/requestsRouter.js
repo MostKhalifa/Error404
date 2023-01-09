@@ -14,6 +14,8 @@ router.route("/getRefundRequest/:id").get(requestsController.getRefundRequest);
 router.route("/getReport/:id").get(requestsController.getReport);
 router.route("/getRequestAccess/:id").get(requestsController.getRequestAccess);
 
+router.route("/myReports/:clientId").get(requestsController.getClientReport);
+
 router.route("/getAllRefundRequest").get(requestsController.getAllRefundRequest);
 router.route("/getAllReport").get(requestsController.getAllReport);
 router.route("/getAllRequestAccess").get(requestsController.getAllRequestAccess);
