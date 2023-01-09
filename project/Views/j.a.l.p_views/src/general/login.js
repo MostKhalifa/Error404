@@ -43,6 +43,8 @@ function Login() {
             { 
                 if(!password)
                 {
+                    setResMsg(null);
+                    setError(false);
                     setResMsg2("please fill the password field");
                     setError2(true);   
                 }

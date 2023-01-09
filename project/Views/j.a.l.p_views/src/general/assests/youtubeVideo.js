@@ -1,7 +1,7 @@
 function YoutubeVideo({ src, height, width, title }) {
   return (
     <iframe
-      width={width}
+      width= {width}
       height={height}
       src={"https://www.youtube.com/embed/" + src}
       title={title}
