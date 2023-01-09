@@ -1,5 +1,7 @@
 const asyncHandler = require("express-async-handler");
 const Courses = require("../Models/Courses");
+const IndividualTrainee = require("../Models/IndividualTrainee")
+const CorporateTrainee = require("../Models/CorporateTrainee")
 const mongoose = require("mongoose");
 
 //view courses title along with total hours and rating ( requirement 7)
@@ -96,12 +98,37 @@ const searchForCourse = asyncHandler(async (req, res) => {
     res.send(course);
   }
 });
+
+
+
 const rateaCourse = asyncHandler(async (req, res) => {
-  const courseRate = await Courses.findById(req.params.id);
+  const courseRateId = await Courses.findById(req.params.id);
+  var reviewer = await IndividualTrainee.findById(req.query.reviewerID);
+  var reviewerType="";
+  flag = false;
+  if(!reviewer){
+    reviewer = await CorporateTrainee.findById(req.query.reviewerID);
+    flag= true;
+  }
+  if(!reviewer){
+    res.status(400).send("invalid traineeId");
+  }
+  if(flag){
+    reviewerType="CorporateTrainee";
+   }
+   else{
+    reviewerType="IndividualTrainee";
+   }
+
   req.query.reviewerID;
   const { rating } = req.body;
   const { review } = req.body;
-  if (!courseRate) {
+  const reviewsTemp = [];
+
+  if(rating>5||rating<0){
+    res.status(400).send("Please enter a rating between 0 and 5");
+  }
+  if (!courseRateId) {
     res.status(400).send("course not found!");
   }
   if (!rating && !review) {
@@ -111,23 +138,35 @@ const rateaCourse = asyncHandler(async (req, res) => {
     res.status(400).send("Please enter the rating");
   }
   if (!review) {
-    const ratedCourse = await Courses.findByIdAndUpdate(
-      req.params.id,
-      { "reviews.rating": rating },
-      { "reviews.reviewedBy": req.query.reviewerID },
-      { new: true }
-    );
-    res.status(200).json(ratedCourse);
-  } else {
-    const ratedCourse = await Courses.findByIdAndUpdate(
-      req.params.id,
-      { "reviews.review": review },
-      { "reviews.rating": rating },
-      { "reviews.reviewedBy": req.query.reviewerID },
-      { new: true }
-    );
-    res.status(200).json(ratedCourse);
+    res.status(400).send("Please enter the review");
+  } 
+  else {
+    flag= false;
+    for (let i = 0; i < courseRateId.reviews.length; i++) {
+      if(!courseRateId.reviews[i]){
+        continue;
+      }
+      if (courseRateId.reviews[i].reviewedBy == (req.query.reviewerID)) 
+      {
+        flag=true;
+        reviewsTemp[i] = {review: review,rating: rating,reviewedBy: req.query.reviewerID,traineeType:reviewerType};
+      }
+      else
+      {
+        reviewsTemp[i] = courseRateId.reviews[i];
+      }
+    }
+    if(!flag){
+      
+      reviewsTemp[reviewsTemp.length] = {review: review,rating: rating,reviewedBy: req.query.reviewerID,traineeType:reviewerType};
+      }
   }
+  const ratedCourse = await Courses.findByIdAndUpdate(req.params.id,
+    {reviews: reviewsTemp},
+    {new: true}
+  );
+
+  res.status(200).send(ratedCourse) 
 });
 
 const updateCourseDescription = asyncHandler(async (req, res) => {
@@ -200,3 +239,9 @@ module.exports = {
   getCourseDescription,
   getCourseChapter,
 };
+   
+    // console.log("rated course id  "+req.params.id)
+// console.log("rating entered  "+rating)
+// console.log("review  "+review)
+// console.log("the id of the trainee "+req.query.reviewerID)
+

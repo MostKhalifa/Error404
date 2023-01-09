@@ -21,7 +21,6 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import TextField from '@mui/material/TextField';
-import Checkbox from '@mui/material/Checkbox';
 
 const theme = createTheme({
     palette: {
@@ -81,6 +80,15 @@ export default function NavBarTrainee() {
     const [filter, setfilter] = React.useState(null);
     const isFilterMenuOpen = Boolean(filter);
 
+    const [filterPriceMin, setFilterPriceMin] = React.useState(null);
+    const [filterPriceMax, setFilterPriceMax] = React.useState(null);
+
+    const handleFilterPrice = () => {
+      console.log(filterPriceMin)
+      console.log(filterPriceMax)
+      
+    };
+
 
     const handleProfileMenuOpen = (event) => {
       setAnchorEl(event.currentTarget);
@@ -95,6 +103,11 @@ export default function NavBarTrainee() {
     const isFilterMenuClose = () => {
       setfilter(null);
     };
+
+    
+
+   
+
 
   const menuId = 'primary-search-account-menu';
   const filterId = 'primary-search-account-menu';
@@ -148,6 +161,7 @@ export default function NavBarTrainee() {
         <AccordionDetails>
         <Stack direction="row">
         <TextField
+        onChange={(change)=>{setFilterPriceMin(change.target.value)}}
           id="outlined-number"
           label="Minimum Price"
           type="number"
@@ -157,6 +171,7 @@ export default function NavBarTrainee() {
         />
         <Box sx={{ flexGrow: 0.07}} />
           <TextField
+          onChange={(change)=>{setFilterPriceMax(change.target.value)}}
           id="outlined-number"
           label="Maximum Price"
           type="number"
@@ -165,7 +180,7 @@ export default function NavBarTrainee() {
           }}
         />
          <Box sx={{ flexGrow: 1}} />
-         <Button  sx={{ bgcolor:theme.palette.paper }} variant="contained"  >Filter</Button>
+         <Button onClick={handleFilterPrice} sx={{ bgcolor:theme.palette.paper }} variant="contained"  >Filter</Button>
           </Stack>
         </AccordionDetails>
       </Accordion>
