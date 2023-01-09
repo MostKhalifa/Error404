@@ -169,7 +169,7 @@ function ViewRating({ instructorId }) {
               return (
                 <div
                   className="singleReview"
-                  key={review.ReviewBody + review.Rating}
+                  key={review.eviewBody + review.Rating}
                 >
                   <Fragment>
                     <h1 className="reviewBoby">{review.ReviewBody}</h1>

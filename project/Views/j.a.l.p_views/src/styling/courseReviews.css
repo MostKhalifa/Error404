@@ -1,0 +1,27 @@
+.ReviewsSection{
+    width: 97vw;
+    margin-left: 1.5vw;
+    margin-right: 1.5vw;
+    height: 30vh;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.singleReview {
+    display: flex;
+  }
+.singleReview:hover {
+  box-shadow: 0 16px 16px 0 rgba(0, 0, 0, 0.24),
+  0 17px 50px 0 rgba(0, 0, 0, 0.19);
+  background-color: #303c6c;
+  color: white;
+border-radius: 8px;
+}
+.reviewBoby {
+    width: 60%;
+}
+.ratingReviewBody {
+    width: fit-content;
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+  }
