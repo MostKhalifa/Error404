@@ -11,7 +11,7 @@ import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import { useNavigate } from "react-router-dom";
-import logo from '../resources/logo.PNG';
+import logo from '../../resources/logo.PNG';
 import { createTheme } from '@mui/system';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
@@ -68,9 +68,9 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     },
   },
 }));
-const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
-export default function NavBarTrainee() {
+
+export default function NavBarInstructor() {
     const navigate = useNavigate();
     const handleLogOut = () => {navigate("/")};
 
@@ -79,16 +79,6 @@ export default function NavBarTrainee() {
 
     const [filter, setfilter] = React.useState(null);
     const isFilterMenuOpen = Boolean(filter);
-
-    const [filterPriceMin, setFilterPriceMin] = React.useState(null);
-    const [filterPriceMax, setFilterPriceMax] = React.useState(null);
-
-    const handleFilterPrice = () => {
-      console.log(filterPriceMin)
-      console.log(filterPriceMax)
-      
-    };
-
 
     const handleProfileMenuOpen = (event) => {
       setAnchorEl(event.currentTarget);
@@ -104,11 +94,7 @@ export default function NavBarTrainee() {
       setfilter(null);
     };
 
-    
-
-   
-
-
+     
   const menuId = 'primary-search-account-menu';
   const filterId = 'primary-search-account-menu';
   const renderMenu = (
@@ -136,7 +122,7 @@ export default function NavBarTrainee() {
     <Menu
       filter={filter}
       anchorOrigin={{
-        vertical: 45,
+        vertical: 90,
        horizontal:680,
       }}
       id={filterId}
@@ -153,41 +139,6 @@ export default function NavBarTrainee() {
       <Accordion>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel1a-content"
-          id="panel1a-header"
-        >
-          <Typography>Filter By Price</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-        <Stack direction="row">
-        <TextField
-        onChange={(change)=>{setFilterPriceMin(change.target.value)}}
-          id="outlined-number"
-          label="Minimum Price"
-          type="number"
-          InputLabelProps={{
-            shrink: true,
-          }}
-        />
-        <Box sx={{ flexGrow: 0.07}} />
-          <TextField
-          onChange={(change)=>{setFilterPriceMax(change.target.value)}}
-          id="outlined-number"
-          label="Maximum Price"
-          type="number"
-          InputLabelProps={{
-            shrink: true,
-          }}
-        />
-         <Box sx={{ flexGrow: 1}} />
-         <Button onClick={handleFilterPrice} sx={{ bgcolor:theme.palette.paper }} variant="contained"  >Filter</Button>
-          </Stack>
-        </AccordionDetails>
-      </Accordion>
-
-      <Accordion>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
           aria-controls="panel2a-content"
           id="panel2a-header"
         >
@@ -196,29 +147,6 @@ export default function NavBarTrainee() {
         <AccordionDetails>
         <Stack direction="row">
         <TextField id="outlined-basic" label="Subject" variant="outlined" />
-        <Box sx={{ flexGrow: 0.07}} />
-        <Button  sx={{ bgcolor:theme.palette.paper }} variant="contained"  >Filter</Button>
-        </Stack>
-        </AccordionDetails>
-      </Accordion>
-
-      <Accordion>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel2a-content"
-          id="panel2a-header"
-        >
-          <Typography>Filter By Rating</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-        <Stack direction="row">
-        <TextField
-          id="outlined-number"
-          label="Rating"
-          type="number"
-          InputLabelProps={{
-            shrink: true,
-          }}></TextField>
         <Box sx={{ flexGrow: 0.07}} />
         <Button  sx={{ bgcolor:theme.palette.paper }} variant="contained"  >Filter</Button>
         </Stack>
@@ -253,7 +181,8 @@ export default function NavBarTrainee() {
           </IconButton>
          
           </Stack>
-         <Button  sx={{ bgcolor:theme.palette.paper }} variant="contained"  >View My Courses</Button>
+          <Box sx={{ flexGrow: 0.1 }} />
+         <Button  sx={{ bgcolor:theme.palette.paper }} variant="contained"  >Add new Course</Button>
          
 		 
 
@@ -270,3 +199,4 @@ export default function NavBarTrainee() {
     </Box>
   );
 }
+

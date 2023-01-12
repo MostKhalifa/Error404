@@ -8,8 +8,8 @@ import Exercises from "./traineeViews/exercise";
 import Login from "./general/login";
 import ForgetPassword from "./general/forgetPassword";
 import SignUp from "./general/signup";
-import NavBarTrainee from "./general/navBarTrainee";
-import NavBarInstructor from "./general/navBarInstructor";
+import NavBarTrainee from "./general/assests/navBarTrainee";
+import NavBarInstructor from "./general/assests/navBarInstructor";
 function App() {
   return (
     <div className="App">
