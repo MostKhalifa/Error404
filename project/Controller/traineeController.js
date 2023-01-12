@@ -204,7 +204,7 @@ module.exports = {
   getCorporateIraineeCourseInfo,
   setIndvidualTrainee,
   setCorperateTrainee,
-  getAllTrainees
+  getAllTrainees,
   getIndividualIrainee,
   getCorporateIrainee
 };

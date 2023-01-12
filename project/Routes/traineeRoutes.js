@@ -7,7 +7,7 @@ const {
   getCorporateIraineeCourseInfo,
   setIndvidualTrainee,
   setCorperateTrainee,
-  getAllTrainees
+  getAllTrainees,
   getIndividualIrainee,
   getCorporateIrainee
 } = require("../Controller/traineeController");
