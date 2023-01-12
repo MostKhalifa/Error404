@@ -6,6 +6,12 @@ const { default: mongoose } = require("mongoose");
 
 // individual Trainee can select his/her country (requirement 6)
 // add the individual Trainee id with the url to change the country of a certain individual Trainee
+
+const getAllTrainees = asyncHandler(async (req, res) => {
+  const course = await CorporateTrainee.find().select();
+  res.status(200).json(course);
+});
+
 const setIndividualIraineeCountry = asyncHandler(async (req, res) => {
   const trainee = await IndividualTrainee.findById(req.params.id);
 
@@ -198,6 +204,7 @@ module.exports = {
   getCorporateIraineeCourseInfo,
   setIndvidualTrainee,
   setCorperateTrainee,
+  getAllTrainees
   getIndividualIrainee,
   getCorporateIrainee
 };

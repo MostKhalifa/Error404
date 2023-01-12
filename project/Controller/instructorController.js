@@ -299,34 +299,41 @@ const setInstructorCourseVideoandDescription = asyncHandler(
 const rateAnInstructor = asyncHandler(async (req, res) => {
   const instructorRate = await Instructor.findById(req.params.id);
   req.query.reviewerID;
-  const { rating, review } = req.body;
+  const { ReviewBody } = req.body;
+  const { Rating } = req.body;
+  const reviewsTemp = [];
+  if(Rating>5||Rating<0){
+    res.status(400).send("Please enter a rating between 0 and 5"); 
+  }
   if (!instructorRate) {
-    res.status(400).send("Instructor not found!");
+    res.status(400).send("instructor not found!");
   }
-  if (!rating && !review) {
-    res.status(400).send("Please fill in the field");
+  if (!Rating || !ReviewBody) {
+    res.status(400).send("Please fill in all the field");
   }
-  if (!rating) {
-    res.status(400).send("Please enter the rating");
+ 
+  else 
+  {
+    flag=false
+    for (let i = 0; i < instructorRate.reviews.length; i++) {
+      if(!instructorRate.reviews[i]){
+        continue;
+      }
+
+      reviewsTemp[i]=instructorRate.reviews[i];
+      }
+      
+        reviewsTemp[reviewsTemp.length] = {ReviewBody: ReviewBody,Rating: Rating};
+      
+
   }
-  if (!review) {
-    const ratedInstructor = await Instructor.findByIdAndUpdate(
-      req.params.id,
-      { "reviews.rating": rating },
-      { "reviews.reviewedBy": req.query.reviewerID },
-      { new: true }
-    );
-    res.status(200).json(ratedInstructor);
-  } else {
-    const ratedInstructor = await Instructor.findByIdAndUpdate(
-      req.params.id,
-      { "reviews.review": review },
-      { "reviews.rating": rating },
-      { "reviews.reviewedBy": req.query.reviewerID },
-      { new: true }
-    );
-    res.status(200).json(ratedInstructor);
-  }
+  console.log(reviewsTemp);
+  const ratedInstructor = await Instructor.findByIdAndUpdate(req.params.id,
+    {reviews: reviewsTemp},
+    {new: true}
+  );
+
+  res.status(200).send(ratedInstructor) 
 });
 
 const getRating = asyncHandler(async (req, res) => {
@@ -343,6 +350,11 @@ const getRating = asyncHandler(async (req, res) => {
   }
   res.status(202).send(instructorFound);
 });
+
+const getAllInstructor = asyncHandler(async (req, res) => {
+  const course = await Instructor.find().select();
+  res.status(200).json(course);
+});
 module.exports = {
   viewAllInstructorCourses,
   filterInstructorCourses,
@@ -354,6 +366,7 @@ module.exports = {
   setInstructor,
   rateAnInstructor,
   getRating,
+  getAllInstructor
 };
 /* Sample test data for createNewCourses:
 {
