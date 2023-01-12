@@ -1,7 +1,7 @@
 const asyncHandler = require("express-async-handler");
 const Courses = require("../Models/Courses");
-const IndividualTrainee = require("../Models/IndividualTrainee")
 const CorporateTrainee = require("../Models/CorporateTrainee")
+const IndividualTrainee = require("../Models/IndividualTrainee")
 const mongoose = require("mongoose");
 
 //view courses title along with total hours and rating ( requirement 7)
