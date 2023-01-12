@@ -105,12 +105,14 @@ function SignUp() {
         const user={firstName:firstName.firstName,
                     lastName:lastName.lastName,
                     username:username.username,
-                    email:email.email,
+                    email:email.email.toLowerCase(),
                     gender:gender.gender,
                     country:country.country,
                     password:password.password}
                     console.log(user);
-        axios.post("/signup",user).then(navigate("/")).catch((res)=>{setEmail({email:"",ava:"true",errMsg:res.response.data})})
+        axios.post("/signup",user).then((res)=>{
+            sessionStorage.setItem("loginAlert",true);
+        sessionStorage.setItem("alertMessage","welcome to our family pleases login with your email and password to continue :-)");navigate("/")}).catch((res)=>{setEmail({email:"",ava:"true",errMsg:res.response.data})})
         }
     return (
         <div className="parentLogin">

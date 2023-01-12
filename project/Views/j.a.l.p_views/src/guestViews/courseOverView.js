@@ -35,13 +35,12 @@ function CourseOverView() {
         <Fragment>
             
             {course&&<Fragment>
-                <div style={{display:"flex",width:"100vw",marginBottom:"1vh"}}><h1 className="courseTitle" >{course.courseTitle} </h1><Button style={{marginTop:"5px",marginRight:"10px",width:"20vw"}} variant="contained">enroll now</Button></div>
-                <YoutubeVideo  src={course.courseDescriptionVideo} height={"500"} width={"1400"}title={course.courseTitle+" DescriptionVideo"}/>
+                <div style={{display:"flex",width:"97vw",marginBottom:"1vh"}}><h1 className="courseTitle" >{course.courseTitle} </h1><Button style={{marginTop:"5px",marginRight:"10px",width:"20vw"}} variant="contained">enroll now</Button></div>
+                <YoutubeVideo  src={course.courseDescriptionVideo} height={"50"} width={"97"} marginValue ={"1.5"}title={course.courseTitle+" DescriptionVideo"}/>
                 <div className="courseOverView">
                     <div className="courseDescripation">
                         <h1>course Description</h1>
                         <p>{course.courseDescription}</p>
-                        
                     </div>
                     <div className="courseDetails">
                     <h1>important info</h1>

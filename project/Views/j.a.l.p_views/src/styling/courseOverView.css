@@ -7,7 +7,8 @@
 }
 .courseOverView
 {
-    height: 35vh;
+    height: 40vh;
+    margin-bottom: 5vh;
     display: flex;
     width:97vw;
     margin-left: 1.5vw;

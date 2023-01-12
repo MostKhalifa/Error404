@@ -18,8 +18,9 @@ function CourseReviews({courseId})
     
     return(
         <div className="ReviewsSection">
-            <div style={{display:"flex"}}> <h1 className="reviewP">Reviews</h1>
-           <p style={{color:"grey"}}>{reviews.length} Reviews</p></div>
+            <div className="reviewHeader" style={{display:"flex",height:"8vh"}}> 
+            <h1 className="reviewP">Reviews</h1>
+            <p className="numberOfReviews">{reviews.length} Reviews</p></div>
             <div className="reviews">
                 {((!reviews)||reviews.length===0)&& (<h1 className="errorMessage">there are currently no course reviews</h1>)}
                 {reviews&& reviews.map(
@@ -27,8 +28,8 @@ function CourseReviews({courseId})
                             return (
                             <div className="singleReview" key={review.review + review.rating}>
                                 <Fragment>
-                                    <h1 className="reviewBoby">{review.review}</h1>
-                                    <p className="reviewBoby"style={{fontSize:"small"}} >by: {review.reviewedBy}</p>
+                                    <h1 className="reviewBody">{review.review}</h1>
+                                    <p className="reviewedBy"style={{fontSize:"small"}} >by: {review.reviewedBy}</p>
                                     <div className="ratingReviewBody">
                                         <Rating sx={{ width: "100%", color: "#f4976c" }}value={review.rating}precision={0.1} readOnly/>
                                         <p className="ratingP">{review.rating} out of 5 stars</p>
