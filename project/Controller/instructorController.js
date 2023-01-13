@@ -466,19 +466,14 @@ module.exports = {
   setInstructor,
   rateAnInstructor,
   getRating,
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-  getAllInstructor
-=======
+
+  getAllInstructor,
+
   getInstructorById,
   changePassword,
-  getamountOwed
->>>>>>> Stashed changes
-=======
   getamountOwed,
   getInstructorById,
   changePassword
->>>>>>> malak-Sprint-3
 };
 /* Sample test data for createNewCourses:
 {
