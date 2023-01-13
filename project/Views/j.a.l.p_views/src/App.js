@@ -8,6 +8,9 @@ import Exercises from "./traineeViews/exercise";
 import Login from "./general/login";
 import ForgetPassword from "./general/forgetPassword";
 import SignUp from "./general/signup";
+import Profile from "./instructorViews/profile";
+import IndvidualTraineeProfile from "./traineeViews/indvidualTraineeProfile";
+import CorporateTraineeProfile from "./traineeViews/corporateTraineeProfile";
 function App() {
   return (
     <div className="App">
@@ -33,7 +36,9 @@ function App() {
               <Route  path="/" element={<Login />} />
               <Route  path="/forgetPassword" element={<ForgetPassword/>} />
               <Route  path="/signup" element={<SignUp/>} />
-          
+              <Route path="/InstructorProfile" element={<Profile />} />
+              <Route path="/ItraineeProfile" element={<IndvidualTraineeProfile />} />
+              <Route path="/CtraineeProfile" element={<CorporateTraineeProfile />} />
             </Routes>
           </div>
         </Router>

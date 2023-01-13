@@ -10,6 +10,9 @@ const {
   getInstructorCourseRatings,
   setInstructorCourseVideoandDescription,
   setInstructor,
+  getamountOwed,
+  getInstructorById,
+  changePassword
 } = require("../Controller/instructorController");
 router.route("/setCountry/:id").put(setInstructorCountry);
 router.route("/ViewAllCourses/:id").get(viewAllInstructorCourses);
@@ -22,4 +25,8 @@ router
 router.route("/setIII").post(setInstructor);
 router.route("/rateAnInstructor/:id").put(rateAnInstructor);
 router.route("/getRating/:id").get(getRating);
+router.route("/getInst/:id").get(getInstructorById);
+router.route("/changePassword/:id").put(changePassword);
+router.route("/amountOwed/:id").get(getamountOwed);
+
 module.exports = router;

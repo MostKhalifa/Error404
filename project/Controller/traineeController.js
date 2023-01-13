@@ -23,6 +23,57 @@ const setIndividualIraineeCountry = asyncHandler(async (req, res) => {
   res.status(200).json(updatedtrainee);
 });
 
+const getIndvidualTrianeeById = asyncHandler(async (req, res) => {
+  const trainee = await IndividualTrainee.findById(req.params.id);
+  if (!trainee) {
+    res.status(400);
+  }
+  res.status(200).json(trainee);
+});
+
+const getCorporateTrianeeById = asyncHandler(async (req, res) => {
+  const trainee = await CorporateTrainee.findById(req.params.id);
+  if (!trainee) {
+    res.status(400);
+  }
+  res.status(200).json(trainee);
+});
+
+const changeIndvPassword = asyncHandler(async (req, res) => {
+  const individualTrainee = await IndividualTrainee.findById(req.params.id);
+  if (!individualTrainee) {
+    res.status(400);
+  }
+  const {password} = req.body;
+  const resa = await IndividualTrainee.findByIdAndUpdate(
+    req.params.id,
+    { password: password },
+    {
+      new: true,
+    }
+  );
+  if (resa) res.status(200).send("Done");
+  else res.status(400);
+});
+
+const changeCopPassword = asyncHandler(async (req, res) => {
+  const corporateTrainee = await CorporateTrainee.findById(req.params.id);
+  if (!corporateTrainee) {
+    res.status(400);
+  }
+  const {password} = req.body;
+  const resa = await CorporateTrainee.findByIdAndUpdate(
+    req.params.id,
+    { password: password },
+    {
+      new: true,
+    }
+  );
+  if (resa) res.status(200).send("Done");
+  else res.status(400);
+});
+
+
 // Coorporate Trainee can select his/her country (requirement 6)
 // add the individual Trainee id with the url to change the country of a certain individual Trainee
 const setCorporateTraineeCountry = asyncHandler(async (req, res) => {
@@ -190,4 +241,8 @@ module.exports = {
   getCorporateIraineeCourseInfo,
   setIndvidualTrainee,
   setCorperateTrainee,
+  changeIndvPassword,
+  changeCopPassword,
+  getIndvidualTrianeeById,
+  getCorporateTrianeeById
 };
