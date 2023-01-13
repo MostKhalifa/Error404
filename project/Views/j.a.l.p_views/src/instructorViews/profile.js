@@ -161,10 +161,6 @@ function Profile (){
              
             }
 
-          <ListItem disablePadding>
-              <ListItemText primary="User Name: "  />
-              <ListItemText primary={instructorInfo.data.userName}  />
-              </ListItem>
          
          
           <ListItem disablePadding>
@@ -210,22 +206,6 @@ function Profile (){
               <ListItemText primary="Password : "  />
               <ListItemText primary={instructorInfo.data.password}  />
 
-              <Button variant="contained" sx={{ bgcolor: deepPurple[500]}} onClick={changeFlag}>{flag?<SaveIcon onClick={changePassword} /> :<EditIcon/>}</Button>
-          </ListItem>
-          {/* {
-            amountOwed &&
-            <ListItem disablePadding>
-              <ListItemText primary="Amount Owed By me : "  />
-              <ListItemText primary={amountOwed.data}  />
-          </ListItem>
-} */}
-          
-
-
-              <Button variant="contained" sx={{ bgcolor: deepPurple[500]}} >{flag?<SaveIcon onClick={changePassword} /> :<EditIcon onClick={changeFlag}/>}</Button>
-          </ListItem>
-          
-
               <Button variant="contained" sx={{ bgcolor: deepPurple[500]}} >{flag?<SaveIcon onClick={changePassword} /> :<EditIcon onClick={changeFlag}/>}</Button>
           </ListItem>
           
@@ -238,21 +218,15 @@ function Profile (){
         <TextField id="standard-basic" label="type Password here" variant="standard" />
 
         <TextField id="standard-basic" label="type Password here" variant="standard" onChange={(change)=>{setPassword(change.target.value)}}/>
-
-
-        <TextField id="standard-basic" label="type Password here" variant="standard" onChange={(change)=>{setPassword(change.target.value)}}/>
-
         </ListItem>
-            
-         
         }
       
 
         </List>
     </Stack>
-}
-          </div>
+    }
+    </div>
         </>
-      );
-
-)
+      )
+  }
+  export default Profile;

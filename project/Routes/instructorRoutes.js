@@ -10,25 +10,10 @@ const {
   getInstructorCourseRatings,
   setInstructorCourseVideoandDescription,
   setInstructor,
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-  getAllInstructor
-=======
-  getInstructorById,
+  getAllInstructor,
   changePassword,
-  getamountOwed
->>>>>>> Stashed changes
-=======
   getamountOwed,
-  getInstructorById,
-  changePassword
->>>>>>> malak-Sprint-3
-=======
-  getamountOwed,
-  getInstructorById,
-  changePassword
->>>>>>> malak-Sprint-3
+  getInstructorById
 } = require("../Controller/instructorController");
 router.route("/setCountry/:id").put(setInstructorCountry);
 router.route("/ViewAllCourses/:id").get(viewAllInstructorCourses);
@@ -43,12 +28,4 @@ router.route("/getRating/:id").get(getRating);
 router.route("/getInst/:id").get(getInstructorById);
 router.route("/changePassword/:id").put(changePassword);
 router.route("/amountOwed/:id").get(getamountOwed);
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-
->>>>>>> malak-Sprint-3
-=======
-
->>>>>>> malak-Sprint-3
 module.exports = router;

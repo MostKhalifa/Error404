@@ -78,30 +78,6 @@ const setInstructorCountry = asyncHandler(async (req, res) => {
 });
 
 
-const getInstructorById = asyncHandler(async (req, res) => {
-  const instructor = await Instructor.findById(req.params.id);
-  if (!instructor) {
-    res.status(400);
-  }
-  res.status(200).json(instructor);
-});
-
-const changePassword = asyncHandler(async (req, res) => {
-  const instructor = await Instructor.findById(req.params.id);
-  if (!instructor) {
-    res.status(400);
-  }
-  const {password} = req.body;
-  const resa = await Instructor.findByIdAndUpdate(
-    req.params.id,
-    { password: password },
-    {
-      new: true,
-    }
-  );
-  if (resa) res.status(200).send("Done");
-  else res.status(400);
-});
 
 //create a new course
 const createNewCourse = asyncHandler(async (req, res) => {
@@ -404,25 +380,14 @@ const getRating = asyncHandler(async (req, res) => {
   res.status(202).send(instructorFound);
 });
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< Updated upstream
+
 const getAllInstructor = asyncHandler(async (req, res) => {
   const course = await Instructor.find().select();
   res.status(200).json(course);
 });
-=======
+
 const getamountOwed= asyncHandler(async (req, res) => {
 
-
-=======
-const getamountOwed= asyncHandler(async (req, res) => {
-
->>>>>>> malak-Sprint-3
-=======
-const getamountOwed= asyncHandler(async (req, res) => {
-
->>>>>>> malak-Sprint-3
   let courses = [];
   const instructorId = req.params.id;
   if (!mongoose.Types.ObjectId.isValid(instructorId)) {
@@ -455,14 +420,7 @@ const getamountOwed= asyncHandler(async (req, res) => {
     res.status(200).json(amountOwed);
 });
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 
->>>>>>> Stashed changes
-=======
->>>>>>> malak-Sprint-3
-=======
->>>>>>> malak-Sprint-3
 module.exports = {
   viewAllInstructorCourses,
   filterInstructorCourses,
@@ -474,17 +432,10 @@ module.exports = {
   setInstructor,
   rateAnInstructor,
   getRating,
-<<<<<<< HEAD
-
   getAllInstructor,
-
   getInstructorById,
   changePassword,
-=======
->>>>>>> malak-Sprint-3
-  getamountOwed,
-  getInstructorById,
-  changePassword
+  getamountOwed
 };
 /* Sample test data for createNewCourses:
 {
