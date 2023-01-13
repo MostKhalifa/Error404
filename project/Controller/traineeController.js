@@ -30,7 +30,10 @@ const setIndividualIraineeCountry = asyncHandler(async (req, res) => {
 });
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> malak-Sprint-3
 const getIndvidualTrianeeById = asyncHandler(async (req, res) => {
   const trainee = await IndividualTrainee.findById(req.params.id);
   if (!trainee) {
@@ -47,6 +50,9 @@ const getCorporateTrianeeById = asyncHandler(async (req, res) => {
   res.status(200).json(trainee);
 });
 
+<<<<<<< HEAD
+>>>>>>> malak-Sprint-3
+=======
 >>>>>>> malak-Sprint-3
 const changeIndvPassword = asyncHandler(async (req, res) => {
   const individualTrainee = await IndividualTrainee.findById(req.params.id);
@@ -82,6 +88,11 @@ const changeCopPassword = asyncHandler(async (req, res) => {
   else res.status(400);
 });
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> malak-Sprint-3
 =======
 
 
@@ -262,6 +273,7 @@ module.exports = {
   setIndvidualTrainee,
   setCorperateTrainee,
 <<<<<<< HEAD
+<<<<<<< HEAD
 <<<<<<< Updated upstream
   getAllTrainees,
   getIndividualIrainee,
@@ -271,9 +283,14 @@ module.exports = {
   changeCopPassword
 >>>>>>> Stashed changes
 =======
+=======
+>>>>>>> malak-Sprint-3
   changeIndvPassword,
   changeCopPassword,
   getIndvidualTrianeeById,
   getCorporateTrianeeById
+<<<<<<< HEAD
+>>>>>>> malak-Sprint-3
+=======
 >>>>>>> malak-Sprint-3
 };

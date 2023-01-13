@@ -405,6 +405,7 @@ const getRating = asyncHandler(async (req, res) => {
 });
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 const getAllInstructor = asyncHandler(async (req, res) => {
   const course = await Instructor.find().select();
@@ -414,6 +415,10 @@ const getAllInstructor = asyncHandler(async (req, res) => {
 const getamountOwed= asyncHandler(async (req, res) => {
 
 
+=======
+const getamountOwed= asyncHandler(async (req, res) => {
+
+>>>>>>> malak-Sprint-3
 =======
 const getamountOwed= asyncHandler(async (req, res) => {
 
@@ -451,8 +456,11 @@ const getamountOwed= asyncHandler(async (req, res) => {
 });
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 >>>>>>> Stashed changes
+=======
+>>>>>>> malak-Sprint-3
 =======
 >>>>>>> malak-Sprint-3
 module.exports = {
@@ -466,11 +474,14 @@ module.exports = {
   setInstructor,
   rateAnInstructor,
   getRating,
+<<<<<<< HEAD
 
   getAllInstructor,
 
   getInstructorById,
   changePassword,
+=======
+>>>>>>> malak-Sprint-3
   getamountOwed,
   getInstructorById,
   changePassword

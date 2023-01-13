@@ -11,6 +11,7 @@ const {
   setInstructorCourseVideoandDescription,
   setInstructor,
 <<<<<<< HEAD
+<<<<<<< HEAD
 <<<<<<< Updated upstream
   getAllInstructor
 =======
@@ -18,6 +19,11 @@ const {
   changePassword,
   getamountOwed
 >>>>>>> Stashed changes
+=======
+  getamountOwed,
+  getInstructorById,
+  changePassword
+>>>>>>> malak-Sprint-3
 =======
   getamountOwed,
   getInstructorById,
@@ -38,6 +44,10 @@ router.route("/getInst/:id").get(getInstructorById);
 router.route("/changePassword/:id").put(changePassword);
 router.route("/amountOwed/:id").get(getamountOwed);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> malak-Sprint-3
 =======
 
 >>>>>>> malak-Sprint-3

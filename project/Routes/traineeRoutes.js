@@ -8,6 +8,7 @@ const {
   setIndvidualTrainee,
   setCorperateTrainee,
 <<<<<<< HEAD
+<<<<<<< HEAD
 <<<<<<< Updated upstream
   getAllTrainees,
   getIndividualIrainee,
@@ -17,10 +18,15 @@ const {
   changeCopPassword
 >>>>>>> Stashed changes
 =======
+=======
+>>>>>>> malak-Sprint-3
   changeIndvPassword,
   changeCopPassword,
   getIndvidualTrianeeById,
   getCorporateTrianeeById
+<<<<<<< HEAD
+>>>>>>> malak-Sprint-3
+=======
 >>>>>>> malak-Sprint-3
 } = require("../Controller/traineeController");
 router
@@ -40,6 +46,11 @@ router.route("/setC").post(setCorperateTrainee);
 router.route("/IndvidualTrainee/changePassword/:id").put(changeIndvPassword);
 router.route("/CorpoarateTrainee/changePassword/:id").put(changeCopPassword);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+router.route("/IndvidualTrainee/getById/:id").get(getIndvidualTrianeeById);
+router.route("/CorpoarateTrainee/getById/:id").get(getCorporateTrianeeById);
+>>>>>>> malak-Sprint-3
 =======
 router.route("/IndvidualTrainee/getById/:id").get(getIndvidualTrianeeById);
 router.route("/CorpoarateTrainee/getById/:id").get(getCorporateTrianeeById);

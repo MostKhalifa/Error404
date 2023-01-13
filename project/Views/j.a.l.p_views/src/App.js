@@ -9,6 +9,7 @@ import Login from "./general/login";
 import ForgetPassword from "./general/forgetPassword";
 import SignUp from "./general/signup";
 <<<<<<< HEAD
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 import NavBarTrainee from "./general/assests/navBarTrainee";
 import NavBarInstructor from "./general/assests/navBarInstructor";
@@ -16,6 +17,11 @@ import CourseOverView from "./guestViews/courseOverView";
 =======
 import Profile from "./instructorViews/profile";
 >>>>>>> Stashed changes
+=======
+import Profile from "./instructorViews/profile";
+import IndvidualTraineeProfile from "./traineeViews/indvidualTraineeProfile";
+import CorporateTraineeProfile from "./traineeViews/corporateTraineeProfile";
+>>>>>>> malak-Sprint-3
 =======
 import Profile from "./instructorViews/profile";
 import IndvidualTraineeProfile from "./traineeViews/indvidualTraineeProfile";
@@ -48,7 +54,12 @@ function App() {
               <Route  path="/signup" element={<SignUp/>} />
               <Route path="/InstructorProfile" element={<Profile />} />
 <<<<<<< HEAD
+<<<<<<< HEAD
           
+=======
+              <Route path="/ItraineeProfile" element={<IndvidualTraineeProfile />} />
+              <Route path="/CtraineeProfile" element={<CorporateTraineeProfile />} />
+>>>>>>> malak-Sprint-3
 =======
               <Route path="/ItraineeProfile" element={<IndvidualTraineeProfile />} />
               <Route path="/CtraineeProfile" element={<CorporateTraineeProfile />} />

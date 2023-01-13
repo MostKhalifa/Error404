@@ -9,18 +9,24 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 <<<<<<< HEAD
+<<<<<<< HEAD
 import Button from '@mui/material/Button';
 import { deepOrange, deepPurple } from '@mui/material/colors';
 import TextField from '@mui/material/TextField';
 import EditIcon from "@mui/icons-material/Edit";
 import SaveIcon from "@mui/icons-material/Save";
 =======
+=======
+>>>>>>> malak-Sprint-3
 import { deepOrange, deepPurple } from '@mui/material/colors';
 import EditIcon from "@mui/icons-material/Edit";
 import SaveIcon from "@mui/icons-material/Save";
 import countries from "i18n-iso-countries";
 import enLocale from "i18n-iso-countries/langs/en.json";
 import { Button, TextField,MenuItem} from "@mui/material";
+<<<<<<< HEAD
+>>>>>>> malak-Sprint-3
+=======
 >>>>>>> malak-Sprint-3
 function Profile (){
         
@@ -28,7 +34,10 @@ function Profile (){
     const [amountOwed, setamountOwed] = useState(null);
     const [flag, setFlag] = useState(false);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> malak-Sprint-3
     const [flag2, setFlag2] = useState(false);
     const [flag3, setFlag3] = useState(false);
     const [flag4, setFlag4] = useState(false);
@@ -40,6 +49,9 @@ function Profile (){
     countries.registerLocale(enLocale);
     const countryObj = countries.getNames("en", {select :"official" });
     const countryList = Object.entries(countryObj).map(([key, value]) =>{return{label: value,}});
+<<<<<<< HEAD
+>>>>>>> malak-Sprint-3
+=======
 >>>>>>> malak-Sprint-3
     useEffect(() => {
         axios
@@ -49,6 +61,7 @@ function Profile (){
             setInstructorInfo(response);
           });
       }, []);
+<<<<<<< HEAD
 <<<<<<< HEAD
 
       // useEffect(() => {
@@ -69,6 +82,8 @@ function Profile (){
      console.log(flag)
     
 =======
+=======
+>>>>>>> malak-Sprint-3
       // useEffect(() => {
       //   axios
       //     .get("/instructor/getInst/6393668c6dd0bd88852031af")
@@ -151,6 +166,9 @@ function Profile (){
    function changeFlag4(){
     setFlag4(!flag4);
  }
+<<<<<<< HEAD
+>>>>>>> malak-Sprint-3
+=======
 >>>>>>> malak-Sprint-3
       return (
         <>
@@ -170,6 +188,7 @@ function Profile (){
               <ListItemText primary="Email: "  />
               <ListItemText primary={instructorInfo.data.email}  />
 <<<<<<< HEAD
+<<<<<<< HEAD
           </ListItem>
           <ListItem disablePadding>
               <ListItemText primary="My Country: "  />
@@ -179,6 +198,8 @@ function Profile (){
               <ListItemText primary="User Name: "  />
               <ListItemText primary={instructorInfo.data.userName}  />
 =======
+=======
+>>>>>>> malak-Sprint-3
               <Button variant="contained" sx={{ bgcolor: deepPurple[500]}} >{flag3?<SaveIcon onClick={changeEmail}></SaveIcon>:<EditIcon onClick={changeFlag3}></EditIcon>}</Button>
               </ListItem>
               { flag3 && 
@@ -228,11 +249,15 @@ function Profile (){
           <ListItem disablePadding>
               <ListItemText primary="User Name: "  />
               <ListItemText primary={instructorInfo.data.username}  />
+<<<<<<< HEAD
+>>>>>>> malak-Sprint-3
+=======
 >>>>>>> malak-Sprint-3
           </ListItem>
           <ListItem disablePadding>
               <ListItemText primary="Password : "  />
               <ListItemText primary={instructorInfo.data.password}  />
+<<<<<<< HEAD
 <<<<<<< HEAD
               <Button variant="contained" sx={{ bgcolor: deepPurple[500]}} onClick={changeFlag}>{flag?<SaveIcon onClick={changePassword} /> :<EditIcon/>}</Button>
           </ListItem>
@@ -250,12 +275,21 @@ function Profile (){
           </ListItem>
           
 >>>>>>> malak-Sprint-3
+=======
+              <Button variant="contained" sx={{ bgcolor: deepPurple[500]}} >{flag?<SaveIcon onClick={changePassword} /> :<EditIcon onClick={changeFlag}/>}</Button>
+          </ListItem>
+          
+>>>>>>> malak-Sprint-3
          { flag && 
             
         <ListItem disablePadding>
         <ListItemText primary="New Password : "  />
 <<<<<<< HEAD
+<<<<<<< HEAD
         <TextField id="standard-basic" label="type Password here" variant="standard" />
+=======
+        <TextField id="standard-basic" label="type Password here" variant="standard" onChange={(change)=>{setPassword(change.target.value)}}/>
+>>>>>>> malak-Sprint-3
 =======
         <TextField id="standard-basic" label="type Password here" variant="standard" onChange={(change)=>{setPassword(change.target.value)}}/>
 >>>>>>> malak-Sprint-3
@@ -275,7 +309,11 @@ function Profile (){
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 export default Profile;
+=======
+export default Profile;
+>>>>>>> malak-Sprint-3
 =======
 export default Profile;
 >>>>>>> malak-Sprint-3
