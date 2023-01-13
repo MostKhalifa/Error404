@@ -4,6 +4,32 @@ const { parseInt } = require("lodash");
 const { default: mongoose } = require("mongoose");
 const Courses = require("../Models/Courses");
 const Instructor = require("../Models/InstructorSchema");
+
+
+const getInstructorById = asyncHandler(async (req, res) => {
+  const instructor = await Instructor.findById(req.params.id);
+  if (!instructor) {
+    res.status(400);
+  }
+  res.status(200).json(instructor);
+});
+
+const changePassword = asyncHandler(async (req, res) => {
+  const instructor = await Instructor.findById(req.params.id);
+  if (!instructor) {
+    res.status(400);
+  }
+  const {password} = req.body;
+  const resa = await Instructor.findByIdAndUpdate(
+    req.params.id,
+    { password: password },
+    {
+      new: true,
+    }
+  );
+  if (resa) res.status(200).send("Done");
+  else res.status(400);
+});
 // just a helper mthod and not part of the requirements
 const setInstructor = asyncHandler(async (req, res) => {
   const {
@@ -351,10 +377,49 @@ const getRating = asyncHandler(async (req, res) => {
   res.status(202).send(instructorFound);
 });
 
+<<<<<<< Updated upstream
 const getAllInstructor = asyncHandler(async (req, res) => {
   const course = await Instructor.find().select();
   res.status(200).json(course);
 });
+=======
+const getamountOwed= asyncHandler(async (req, res) => {
+
+
+  let courses = [];
+  const instructorId = req.params.id;
+  if (!mongoose.Types.ObjectId.isValid(instructorId)) {
+    res.status(404).send("the id given is in a invalid form ");
+  }
+  let instructorFound = await Instructor.find({
+    _id: mongoose.Types.ObjectId(instructorId),
+  });
+  if (instructorFound.length != 1) {
+    res.status(404).send("the insttuctor is not found");
+  }
+  const instructorCourses = (
+    await Courses.find({
+      "instructor.instructorId": mongoose.Types.ObjectId(instructorId),
+    })
+  ).forEach((course) => {
+    courses.push(course);
+  });
+ 
+  let amountOwed = 0;
+  courses.forEach((course)=>{
+   const numberOfTrainees = course.enrolledTrainees.length
+   const coursePrice = course.price
+   const numberOfMonths = course.numberOfHours/12.0
+   const courseDiscount = course.discount.avaliable ? course.discount.percentage : 0.0;
+   const amountOwedPerCourse = ((coursePrice-(coursePrice*courseDiscount))*numberOfTrainees)/numberOfMonths
+   amountOwed += amountOwedPerCourse;
+  })
+
+    res.status(200).json(amountOwed);
+});
+
+
+>>>>>>> Stashed changes
 module.exports = {
   viewAllInstructorCourses,
   filterInstructorCourses,
@@ -366,7 +431,13 @@ module.exports = {
   setInstructor,
   rateAnInstructor,
   getRating,
+<<<<<<< Updated upstream
   getAllInstructor
+=======
+  getInstructorById,
+  changePassword,
+  getamountOwed
+>>>>>>> Stashed changes
 };
 /* Sample test data for createNewCourses:
 {

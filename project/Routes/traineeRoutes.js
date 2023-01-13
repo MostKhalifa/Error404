@@ -7,9 +7,14 @@ const {
   getCorporateIraineeCourseInfo,
   setIndvidualTrainee,
   setCorperateTrainee,
+<<<<<<< Updated upstream
   getAllTrainees,
   getIndividualIrainee,
   getCorporateIrainee
+=======
+  changeIndvPassword,
+  changeCopPassword
+>>>>>>> Stashed changes
 } = require("../Controller/traineeController");
 router
   .route("/IndividualTrainee/setCountry/:id")
@@ -25,4 +30,6 @@ router
   .get(getCorporateIraineeCourseInfo);
 router.route("/setI").post(setIndvidualTrainee);
 router.route("/setC").post(setCorperateTrainee);
+router.route("/IndvidualTrainee/changePassword/:id").put(changeIndvPassword);
+router.route("/CorpoarateTrainee/changePassword/:id").put(changeCopPassword);
 module.exports = router;

@@ -8,9 +8,13 @@ import Exercises from "./traineeViews/exercise";
 import Login from "./general/login";
 import ForgetPassword from "./general/forgetPassword";
 import SignUp from "./general/signup";
+<<<<<<< Updated upstream
 import NavBarTrainee from "./general/assests/navBarTrainee";
 import NavBarInstructor from "./general/assests/navBarInstructor";
 import CourseOverView from "./guestViews/courseOverView";
+=======
+import Profile from "./instructorViews/profile";
+>>>>>>> Stashed changes
 function App() {
   return (
     <div className="App">
@@ -36,6 +40,7 @@ function App() {
               <Route  path="/" element={<Login />} />
               <Route  path="/forgetPassword" element={<ForgetPassword/>} />
               <Route  path="/signup" element={<SignUp/>} />
+              <Route path="/InstructorProfile" element={<Profile />} />
           
             </Routes>
           </div>
