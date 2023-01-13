@@ -29,6 +29,25 @@ const setIndividualIraineeCountry = asyncHandler(async (req, res) => {
   res.status(200).json(updatedtrainee);
 });
 
+<<<<<<< HEAD
+=======
+const getIndvidualTrianeeById = asyncHandler(async (req, res) => {
+  const trainee = await IndividualTrainee.findById(req.params.id);
+  if (!trainee) {
+    res.status(400);
+  }
+  res.status(200).json(trainee);
+});
+
+const getCorporateTrianeeById = asyncHandler(async (req, res) => {
+  const trainee = await CorporateTrainee.findById(req.params.id);
+  if (!trainee) {
+    res.status(400);
+  }
+  res.status(200).json(trainee);
+});
+
+>>>>>>> malak-Sprint-3
 const changeIndvPassword = asyncHandler(async (req, res) => {
   const individualTrainee = await IndividualTrainee.findById(req.params.id);
   if (!individualTrainee) {
@@ -62,6 +81,11 @@ const changeCopPassword = asyncHandler(async (req, res) => {
   if (resa) res.status(200).send("Done");
   else res.status(400);
 });
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> malak-Sprint-3
 // Coorporate Trainee can select his/her country (requirement 6)
 // add the individual Trainee id with the url to change the country of a certain individual Trainee
 const setCorporateTraineeCountry = asyncHandler(async (req, res) => {
@@ -237,6 +261,7 @@ module.exports = {
   getCorporateIraineeCourseInfo,
   setIndvidualTrainee,
   setCorperateTrainee,
+<<<<<<< HEAD
 <<<<<<< Updated upstream
   getAllTrainees,
   getIndividualIrainee,
@@ -245,4 +270,10 @@ module.exports = {
   changeIndvPassword,
   changeCopPassword
 >>>>>>> Stashed changes
+=======
+  changeIndvPassword,
+  changeCopPassword,
+  getIndvidualTrianeeById,
+  getCorporateTrianeeById
+>>>>>>> malak-Sprint-3
 };

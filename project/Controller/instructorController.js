@@ -76,6 +76,33 @@ const setInstructorCountry = asyncHandler(async (req, res) => {
   );
   res.status(200).json(updatedInstructor);
 });
+
+
+const getInstructorById = asyncHandler(async (req, res) => {
+  const instructor = await Instructor.findById(req.params.id);
+  if (!instructor) {
+    res.status(400);
+  }
+  res.status(200).json(instructor);
+});
+
+const changePassword = asyncHandler(async (req, res) => {
+  const instructor = await Instructor.findById(req.params.id);
+  if (!instructor) {
+    res.status(400);
+  }
+  const {password} = req.body;
+  const resa = await Instructor.findByIdAndUpdate(
+    req.params.id,
+    { password: password },
+    {
+      new: true,
+    }
+  );
+  if (resa) res.status(200).send("Done");
+  else res.status(400);
+});
+
 //create a new course
 const createNewCourse = asyncHandler(async (req, res) => {
   const instructorId = req.params.id;
@@ -377,6 +404,7 @@ const getRating = asyncHandler(async (req, res) => {
   res.status(202).send(instructorFound);
 });
 
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 const getAllInstructor = asyncHandler(async (req, res) => {
   const course = await Instructor.find().select();
@@ -386,6 +414,10 @@ const getAllInstructor = asyncHandler(async (req, res) => {
 const getamountOwed= asyncHandler(async (req, res) => {
 
 
+=======
+const getamountOwed= asyncHandler(async (req, res) => {
+
+>>>>>>> malak-Sprint-3
   let courses = [];
   const instructorId = req.params.id;
   if (!mongoose.Types.ObjectId.isValid(instructorId)) {
@@ -418,8 +450,11 @@ const getamountOwed= asyncHandler(async (req, res) => {
     res.status(200).json(amountOwed);
 });
 
+<<<<<<< HEAD
 
 >>>>>>> Stashed changes
+=======
+>>>>>>> malak-Sprint-3
 module.exports = {
   viewAllInstructorCourses,
   filterInstructorCourses,
@@ -431,6 +466,7 @@ module.exports = {
   setInstructor,
   rateAnInstructor,
   getRating,
+<<<<<<< HEAD
 <<<<<<< Updated upstream
   getAllInstructor
 =======
@@ -438,6 +474,11 @@ module.exports = {
   changePassword,
   getamountOwed
 >>>>>>> Stashed changes
+=======
+  getamountOwed,
+  getInstructorById,
+  changePassword
+>>>>>>> malak-Sprint-3
 };
 /* Sample test data for createNewCourses:
 {
