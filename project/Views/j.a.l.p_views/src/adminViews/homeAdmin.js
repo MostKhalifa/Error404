@@ -21,7 +21,7 @@ const AdminHomePage = () => {
         //For  Refunds
             const allreqs = axios.get("/requests/getAllRefundRequest")
             .then((res)=>
-            {   //console.log(res.data[0]._id);
+            {   console.log(res.data);
                 for(let i=0 ; i<res.data.length ; i++){
                     const reviewId = res.data[i]._id;
                     const traineeId = res.data[i].trainee;
@@ -30,7 +30,8 @@ const AdminHomePage = () => {
                     axios.get("/trainee/getIndividualTrainee/" + traineeId)
                     .then((result)=>{
                         user.push(result.data.username);
-                        console.log(user);
+                        //console.log(i);
+                        //console.log(user);
                     })
                 // console.log(user);
                 }
