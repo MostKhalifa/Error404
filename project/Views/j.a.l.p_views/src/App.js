@@ -8,9 +8,9 @@ import Exercises from "./traineeViews/exercise";
 import Login from "./general/login";
 import ForgetPassword from "./general/forgetPassword";
 import SignUp from "./general/signup";
-import NavBarTrainee from "./general/assests/navBarTrainee";
-import NavBarInstructor from "./general/assests/navBarInstructor";
-import CourseOverView from "./guestViews/courseOverView";
+import GuestHomePage from "./guestViews/guestHomePage";
+import CourseOverView from "./general/assests/courseOverView";
+
 function App() {
   return (
     <div className="App">
@@ -19,6 +19,8 @@ function App() {
           <div className="container">
             <Routes>
               <Route path="/CTcourseInfo" element={<CTcourseInfo />} />
+              <Route path="/viewCourse" element={<CourseOverView />} />
+              
               <Route
                 path="/ViewInstructorRatingsonCourses"
                 element={<InstructorCourses />}
@@ -33,10 +35,11 @@ function App() {
               />
               <Route path="/karimTests" element={<KarimTests />} />
               <Route path="/exercise" element={<Exercises />} />
-              <Route  path="/" element={<Login />} />
               <Route  path="/forgetPassword" element={<ForgetPassword/>} />
               <Route  path="/signup" element={<SignUp/>} />
-          
+              <Route path="/login" element={<Login />}></Route>
+              <Route  path="/" element={<GuestHomePage />} />
+              
             </Routes>
           </div>
         </Router>

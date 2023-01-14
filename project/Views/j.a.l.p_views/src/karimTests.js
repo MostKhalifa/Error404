@@ -7,7 +7,6 @@ import ViewRating from "./instructorViews/viewRating";
 import Login from "./general/login";
 import CourseCard from "./general/assests/courseCard";
 import CourseDrawer from "./general/assests/courseDrawer";
-import courseReviews from "./general/assests/courseReviews";
 import CourseReviews from "./general/assests/courseReviews";
 
 function KarimTests() {
