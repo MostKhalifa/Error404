@@ -1,15 +1,17 @@
-import { useState, useEffect } from "react";
+import {useState} from "react";
 import "../styling/loginPage.css";
-import { Button, TextField,Link} from "@mui/material";
+import {Button,Alert,Collapse,IconButton,TextField,Link} from "@mui/material";
 import logo from '../resources/logo.PNG';
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import CloseIcon from '@mui/icons-material/Close';
+
 function ForgetPassword() {
     const [email,setEmail]=useState("");
     const [resMsg, setResMsg] = useState("");
     const [error, setError] = useState(false);
+    const [showAlert, setShowAlert] = useState(false);
     const navigate = useNavigate();
-
     const matchEmail = (email) => {
         var p =
         /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
@@ -35,8 +37,10 @@ function ForgetPassword() {
             {
                 setResMsg(null);
                 setError(false);
+                console.log(email.toLowerCase());
+                axios.post("/forgetPassword",{"email":email.toLowerCase()}).then((res)=>{sessionStorage.setItem("loginAlert",true);
+                sessionStorage.setItem("alertMessage","A recovery password was sent to your e-mail inbox");navigate("/")}).catch((res)=>{console.log(res);setResMsg(res.response.data);setError(true);}) 
             }
-            axios.post("/forgetPassword",{"email":email}).then((res)=>{navigate("/")}).catch((res)=>{console.log(res);setResMsg(res.response.data);setError(true);}) 
         }
     }
     return (

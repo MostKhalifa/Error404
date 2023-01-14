@@ -6,8 +6,9 @@ import AddExercise from "./instructorViews/addExercise";
 import ViewRating from "./instructorViews/viewRating";
 import Login from "./general/login";
 import CourseCard from "./general/assests/courseCard";
-
 import CourseDrawer from "./general/assests/courseDrawer";
+import courseReviews from "./general/assests/courseReviews";
+import CourseReviews from "./general/assests/courseReviews";
 
 function KarimTests() {
   const [exercises, SetExercises] = useState([]);
@@ -35,11 +36,11 @@ function KarimTests() {
   };
   return (
     <div className="App">
-
+      <CourseReviews courseId={"639114e227ba150662d88096"}></CourseReviews>
       <CourseDrawer  title="my courses" courses={courses}/>
       <Login/>
-      <CourseCard courseId={"639114e227ba150662d88096"}/>       
-      <ViewRating instructorId={"63653e09c81ff58c1c877e6d"}></ViewRating>
+      <CourseCard courseId={"639114e227ba150662d88096"}/>        
+      <ViewRating instructorId={"63653e09c81ff58c1c877e6d"}></ViewRating> 
       <AddExercise handleClick={handleClickAddExcersie}></AddExercise>
       <UpdateCourseDescription
         courseId={"639114e227ba150662d88096"}

@@ -7,9 +7,13 @@ const {
   getCorporateIraineeCourseInfo,
   setIndvidualTrainee,
   setCorperateTrainee,
+  getAllTrainees,
   getIndividualIrainee,
   getCorporateIrainee,
-  getTraineeCourses,
+  changeIndvPassword,
+  changeCopPassword,
+  getIndvidualTrianeeById,
+  getCorporateTrianeeById
 } = require("../Controller/traineeController");
 router
   .route("/IndividualTrainee/setCountry/:id")
@@ -25,9 +29,10 @@ router
   .get(getCorporateIraineeCourseInfo);
 router.route("/setI").post(setIndvidualTrainee);
 router.route("/setC").post(setCorperateTrainee);
-
-router.route("/getIndividualTrainee/:id").get(getIndividualIrainee);
-router.route("/getCorporateTrainee/:id").get(getCorporateIrainee);
-router.route("/getIndividualTraineeCourses/:id").get(getTraineeCourses);
-
+router.route("/IndvidualTrainee/changePassword/:id").put(changeIndvPassword);
+router.route("/CorpoarateTrainee/changePassword/:id").put(changeCopPassword);
+router.route("/IndvidualTrainee/getById/:id").get(getIndvidualTrianeeById);
+router.route("/CorpoarateTrainee/getById/:id").get(getCorporateTrianeeById);
+router.route("/IndvidualTrainee/getById/:id").get(getIndvidualTrianeeById);
+router.route("/CorpoarateTrainee/getById/:id").get(getCorporateTrianeeById);
 module.exports = router;

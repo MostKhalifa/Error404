@@ -21,3 +21,19 @@
   background: #303c6c;
   border-radius: 200px;
 }
+
+.section{
+  padding: 8cm;
+}
+
+.viewCourses{
+  background: #f4976c;
+  text-emphasis-color:#303c6c ;
+}
+
+
+img {
+  width: 80px;
+  height: 80px;
+}
+

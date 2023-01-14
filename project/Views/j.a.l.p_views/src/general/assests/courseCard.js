@@ -14,12 +14,11 @@ function CourseCard({courseId}) {
         .then(
                 (res)=>
                 {
-                    setCourse(res.data);console.log(res.data)
+                    setCourse(res.data);
                     setNumberOfReviews(res.data.reviews.length)
                     let averageRarting = 0;
                     res.data.reviews.forEach((review) => {averageRarting += review.rating;});   
                     setOverAllRating(Math.floor((averageRarting / res.data.reviews.length) * 10)/ 10);
-                    console.log(overAllRating);
                 }
              )
         .catch((res)=>{setErrMsg(res.response.data)});   
@@ -33,7 +32,6 @@ function CourseCard({courseId}) {
                 <h1 className="title">{course.courseTitle}</h1>
                 <Divider />
                 <div className="instructor_Rating">
-                
                 <p className="instructor"> by: {course.instructor.instructorName}</p>
                 <Rating sx={{ width: "50%",alignSelf:"center", margin: "auto",color: "#f4976c" }} name="CourseRating" value={overAllRating} precision={0.1} readOnly/>
                 </div>

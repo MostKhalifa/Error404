@@ -12,6 +12,13 @@ import AdminHomePage from "./adminViews/homeAdmin";
 import RequestARefund from "./traineeViews/RequestARefund";
 import ReportAProblem from "./general/ReportAProblem";
 import ViewMyReports from "./general/ViewMyReports";
+
+import NavBarTrainee from "./general/assests/navBarTrainee";
+import NavBarInstructor from "./general/assests/navBarInstructor";
+import CourseOverView from "./guestViews/courseOverView";
+import Profile from "./instructorViews/profile"
+import IndvidualTraineeProfile from "./traineeViews/indvidualTraineeProfile";
+import CorporateTraineeProfile from "./traineeViews/corporateTraineeProfile";
 function App() {
   return (
     <div className="App">
@@ -43,6 +50,12 @@ function App() {
               <Route path="/MakeRefundRequest" element={<RequestARefund/>}/>
               <Route path="/ReportAProblem" element={<ReportAProblem/>}/>
               <Route path="/MyReports" element={<ViewMyReports/>}/>
+              <Route path="/InstructorProfile" element={<Profile />} />
+
+              <Route path="/ItraineeProfile" element={<IndvidualTraineeProfile />} />
+              <Route path="/CtraineeProfile" element={<CorporateTraineeProfile />} />
+              <Route path="/navbarinstructor" element={<NavBarInstructor />} />
+              <Route path="/navbartrainee" element={<NavBarTrainee />} />
 
             </Routes>
           </div>

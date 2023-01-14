@@ -6,6 +6,12 @@ const { default: mongoose } = require("mongoose");
 
 // individual Trainee can select his/her country (requirement 6)
 // add the individual Trainee id with the url to change the country of a certain individual Trainee
+
+const getAllTrainees = asyncHandler(async (req, res) => {
+  const course = await CorporateTrainee.find().select();
+  res.status(200).json(course);
+});
+
 const setIndividualIraineeCountry = asyncHandler(async (req, res) => {
   const trainee = await IndividualTrainee.findById(req.params.id);
 
@@ -21,6 +27,58 @@ const setIndividualIraineeCountry = asyncHandler(async (req, res) => {
     }
   );
   res.status(200).json(updatedtrainee);
+});
+
+
+const getIndvidualTrianeeById = asyncHandler(async (req, res) => {
+  const trainee = await IndividualTrainee.findById(req.params.id);
+  if (!trainee) {
+    res.status(400);
+  }
+  res.status(200).json(trainee);
+});
+
+const getCorporateTrianeeById = asyncHandler(async (req, res) => {
+  const trainee = await CorporateTrainee.findById(req.params.id);
+  if (!trainee) {
+    res.status(400);
+  }
+  res.status(200).json(trainee);
+});
+
+
+const changeIndvPassword = asyncHandler(async (req, res) => {
+  const individualTrainee = await IndividualTrainee.findById(req.params.id);
+  if (!individualTrainee) {
+    res.status(400);
+  }
+  const {password} = req.body;
+  const resa = await IndividualTrainee.findByIdAndUpdate(
+    req.params.id,
+    { password: password },
+    {
+      new: true,
+    }
+  );
+  if (resa) res.status(200).send("Done");
+  else res.status(400);
+});
+
+const changeCopPassword = asyncHandler(async (req, res) => {
+  const corporateTrainee = await CorporateTrainee.findById(req.params.id);
+  if (!corporateTrainee) {
+    res.status(400);
+  }
+  const {password} = req.body;
+  const resa = await CorporateTrainee.findByIdAndUpdate(
+    req.params.id,
+    { password: password },
+    {
+      new: true,
+    }
+  );
+  if (resa) res.status(200).send("Done");
+  else res.status(400);
 });
 
 // Coorporate Trainee can select his/her country (requirement 6)
@@ -182,8 +240,6 @@ const getCorporateIraineeCourseInfo = asyncHandler(async (req, res) => {
     res.status(200).json(course);
   }
 });
-
-
 const getIndividualIrainee = asyncHandler(async (req, res) => {
   const indTrain = await IndividualTrainee.findById(req.params.id);
   res.send(indTrain);
@@ -193,19 +249,6 @@ const getCorporateIrainee = asyncHandler(async (req, res) => {
   const corpTrain = await CorporateTrainee.findById(req.params.id);
   res.send(corpTrain);
 });
-
-
-const getTraineeCourses = asyncHandler(async (req,res) => {
-  const indTrain = await IndividualTrainee.findById(req.params.id);
-  let arrayCourses=[];
-  for( const courseHere of indTrain.courses){
-    const tired = await (Courses.findById(courseHere.CourseID))
-    arrayCourses.push({courseId:courseHere.CourseID,courseTitle:tired.courseTitle , price: tired.price})
-
-  }
-  res.send(arrayCourses);
-})
-
 module.exports = {
   setIndividualIraineeCountry,
   setCorporateTraineeCountry,
@@ -213,7 +256,11 @@ module.exports = {
   getCorporateIraineeCourseInfo,
   setIndvidualTrainee,
   setCorperateTrainee,
+  getAllTrainees,
   getIndividualIrainee,
   getCorporateIrainee,
-  getTraineeCourses,
+  changeIndvPassword, 
+  changeCopPassword,
+  getIndvidualTrianeeById,
+  getCorporateTrianeeById
 };

@@ -52,7 +52,6 @@ const forgetPassword=async (req,res)=>{
         }
         else
         {
-          console.log("error")
           res.status(404).send("please provide an registered email address")
         }
       }
@@ -131,6 +130,7 @@ const signUp= async(req,res)=>{
   {
     user.password = await bcrypt.hash(user.password,saltRounds);
     const test = individualTrainee.create(user);
+    res.status(200).send("userCreated");
     console.log(test)
   }
 }
