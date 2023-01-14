@@ -12,9 +12,13 @@ const {
   updateCourseDescription,
   getCourseDescription,
   getCourseChapter,
-  getCourseReviews
+  getCourseReviews,
+  getDiscountCourses,
+  getPopularCourses
 } = require("../Controller/coursesController");
 router.route("/getCourse").get(getCourse);
+router.route("/popularCourses").get(getPopularCourses);
+router.route("/discountCourses").get(getDiscountCourses);
 router.route("/getCourseReviews").get(getCourseReviews);
 router.route("/getCourses").get(getCourses);
 router.route("/getCoursePrice/:id").get(viewCoursePrice);
