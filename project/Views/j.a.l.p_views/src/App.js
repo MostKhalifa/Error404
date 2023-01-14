@@ -10,6 +10,11 @@ import ForgetPassword from "./general/forgetPassword";
 import SignUp from "./general/signup";
 import GuestHomePage from "./guestViews/guestHomePage";
 import CourseOverView from "./general/assests/courseOverView";
+import AdminHomePage from "./adminViews/homeAdmin";
+import RequestARefund from "./traineeViews/RequestARefund";
+import ReportAProblem from "./general/ReportAProblem";
+import ViewMyReports from "./general/ViewMyReports";
+
 import NavBarTrainee from "./general/assests/navBarTrainee";
 import NavBarInstructor from "./general/assests/navBarInstructor";
 import CourseOverView from "./guestViews/courseOverView";
@@ -49,15 +54,19 @@ function App() {
               <Route path="/login" element={<Login />}></Route>
               <Route  path="/" element={<GuestHomePage />} />
               <Route  path="/viewCourse" element={<SignUp/>} />
+              <Route  path="/viewCourse" element={<SignUp/>} />
+
               <Route path="/homePageAdmin" element={<AdminHomePage/>}/>
               <Route path="/MakeRefundRequest" element={<RequestARefund/>}/>
               <Route path="/ReportAProblem" element={<ReportAProblem/>}/>
               <Route path="/MyReports" element={<ViewMyReports/>}/>
               <Route path="/InstructorProfile" element={<Profile />} />
+
               <Route path="/ItraineeProfile" element={<IndvidualTraineeProfile />} />
               <Route path="/CtraineeProfile" element={<CorporateTraineeProfile />} />
               <Route path="/navbarinstructor" element={<NavBarInstructor />} />
               <Route path="/navbartrainee" element={<NavBarTrainee />} />
+
             </Routes>
           </div>
         </Router>
