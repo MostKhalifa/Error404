@@ -10,14 +10,9 @@ import ForgetPassword from "./general/forgetPassword";
 import SignUp from "./general/signup";
 import GuestHomePage from "./guestViews/guestHomePage";
 import CourseOverView from "./general/assests/courseOverView";
-import AdminHomePage from "./adminViews/homeAdmin";
-import RequestARefund from "./traineeViews/RequestARefund";
-import ReportAProblem from "./general/ReportAProblem";
-import ViewMyReports from "./general/ViewMyReports";
-
 import NavBarTrainee from "./general/assests/navBarTrainee";
 import NavBarInstructor from "./general/assests/navBarInstructor";
-import CourseOverView from "./guestViews/courseOverView";
+//import CourseOverView from "./guestViews/courseOverView";
 import Profile from "./instructorViews/profile"
 import IndvidualTraineeProfile from "./traineeViews/indvidualTraineeProfile";
 import CorporateTraineeProfile from "./traineeViews/corporateTraineeProfile";
