@@ -13,7 +13,8 @@ const {
   changeIndvPassword,
   changeCopPassword,
   getIndvidualTrianeeById,
-  getCorporateTrianeeById
+  getCorporateTrianeeById,
+  getTraineeCourses
 } = require("../Controller/traineeController");
 router
   .route("/IndividualTrainee/setCountry/:id")
@@ -35,4 +36,9 @@ router.route("/IndvidualTrainee/getById/:id").get(getIndvidualTrianeeById);
 router.route("/CorpoarateTrainee/getById/:id").get(getCorporateTrianeeById);
 router.route("/IndvidualTrainee/getById/:id").get(getIndvidualTrianeeById);
 router.route("/CorpoarateTrainee/getById/:id").get(getCorporateTrianeeById);
+router.route("/getIndividualTrainee/:id").get(getIndividualIrainee);
+router.route("/getCorporateTrainee/:id").get(getCorporateIrainee);
+router.route("/getIndividualTraineeCourses/:id").get(getTraineeCourses);
+
+
 module.exports = router;

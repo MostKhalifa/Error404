@@ -8,6 +8,10 @@ import Exercises from "./traineeViews/exercise";
 import Login from "./general/login";
 import ForgetPassword from "./general/forgetPassword";
 import SignUp from "./general/signup";
+import AdminHomePage from "./adminViews/homeAdmin";
+import RequestARefund from "./traineeViews/RequestARefund";
+import ReportAProblem from "./general/ReportAProblem";
+import ViewMyReports from "./general/ViewMyReports";
 
 import NavBarTrainee from "./general/assests/navBarTrainee";
 import NavBarInstructor from "./general/assests/navBarInstructor";
@@ -40,6 +44,12 @@ function App() {
               <Route  path="/" element={<Login />} />
               <Route  path="/forgetPassword" element={<ForgetPassword/>} />
               <Route  path="/signup" element={<SignUp/>} />
+              <Route  path="/viewCourse" element={<SignUp/>} />
+
+              <Route path="/homePageAdmin" element={<AdminHomePage/>}/>
+              <Route path="/MakeRefundRequest" element={<RequestARefund/>}/>
+              <Route path="/ReportAProblem" element={<ReportAProblem/>}/>
+              <Route path="/MyReports" element={<ViewMyReports/>}/>
               <Route path="/InstructorProfile" element={<Profile />} />
 
               <Route path="/ItraineeProfile" element={<IndvidualTraineeProfile />} />
