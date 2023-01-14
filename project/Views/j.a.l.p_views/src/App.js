@@ -50,6 +50,10 @@ function App() {
               <Route path="/ReportAProblem" element={<ReportAProblem/>}/>
               <Route path="/MyReports" element={<ViewMyReports/>}/>
               <Route path="/InstructorProfile" element={<Profile />} />
+              <Route path="/ItraineeProfile" element={<IndvidualTraineeProfile />} />
+              <Route path="/CtraineeProfile" element={<CorporateTraineeProfile />} />
+              <Route path="/navbarinstructor" element={<NavBarInstructor />} />
+              <Route path="/navbartrainee" element={<NavBarTrainee />} />
             </Routes>
           </div>
         </Router>
