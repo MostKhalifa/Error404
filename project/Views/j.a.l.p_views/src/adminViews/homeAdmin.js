@@ -21,8 +21,20 @@ const AdminHomePage = () => {
         //For  Refunds
             const allreqs = axios.get("/requests/getAllRefundRequest")
             .then((res)=>
-            {   
-                setRequests(res.data);
+            {   //console.log(res.data[0]._id);
+                for(let i=0 ; i<res.data.length ; i++){
+                    const reviewId = res.data[i]._id;
+                    const traineeId = res.data[i].trainee;
+                    const courseId = res.data[i].course;
+                    //console.log(reviewId);
+                    axios.get("/trainee/getIndividualTrainee/" + traineeId)
+                    .then((result)=>{
+                        user.push(result.data.username);
+                        console.log(user);
+                    })
+                // console.log(user);
+                }
+                // setRequests(res.data);
             })
 
         //For Reports
@@ -31,7 +43,7 @@ const AdminHomePage = () => {
         
       } , []);
 
-    useEffect(() => {
+    /* useEffect(() => {
 
         for(const reqs of requests){
             const reviewId = reqs.id;
@@ -44,7 +56,8 @@ const AdminHomePage = () => {
             
 
         }
-        console.log(user);
+         console.log(user); */
+
         // requests.forEach(async (request)=>{
         //     await axios.get("/trainee/getIndividualTrainee/" + request.trainee)
         //     .then((res)=>{
@@ -60,16 +73,16 @@ const AdminHomePage = () => {
         // console.log(cour);
         //setRefundRequests({username:user,coursename:course,courseprice:price});
        //console.log(requests);
-             } , [requests]);
+          /////////////  //  } , [requests]);
 
 
-    const getTrainee =  async (traineeID) => {
-            await axios.get("/trainee/getIndividualTrainee/" + traineeID).then((res) =>{
-            // return res.data.username;   
-            //console.log(res.data.username);             
-            return res.data.username;
-        })
-        };
+    // const getTrainee =  async (traineeID) => {
+    //         await axios.get("/trainee/getIndividualTrainee/" + traineeID).then((res) =>{
+    //         // return res.data.username;   
+    //         //console.log(res.data.username);             
+    //         return res.data.username;
+    //     })
+    //     };
 
 
         //, getTrainee("63665a860a6c1686a07f7e28")

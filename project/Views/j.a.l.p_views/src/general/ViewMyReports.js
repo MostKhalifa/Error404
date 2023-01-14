@@ -11,7 +11,7 @@ const ViewMyReports = ({userId}) => {
 
     useEffect(() => {
 
-        axios.get("/requests/myReports/"+ userId ) //"63653e09c81ff58c1c877e6d"
+        axios.get("/requests/myReports/63653e09c81ff58c1c877e6d" /*+ userId*/ ) //"63653e09c81ff58c1c877e6d"
         .then((res)=>
         {
             setReports(res.data);

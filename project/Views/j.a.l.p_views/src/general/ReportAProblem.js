@@ -36,6 +36,8 @@ const ReportAProblem = () => {
         else{
             setProblemType({problemType:problemType.problemType,ava:false,errMsg:""});
         }
+
+        //This does not show after a fresh start or a refresh so it will always stop the server
         setClient("63653e09c81ff58c1c877e6d");
         setClientType("Instructor");
 
