@@ -16,6 +16,10 @@ import CourseOverView from "./guestViews/courseOverView";
 import Profile from "./instructorViews/profile"
 import IndvidualTraineeProfile from "./traineeViews/indvidualTraineeProfile";
 import CorporateTraineeProfile from "./traineeViews/corporateTraineeProfile";
+import AdminHomePage from "./adminViews/homeAdmin";
+import RequestARefund from "./traineeViews/RequestARefund";
+import ReportAProblem from "./general/ReportAProblem";
+import ViewMyReports from "./general/ViewMyReports";
 function App() {
   return (
     <div className="App">
