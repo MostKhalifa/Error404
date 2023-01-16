@@ -108,8 +108,6 @@ const IndividualTraineeSchema = new Schema(
         noViewed: {
           type: Number,
           required: true,
-          min: 0,
-          max: 1,
         },
         progress: {
           type: Number,
