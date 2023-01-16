@@ -15,6 +15,8 @@ import CourseOverView from "./guestViews/courseOverView";
 import Profile from "./instructorViews/profile"
 import IndvidualTraineeProfile from "./traineeViews/indvidualTraineeProfile";
 import CorporateTraineeProfile from "./traineeViews/corporateTraineeProfile";
+import TraineeFirstPage from "./traineeViews/traineeFirstPage";
+import ITPayment from "./traineeViews/iTPayment";
 function App() {
   return (
     <div className="App">
@@ -46,7 +48,9 @@ function App() {
               <Route path="/CtraineeProfile" element={<CorporateTraineeProfile />} />
               <Route path="/navbarinstructor" element={<NavBarInstructor />} />
               <Route path="/navbartrainee" element={<NavBarTrainee />} />
-
+              <Route path="/IT" element={<TraineeFirstPage />} />
+              <Route path="/viewCourse" element={<CourseOverView />} />
+              <Route path="/Payment" element={<ITPayment />} />
             </Routes>
           </div>
         </Router>

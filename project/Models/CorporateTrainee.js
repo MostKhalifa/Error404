@@ -38,14 +38,96 @@ const CorporateTraineeSchema = new Schema(
       required: true,
     },
     courses: [
-      {
-        courseID: {
-          type: Schema.Types.ObjectId,
-          required: true,
-          ref: "Courses",
+        {
+          CourseID: {
+            type: Schema.Types.ObjectId,
+            required: true,
+            ref: "Courses",
+          },
+          chapters: [
+            {
+              chapterNumber: {
+                type: Number,
+                required: true,
+              },
+              chapterTitle: {
+                type: String,
+                required: true,
+              },
+              chapterVideo: {
+                type: String,
+              },
+              instructorNotes: {
+                type: String,
+                required: true,
+              },
+              totalHours: {
+                type: Number,
+                required: true,
+              },
+              exercise: [
+                {
+                  questionHead: {
+                    type: String,
+                    required: true,
+                  },
+                  answers: [
+                    {
+                      answerBody: {
+                        type: String,
+                        required: true,
+                      },
+                      valid: {
+                        type: Boolean,
+                        required: true,
+                        default: false,
+                      },
+                    },
+                  ],
+                },
+              ],
+              chaptersAssessments: [
+                {
+                  questionHead: {
+                    type: String,
+                    required: true,
+                  },
+                  answers: [
+                    {
+                      answerBody: {
+                        type: String,
+                        required: true,
+                      },
+                      valid: {
+                        type: Boolean,
+                        required: true,
+                      },
+                    },
+                  ],
+                },
+              ],
+              
+            },
+          ],
+          noViewed: {
+            type: Number,
+            required: true,
+            min: 0,
+            max: 1,
+          },
+          progress: {
+            type: Number,
+            required: true,
+            default: 0,
+          },
         },
-      },
-    ],
+      ],
+ 
+    completed: {
+      type: Boolean,
+      required: true,
+      default: false,
+    },
   },
   { timestamps: true }
 );

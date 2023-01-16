@@ -13,7 +13,8 @@ const {
   changeIndvPassword,
   changeCopPassword,
   getIndvidualTrianeeById,
-  getCorporateTrianeeById
+  getCorporateTrianeeById,
+
 } = require("../Controller/traineeController");
 router
   .route("/IndividualTrainee/setCountry/:id")
@@ -35,4 +36,5 @@ router.route("/IndvidualTrainee/getById/:id").get(getIndvidualTrianeeById);
 router.route("/CorpoarateTrainee/getById/:id").get(getCorporateTrianeeById);
 router.route("/IndvidualTrainee/getById/:id").get(getIndvidualTrianeeById);
 router.route("/CorpoarateTrainee/getById/:id").get(getCorporateTrianeeById);
+
 module.exports = router;

@@ -21,7 +21,7 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import TextField from '@mui/material/TextField';
-
+import IndvidualTraineeProfile from '../../traineeViews/indvidualTraineeProfile';
 const theme = createTheme({
     palette: {
         paper: '#f4976c',
@@ -94,7 +94,8 @@ export default function NavBarTrainee() {
       setAnchorEl(event.currentTarget);
     };
     const handleMenuClose = () => {
-      setAnchorEl(null);
+      //setAnchorEl(null);
+     navigate('/ItraineeProfile');
     };
 
     const handleFiltering = (event) => {
