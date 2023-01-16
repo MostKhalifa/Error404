@@ -120,14 +120,14 @@ const CorporateTraineeSchema = new Schema(
             required: true,
             default: 0,
           },
+          completed: {
+            type: Boolean,
+            required: true,
+            default: false,
+          },
         },
       ],
  
-    completed: {
-      type: Boolean,
-      required: true,
-      default: false,
-    },
   },
   { timestamps: true }
 );
