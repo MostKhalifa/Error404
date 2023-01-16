@@ -49,6 +49,7 @@ function ITPayment (){
      console.log(traineeInfo.data.wallet);
      if(courseInfo)
      console.log(courseInfo.data.price);
+     
      function walletPayment(){
         turnOnWalletPayment();
         if(traineeInfo){
