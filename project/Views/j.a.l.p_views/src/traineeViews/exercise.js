@@ -93,12 +93,6 @@ const Exercises = () => {
 
                         })}
 
-                        {/* {idiot && idiot.map((khara) => {
-                            return(
-                                <li>{khara} </li>
-                            );
-                        })} */}
-
                     </ul>
 
                     <button onClick ={() => retakeExercise()}> Retake exercise</button>
