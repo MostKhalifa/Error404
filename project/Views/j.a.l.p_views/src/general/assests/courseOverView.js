@@ -1,25 +1,22 @@
 import { Fragment, useState, useEffect } from "react";
-import {Button,Rating,Divider} from "@mui/material";
+import {Button,Rating} from "@mui/material";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import "../styling/courseOverView.css"
-import CourseReviews from "../general/assests/courseReviews";
-import YoutubeVideo from "../general/assests/youtubeVideo";
+import "../../styling/courseOverView.css"
+import CourseReviews from "./courseReviews";
+import YoutubeVideo from "./youtubeVideo";
 
 function CourseOverView() {
     const courseId =window.location.href.split("?courseId=")[1];
     const [course,setCourse]=useState(null);
     const [errMsg,setErrMsg]=useState("");
     const [overAllRating, setOverAllRating] = useState(0);
-    const [numberOfReviews, setNumberOfReviews] = useState(0);
-    const navigate= useNavigate();
     useEffect(()=>{
         axios.get("/course/getCourse?courseId="+courseId)
         .then(
                 (res)=>
                 {
                     setCourse(res.data);
-                    setNumberOfReviews(res.data.reviews.length)
                     let averageRarting = 0;
                     res.data.reviews.forEach((review) => {averageRarting += review.rating;});   
                     setOverAllRating(Math.floor((averageRarting / res.data.reviews.length) * 10)/ 10);
@@ -27,9 +24,6 @@ function CourseOverView() {
              )
         .catch((res)=>{setErrMsg(res.response.data)});   
     },[])
-    const handleClick= ()=>{
-        navigate("/viewCourse?courseId="+course._id);
-    }
     return (
         
         <Fragment>

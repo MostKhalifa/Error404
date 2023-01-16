@@ -38,7 +38,8 @@ function CourseCard({courseId}) {
                 <div >
                 <p className="Details"> Estimated number of hours: {course.numberOfHours} hour</p>
                 <p className="Details"> Subject: {course.courseSubject} </p>
-                <p className="Details"> Price: {course.price} </p>
+                {(!course.discount.avaliable)?<p className="Details"><b>price:</b>{course.price} coin</p>:<p className="Details"><b>price:</b><s >{course.price}</s> <b style={{color:"#ff0000"}}>{(!(course.discount.percentage===1))?(course.price-course.price*course.discount.percentage):"free"}</b></p>}
+                        
                 </div>
                 </Fragment>
             }

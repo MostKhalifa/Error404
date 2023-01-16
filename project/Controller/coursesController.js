@@ -1,5 +1,8 @@
 const asyncHandler = require("express-async-handler");
 const Courses = require("../Models/Courses");
+const IndividualTrainee = require("../Models/IndividualTrainee");
+const CorporateTrainee = require("../Models/CorporateTrainee");
+
 const mongoose = require("mongoose");
 const axios = require("axios")
 //get a specfic course by id
@@ -279,6 +282,32 @@ const getCourseChapter = asyncHandler(async (req, res) => {
   res.status(200).json(course);
 });
 
+const getPopularCourses = asyncHandler(async(req,res)=>{
+  const popularCourses =[];
+  (await Courses.find({},{_id:1}).sort({enrolledTrainees:-1}).limit(20)).forEach((course)=>
+  {
+    popularCourses.push(course._id); 
+  });
+  if(popularCourses.length!==0){
+    res.status(200).send(popularCourses);
+  }
+  else{
+    res.status(404).send("the courses collection can't be found");
+  }
+})
+const getDiscountCourses = asyncHandler(async(req,res)=>{
+  const discountCourses = [];
+  (await Courses.find({"discount.avaliable":true,"discount.percentage":{$gt :0}},{_id:1}).sort({"discount.percentage":-1}).limit(20)).forEach((course)=>{
+    discountCourses.push(course._id);
+  });
+  if(discountCourses.length!==0){
+    res.status(200).send(discountCourses);
+  }
+  else{
+    res.status(200).send("there are currently no courses on discount");
+  }
+})
+
 module.exports = {
   filterCourseSubjectRating,
   filterCoursePrice,
@@ -290,7 +319,9 @@ module.exports = {
   updateCourseDescription,
   getCourseDescription,
   getCourseChapter,
-  getCourseReviews
+  getCourseReviews,
+  getPopularCourses,
+  getDiscountCourses,
 };
    
     // console.log("rated course id  "+req.params.id)

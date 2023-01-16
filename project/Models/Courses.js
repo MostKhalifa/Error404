@@ -61,20 +61,10 @@ const CoursesSchema = new Schema(
         ref: Instructor,
       },
     },
-    enrolledTrainees: [
-      {
-        traineeId: {
-          type: Schema.Types.ObjectId,
-          required: true,
-          refPath: "TraineeType",
-        },
-        traineeType: {
-          type: String,
-          required: true,
-          enum: ["CorporateTrainee", "IndividualTrainee"],
-        },
-      },
-    ],
+    enrolledTrainees: {
+      type: Number,
+      default:0,
+    },
     reviews: [
       {
         review: {

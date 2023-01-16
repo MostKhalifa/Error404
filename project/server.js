@@ -21,3 +21,4 @@ app.use("/instructor", require("./Routes/instructorRoutes"));
 app.use("/admin", require("./Routes/adminRoutes"));
 app.use("/trainee", require("./Routes/traineeRoutes"));
 app.use("/", require("./Routes/generalRoutes"));
+app.use("/requests", require("./Routes/requestsRouter"));

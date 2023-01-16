@@ -1,16 +1,13 @@
 import {useState} from "react";
 import "../styling/loginPage.css";
-import {Button,Alert,Collapse,IconButton,TextField,Link} from "@mui/material";
+import {Button,TextField,Link} from "@mui/material";
 import logo from '../resources/logo.PNG';
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import CloseIcon from '@mui/icons-material/Close';
-
 function ForgetPassword() {
     const [email,setEmail]=useState("");
     const [resMsg, setResMsg] = useState("");
     const [error, setError] = useState(false);
-    const [showAlert, setShowAlert] = useState(false);
     const navigate = useNavigate();
     const matchEmail = (email) => {
         var p =

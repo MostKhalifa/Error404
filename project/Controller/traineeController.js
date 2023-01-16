@@ -240,15 +240,31 @@ const getCorporateIraineeCourseInfo = asyncHandler(async (req, res) => {
     res.status(200).json(course);
   }
 });
+
+//Getss all individual trainee data
 const getIndividualIrainee = asyncHandler(async (req, res) => {
   const indTrain = await IndividualTrainee.findById(req.params.id);
   res.send(indTrain);
 });
 
+//Gets all corporate trainee data
 const getCorporateIrainee = asyncHandler(async (req, res) => {
   const corpTrain = await CorporateTrainee.findById(req.params.id);
   res.send(corpTrain);
 });
+
+//Gets course data i need for front-end 
+const getTraineeCourses = asyncHandler(async (req,res) => {
+  const indTrain = await IndividualTrainee.findById(req.params.id);
+  let arrayCourses=[];
+  for( const courseHere of indTrain.courses){
+    const tired = await (Courses.findById(courseHere.CourseID))
+    arrayCourses.push({courseId:courseHere.CourseID,courseTitle:tired.courseTitle , price: tired.price})
+
+  }
+  res.send(arrayCourses);
+})
+
 
 //trigger indvidual trainee viewed course + update change progress
 const ViewedForIndividualTrainee = asyncHandler(async (req, res) => {
@@ -320,6 +336,7 @@ module.exports = {
   changeCopPassword,
   getIndvidualTrianeeById,
   getCorporateTrianeeById,
+  getTraineeCourses,
   getIndvTrainEnrolledCourses,
   getCopTrainEnrolledCourses
 };
