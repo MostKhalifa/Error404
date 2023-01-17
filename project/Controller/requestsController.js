@@ -149,6 +149,8 @@ exports.getAllRequestAccess = asyncHandler(async (req, res) => {
     if(reqAcc[i].status == "pending"){
       theItemIWishIHave.push({
         accRequestID : reqAcc[i]._id,
+        userID : reqAcc[i].trainee,
+        courseID: reqAcc[i].course,
         username: (await CorporateTrainee.findById(reqAcc[i].trainee)).username,
         corporate: (await CorporateTrainee.findById(reqAcc[i].trainee)).corporate,
         coursename: (await Courses.findById(reqAcc[i].course)).courseTitle,
@@ -187,6 +189,15 @@ exports.changeAccessRequestStatus = asyncHandler(async (req, res) => {
   await RequestAccess.findByIdAndUpdate(req.params.id, {
       status: req.body.status,
     });
+    if(req.body.status == 'accepted'){
+      let user= req.body.userId;
+      let course = req.body.courseId;
+      let getUserCourses = (await CorporateTrainee.findById(req.body.userId)).courses;
+      getUserCourses.push({CourseID:course});
+      await CorporateTrainee.findByIdAndUpdate(user , {courses: getUserCourses,})
+    };
+
+
   res.send("Status Updated");
 });
 

@@ -282,6 +282,25 @@ const getCourseChapter = asyncHandler(async (req, res) => {
   res.status(200).json(course);
 });
 
+const getCourseWithAllItsData = asyncHandler(async(req,res) => {
+  const course = await Courses.find();
+  res.status(200).json(course);
+})
+
+const changeDiscountOfACourse = asyncHandler(async(req,res) => { 
+  if(req.body.discountValue !== 0){
+    let inPercentage = req.body.discountValue/100;
+    let x = true;
+    const course = await Courses.findByIdAndUpdate(req.params.id , {
+      discount: {avaliable:x,percentage:inPercentage}
+    });
+    console.log(course);
+    res.status(200).json(course);
+
+  }
+
+})
+
 const getPopularCourses = asyncHandler(async(req,res)=>{
   const popularCourses =[];
   (await Courses.find({},{_id:1}).sort({enrolledTrainees:-1}).limit(20)).forEach((course)=>
@@ -322,6 +341,8 @@ module.exports = {
   getCourseReviews,
   getPopularCourses,
   getDiscountCourses,
+  getCourseWithAllItsData,
+  changeDiscountOfACourse,
 };
    
     // console.log("rated course id  "+req.params.id)

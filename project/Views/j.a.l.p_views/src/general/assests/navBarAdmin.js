@@ -96,6 +96,11 @@ export default function NavBarInstructor() {
         navigate("/addAdmin")
     };
 
+    const handleAddDiscountMenuClose = () => {
+      setAnchorEl(null);
+      navigate("/makeDiscounts")
+  };
+
     const handleMenuClose = () => {
         setAnchorEl(null);
     };
@@ -125,6 +130,8 @@ export default function NavBarInstructor() {
       <MenuItem onClick={handleAddCorpMenuClose}>Add Corporate Trainee</MenuItem>
       <MenuItem onClick={handleAddInstMenuClose}>Add Instructor</MenuItem>
       <MenuItem onClick={handleAddAdminMenuClose}>Add Admin</MenuItem>
+      <MenuItem onClick={handleAddDiscountMenuClose}>Add Discount</MenuItem>
+
       <MenuItem onClick={handleLogOut}>Log Out</MenuItem>
     </Menu>
   );
