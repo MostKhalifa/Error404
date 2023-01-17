@@ -14,7 +14,9 @@ const {
   getCourseChapter,
   getCourseReviews,
   getDiscountCourses,
-  getPopularCourses
+  getPopularCourses,
+  getCourseWithAllItsData,
+  changeDiscountOfACourse
 } = require("../Controller/coursesController");
 router.route("/getCourse").get(getCourse);
 router.route("/popularCourses").get(getPopularCourses);
@@ -28,6 +30,8 @@ router.route("/searchForCourse").get(searchForCourse);
 router.route("/rateaCourse/:id").put(rateaCourse);
 router.route("/updateCourseDescription/:id").patch(updateCourseDescription);
 router.route("/getCoursesChapter/:id").get(getCourseChapter);
+router.route("/getCourseWithAllItsData").get(getCourseWithAllItsData);
+router.route("/changeDiscountOfACourse/:id").put(changeDiscountOfACourse);
 
 router.route("/getCourseDescription/:id").get(getCourseDescription);
 module.exports = router;

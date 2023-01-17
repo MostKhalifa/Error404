@@ -69,13 +69,13 @@ const AdminHomePage = () => {
         }
       };
 
-      const handleAccessRequestsButton = (AccessRequestId , answer) => {
+      const handleAccessRequestsButton = (AccessRequestId ,user,course, answer) => {
         if(answer){
-          axios.put("/requests/changeAccessRequestStatus/"+ AccessRequestId , {status:"accepted"});
+          axios.put("/requests/changeAccessRequestStatus/"+ AccessRequestId , {status:"accepted" ,userId : user , courseId : course });
           setDataChanged(!dataChanged);
         }
         else{
-          axios.put("/requests/changeAccessRequestStatus/"+ AccessRequestId , {status:"rejected"});
+          axios.put("/requests/changeAccessRequestStatus/"+ AccessRequestId , {status:"rejected" ,userId : user , courseId : course });
           setDataChanged(!dataChanged);
         }
       };
@@ -179,8 +179,8 @@ const AdminHomePage = () => {
                                 <h4 className="ratingP">User's corporate: {items.corporate}</h4>
                                 <div>
                                <p> <ButtonGroup disableElevation variant="contained" aria-label="Disabled elevation buttons" sx={{mx : 55}}>
-                               <Button sx={{bgcolor: '#00ee00' }} onClick={() => handleAccessRequestsButton(items.accRequestID , true)}>Accept</Button>
-                                <Button sx={{bgcolor: '#ee0000' }} onClick={() => handleAccessRequestsButton(items.accRequestID , false)}>Reject</Button>
+                               <Button sx={{bgcolor: '#00ee00' }} onClick={() => handleAccessRequestsButton(items.accRequestID ,items.userID, items.courseID, true)}>Accept</Button>
+                                <Button sx={{bgcolor: '#ee0000' }} onClick={() => handleAccessRequestsButton(items.accRequestID ,items.userID, items.courseID, false)}>Reject</Button>
                               </ButtonGroup></p>
                               </div>
                               <Divider/>

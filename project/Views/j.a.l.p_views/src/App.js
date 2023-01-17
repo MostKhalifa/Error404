@@ -26,6 +26,7 @@ import AddInstructor from "./adminViews/addInstructor";
 import AddAdmin from "./adminViews/addAdmin";
 import TraineeFirstPage from "./traineeViews/traineeFirstPage";
 import ITPayment from "./traineeViews/iTPayment";
+import MakeDiscounts from "./adminViews/makeDiscounts";
 function App() {
   return (
     <div className="App">
@@ -61,6 +62,7 @@ function App() {
               <Route path="/addCorporateTrainee" element={<AddCorporateTrainee/>}/>
               <Route path="/addInstructor" element={<AddInstructor/>}/>
               <Route path="/addAdmin" element={<AddAdmin/>}/>
+              <Route path="/makeDiscounts" element={<MakeDiscounts/>}/>
 
               <Route path="/MakeRefundRequest" element={<RequestARefund/>}/>
               <Route path="/ReportAProblem" element={<ReportAProblem/>}/>
