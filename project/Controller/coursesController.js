@@ -80,8 +80,8 @@ const viewCoursePrice = asyncHandler(async (req, res) => {
 
 //filter course by subject and/or rating
 const filterCourseSubjectRating = asyncHandler(async (req, res) => {
-  const { courseSubject } = req.body;
-  const { rating } = req.body;
+  const { courseSubject } = req.query;
+  const { rating } = req.query;
   if (!courseSubject) {
     if (!rating) {
       const course = await Courses.find({}).select(
@@ -112,7 +112,7 @@ const filterCourseSubjectRating = asyncHandler(async (req, res) => {
 });
 
 const filterCoursePrice = asyncHandler(async (req, res) => {
-  const { priceTo, priceFrom } = req.body;
+  const { priceTo, priceFrom } = req.query;
   if (!priceFrom && !priceTo) {
     const course = await Courses.find({}).select("courseTitle price");
     res.send(course);
@@ -129,7 +129,7 @@ const filterCoursePrice = asyncHandler(async (req, res) => {
 
 //filter course by subject and/or rating
 const searchForCourse = asyncHandler(async (req, res) => {
-  const { courseTitle, courseSubject, instructorName } = req.body;
+  const { courseTitle, courseSubject, instructorName } = req.query;
 
   if (!courseSubject) {
     if (!courseTitle) {

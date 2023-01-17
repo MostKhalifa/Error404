@@ -233,9 +233,6 @@ export default function NavBarTrainee() {
           console.log(error.response.data);
         });
       }
-
-    
-    
     };
 
    
