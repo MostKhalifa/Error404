@@ -46,14 +46,14 @@ const AdminHomePage = () => {
       } , [dataChanged]);
 
 
-    const handleRefundsButton = (requestedId , answer) =>{
+    const handleRefundsButton = (requestedId , userRequestingID, priceRefunded, answer) =>{
       if(answer){
-        axios.put("/requests/changeRefundStatus/"+requestedId , {status:"accepted"});
+        axios.put("/requests/changeRefundStatus/"+requestedId , {status:"accepted" , userId : userRequestingID , refundedAmount : priceRefunded});
         setDataChanged(!dataChanged);
       }
       else{
 
-        axios.put("/requests/changeRefundStatus/"+requestedId , {status:"rejected"});
+        axios.put("/requests/changeRefundStatus/"+requestedId , {status:"rejected" , userId: userRequestingID,  refundedAmount : priceRefunded});
         setDataChanged(!dataChanged);
       }
       };
@@ -103,8 +103,8 @@ const AdminHomePage = () => {
                                 <h4 className="ratingP">Price: {items.price}</h4>
                                 <div>
                                <p> <ButtonGroup disableElevation variant="contained" aria-label="Disabled elevation buttons" sx={{mx : 55}}>
-                               <Button sx={{bgcolor: '#00ee00' }} onClick={() => handleRefundsButton(items.requestID , true)}>Accept</Button>
-                                <Button sx={{bgcolor: '#ee0000' }} onClick={() => handleRefundsButton(items.requestID , false)}>Reject</Button>
+                               <Button sx={{bgcolor: '#00ee00' }} onClick={() => handleRefundsButton(items.requestID ,items.userID, items.price, true)}>Accept</Button>
+                                <Button sx={{bgcolor: '#ee0000' }} onClick={() => handleRefundsButton(items.requestID ,items.userID, items.price, false)}>Reject</Button>
 
                               </ButtonGroup></p>
                               </div>
