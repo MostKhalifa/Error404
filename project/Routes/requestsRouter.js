@@ -20,6 +20,8 @@ router.route("/getAllRefundRequest").get(requestsController.getAllRefundRequest)
 router.route("/getAllReport").get(requestsController.getAllReport);
 router.route("/getAllRequestAccess").get(requestsController.getAllRequestAccess);
 
+router.route("/changeRefundStatus/:id").put(requestsController.changeRefundStatus);
 router.route("/changeReportStatus/:id").put(requestsController.changeReportStatus);
+router.route("/changeAccessRequestStatus/:id").put(requestsController.changeAccessRequestStatus);
 
 module.exports = router;

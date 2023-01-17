@@ -1,103 +1,207 @@
-import React, { useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import axios from 'axios';
-import CourseCard from "../general/assests/courseCard";
-import { xml } from "d3";
-  
+import NavBarAdmin from "../general/assests/navBarAdmin"
+import Footer from "../general/assests/footer";
+import { Button, ButtonGroup, Divider } from "@mui/material";
+import "../styling/adminPage.css";
+import "../styling/viewRating.css";
+import "../styling/guestHomePage.css";
+import { Box } from "@mui/system";
+
 
 
 const AdminHomePage = () => {   
-    const [refundRequests , setRefundRequests] = useState({username:null , coursename:null, courseprice:null});
-    const [username , setUserName] = useState(null);
+//    const [refundRequests , setRefundRequests] = useState({requestId: null, username:null , coursename:null, courseprice:null, status : null});
+    const [refundRequests , setRefundRequests] = useState(null);
+    const [reports , setReports] = useState(null);
+    const [requestAccess , setRequestAccess] = useState(null);
 
+    const [dataChanged , setDataChanged] = useState(false)
     let user = [];
     let course = [];
-    let price = [];
-    let sum =[];
-    let [requests,setRequests]=useState([]); 
 
-    let trial = [];
 
     useEffect(() => {
         //For  Refunds
-            const allreqs = axios.get("/requests/getAllRefundRequest")
+            axios.get("/requests/getAllRefundRequest")
             .then((res)=>
-            {   console.log(res.data);
-                for(let i=0 ; i<res.data.length ; i++){
-                    const reviewId = res.data[i]._id;
-                    const traineeId = res.data[i].trainee;
-                    const courseId = res.data[i].course;
-                    //console.log(reviewId);
-                    axios.get("/trainee/getIndividualTrainee/" + traineeId)
-                    .then((result)=>{
-                        user.push(result.data.username);
-                        //console.log(i);
-                        //console.log(user);
-                    })
-                // console.log(user);
-                }
-                // setRequests(res.data);
-            })
+            { 
+              setRefundRequests(res.data);
+            });
 
         //For Reports
+            axios.get("/requests/getAllReport")
+            .then((res)=>
+            {
+              setReports(res.data);
+            });
 
         //For Access Requests
+            axios.get("/requests/getAllRequestAccess")
+            .then((res)=>
+            {
+              setRequestAccess(res.data);
+            });
         
-      } , []);
+      } , [dataChanged]);
 
-    /* useEffect(() => {
 
-        for(const reqs of requests){
-            const reviewId = reqs.id;
-            const traineeId = reqs.trainee;
-            const courseId = reqs.course;
-            axios.get("/trainee/getIndividualTrainee/" + traineeId)
-            .then((res)=>{
-                user.push(res.data.username);
-            })
-            
+    const handleRefundsButton = (requestedId , answer) =>{
+      if(answer){
+        axios.put("/requests/changeRefundStatus/"+requestedId , {status:"accepted"});
+        setDataChanged(!dataChanged);
+      }
+      else{
 
+        axios.put("/requests/changeRefundStatus/"+requestedId , {status:"rejected"});
+        setDataChanged(!dataChanged);
+      }
+      };
+
+      const handleReportsButton = (reportId , answer) => {
+        if(answer){
+          axios.put("/requests/changeReportStatus/"+reportId , {status:"Resolved"});
+          setDataChanged(!dataChanged);
         }
-         console.log(user); */
+        else{
+          axios.put("/requests/changeReportStatus/"+reportId , {status:"Seen"});
+          setDataChanged(!dataChanged);
+        }
+      };
 
-        // requests.forEach(async (request)=>{
-        //     await axios.get("/trainee/getIndividualTrainee/" + request.trainee)
-        //     .then((res)=>{
-        //         user.push(res.data.username);
-        //     })
-        //     await axios.get("/course/getCourse?courseId=" + request.course)
-        //     .then((res)=>{
-        //         course.push(res.data.courseTitle);
-        //         price.push(res.data.price);
-        //     })
-        // })
-         //console.log(user);
-        // console.log(cour);
-        //setRefundRequests({username:user,coursename:course,courseprice:price});
-       //console.log(requests);
-          /////////////  //  } , [requests]);
+      const handleAccessRequestsButton = (AccessRequestId , answer) => {
+        if(answer){
+          axios.put("/requests/changeAccessRequestStatus/"+ AccessRequestId , {status:"accepted"});
+          setDataChanged(!dataChanged);
+        }
+        else{
+          axios.put("/requests/changeAccessRequestStatus/"+ AccessRequestId , {status:"rejected"});
+          setDataChanged(!dataChanged);
+        }
+      };
 
-
-    // const getTrainee =  async (traineeID) => {
-    //         await axios.get("/trainee/getIndividualTrainee/" + traineeID).then((res) =>{
-    //         // return res.data.username;   
-    //         //console.log(res.data.username);             
-    //         return res.data.username;
-    //     })
-    //     };
-
-
-        //, getTrainee("63665a860a6c1686a07f7e28")
-            
     return(      
-        <div className="relative flex items-center">
-       {/* <button onClick={() => {console.log(refundRequests, getTrainee("63665a860a6c1686a07f7e28") )}}></button> */}
-            {/* {requests?.map((reqs) => {
-                return(
-                    // <li key={reqs.id}>{console.log(getTrainee(reqs.trainee))}</li>
-                    <li key={reqs.id}>{reqs}</li>
-                );
-            })} */}
-        </div>     
+            <Fragment>
+
+            <NavBarAdmin className="navBar"></NavBarAdmin>
+              <div className="content">
+
+                {/* START OF REFUNDS SECTION */}
+                <div className="itemTitle" >
+                    <h1>Refund Requests</h1>
+                    <Fragment>
+                      <Divider />
+                      { refundRequests && refundRequests.map((items) => {
+                            return(
+                              <div className="singleRefundRequest" key={items.requestID}>
+                              <Box sx={{ bgcolor: '#eeeeee', boxShadow: 1, borderRadius: 2, p: 2}}>
+                                <h3 className="ratingP">User: {items.username}</h3>
+                                <Divider/>
+                                <div className="ratingReviewBody">
+                                  <h4>Course: {items.coursename}</h4>
+                                </div>
+                                <h4 className="ratingP">Price: {items.price}</h4>
+                                <div>
+                               <p> <ButtonGroup disableElevation variant="contained" aria-label="Disabled elevation buttons" sx={{mx : 55}}>
+                               <Button sx={{bgcolor: '#00ee00' }} onClick={() => handleRefundsButton(items.requestID , true)}>Accept</Button>
+                                <Button sx={{bgcolor: '#ee0000' }} onClick={() => handleRefundsButton(items.requestID , false)}>Reject</Button>
+
+                              </ButtonGroup></p>
+                              </div>
+                              <Divider/>
+                              <Divider/>
+                              <Divider/>
+                              <Divider/>
+                              <Divider/>
+                              <Divider/>
+                              </Box>
+                            </div>
+                            
+                          );
+
+                        })}
+                    </Fragment>
+                    </div> 
+
+                    {/* START OF REPORTS SECTION */}
+                  <div className="itemTitle" >
+                    <h1>Reports</h1>
+                    <Fragment>
+                      <Divider />
+                      { reports && reports.map((items) => {
+                            return(
+                              <div className="singleRefundRequest" key={items.reportId}>
+                              <Box sx={{ bgcolor: '#eeeeee', boxShadow: 1, borderRadius: 2, p: 2}}>
+                                <h3 className="ratingP">Report Type: {items.reportType  }</h3>
+                                <Divider/>
+                                <div className="ratingReviewBody">
+                                  <h4>Problem: {items.problem}</h4>
+                                </div>
+                                <h4 className="ratingP">Client's Username: {items.username}</h4>
+                                <h4 className="ratingP">Client is an: {items.userType}</h4>
+                                <div>
+                               <p> <ButtonGroup disableElevation variant="contained" aria-label="Disabled elevation buttons" sx={{mx : 55}}>
+                               <h4 className="ratingP">Status:{items.status}</h4>  
+                               <Button sx={{bgcolor: '#00ee00' }} onClick={() => handleReportsButton(items.reportId , false)}>Seen</Button>
+                                <Button sx={{bgcolor: '#ee0000' }} onClick={() => handleReportsButton(items.reportId , true)}>Resolved</Button>
+
+                              </ButtonGroup></p>
+                              </div>
+                              <Divider/>
+                              <Divider/>
+                              <Divider/>
+                              <Divider/>
+                              <Divider/>
+                              <Divider/>
+                              </Box>
+                            </div>
+                            
+                          );
+
+                        })}
+                    </Fragment>
+                    </div> 
+
+                    {/* START OF ACCESS REQUESTS SECTION */}
+                  <div className="itemTitle" >
+                    <h1>Access Requests</h1>
+                    <Fragment>
+                      <Divider />
+                      { requestAccess && requestAccess.map((items) => {
+                            return(
+                              <div className="singleRefundRequest" key={items.accRequestID}>
+                              <Box sx={{ bgcolor: '#eeeeee', boxShadow: 1, borderRadius: 2, p: 2}}>
+                                <h3 className="ratingP">Username requesting access: {items.username}</h3>
+                                <Divider/>
+                                <div className="ratingReviewBody">
+                                  <h4>Course: {items.coursename}</h4>
+                                </div>
+                                <h4 className="ratingP">User's corporate: {items.corporate}</h4>
+                                <div>
+                               <p> <ButtonGroup disableElevation variant="contained" aria-label="Disabled elevation buttons" sx={{mx : 55}}>
+                               <Button sx={{bgcolor: '#00ee00' }} onClick={() => handleAccessRequestsButton(items.accRequestID , true)}>Accept</Button>
+                                <Button sx={{bgcolor: '#ee0000' }} onClick={() => handleAccessRequestsButton(items.accRequestID , false)}>Reject</Button>
+                              </ButtonGroup></p>
+                              </div>
+                              <Divider/>
+                              <Divider/>
+                              <Divider/>
+                              <Divider/>
+                              <Divider/>
+                              <Divider/>
+                              </Box>
+                            </div>
+                            
+                          );
+
+                        })}
+                    </Fragment>
+                  </div> 
+
+            <Footer></Footer>
+          </div>
+        </Fragment> 
+
     );
 }
 export default AdminHomePage;

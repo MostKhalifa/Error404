@@ -12,7 +12,7 @@ import GuestHomePage from "./guestViews/guestHomePage";
 import CourseOverView from "./general/assests/courseOverView";
 import NavBarTrainee from "./general/assests/navBarTrainee";
 import NavBarInstructor from "./general/assests/navBarInstructor";
-//import CourseOverView from "./guestViews/courseOverView";
+////import CourseOverView from "./guestViews/courseOverView";
 import Profile from "./instructorViews/profile"
 import IndvidualTraineeProfile from "./traineeViews/indvidualTraineeProfile";
 import CorporateTraineeProfile from "./traineeViews/corporateTraineeProfile";
@@ -20,6 +20,10 @@ import AdminHomePage from "./adminViews/homeAdmin";
 import RequestARefund from "./traineeViews/RequestARefund";
 import ReportAProblem from "./general/ReportAProblem";
 import ViewMyReports from "./general/ViewMyReports";
+import Footer from "./general/assests/footer";
+import AddCorporateTrainee from "./adminViews/addCorporateTrainee";
+import AddInstructor from "./adminViews/addInstructor";
+import AddAdmin from "./adminViews/addAdmin";
 import TraineeFirstPage from "./traineeViews/traineeFirstPage";
 import ITPayment from "./traineeViews/iTPayment";
 function App() {
@@ -54,6 +58,10 @@ function App() {
               <Route  path="/viewCourse" element={<SignUp/>} />
 
               <Route path="/homePageAdmin" element={<AdminHomePage/>}/>
+              <Route path="/addCorporateTrainee" element={<AddCorporateTrainee/>}/>
+              <Route path="/addInstructor" element={<AddInstructor/>}/>
+              <Route path="/addAdmin" element={<AddAdmin/>}/>
+
               <Route path="/MakeRefundRequest" element={<RequestARefund/>}/>
               <Route path="/ReportAProblem" element={<ReportAProblem/>}/>
               <Route path="/MyReports" element={<ViewMyReports/>}/>
@@ -67,9 +75,12 @@ function App() {
               <Route path="/viewCourse" element={<CourseOverView />} />
               <Route path="/Payment" element={<ITPayment />} />
             </Routes>
+
           </div>
         </Router>
+        
       }
+
     </div>
   );
 }
