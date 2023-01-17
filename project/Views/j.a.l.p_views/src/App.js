@@ -21,12 +21,18 @@ import RequestARefund from "./traineeViews/RequestARefund";
 import ReportAProblem from "./general/ReportAProblem";
 import ViewMyReports from "./general/ViewMyReports";
 import Footer from "./general/assests/footer";
+import SearchResultsPage from "./general/searchResults";
+import FilterResultsPagePrice from "./general/filterResultsPagePrice";
+import FilterResultsPagesubRate from "./general/filterResultsPagesubRate";
+import Search2 from "./general/search2";
+import Search3 from "./general/search3";
 import AddCorporateTrainee from "./adminViews/addCorporateTrainee";
 import AddInstructor from "./adminViews/addInstructor";
 import AddAdmin from "./adminViews/addAdmin";
 import TraineeFirstPage from "./traineeViews/traineeFirstPage";
 import ITPayment from "./traineeViews/iTPayment";
 import MakeDiscounts from "./adminViews/makeDiscounts";
+
 function App() {
   return (
     <div className="App">
@@ -76,6 +82,12 @@ function App() {
               <Route path="/IT" element={<TraineeFirstPage />} />
               <Route path="/viewCourse" element={<CourseOverView />} />
               <Route path="/Payment" element={<ITPayment />} />
+              <Route path="/Payment" element={<ITPayment />} />
+              <Route path="/searchResults" element={<SearchResultsPage />} />
+              <Route path="/filterResultsPrice" element={<FilterResultsPagePrice />} />
+               <Route path="/filterResultssubrate" element={<FilterResultsPagesubRate />} />
+               <Route path="/search2" element={<Search2 />} />
+               <Route path="/search3" element={<Search3 />} />
             </Routes>
 
           </div>
