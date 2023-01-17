@@ -145,7 +145,6 @@ exports.getAllReport = asyncHandler(async (req, res) => {
 exports.getAllRequestAccess = asyncHandler(async (req, res) => {
   const reqAcc = await RequestAccess.find();
   let theItemIWishIHave=[];
-  console.log(reqAcc);
   for(let i = 0; i<reqAcc.length; i++){
     if(reqAcc[i].status == "pending"){
       theItemIWishIHave.push({

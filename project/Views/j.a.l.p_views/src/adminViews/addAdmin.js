@@ -3,8 +3,6 @@ import "../styling/loginPage.css";
 import { Button, TextField,MenuItem,InputAdornment,IconButton} from "@mui/material";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import countries from "i18n-iso-countries";
-import enLocale from "i18n-iso-countries/langs/en.json";
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import NavBarAdmin from "../general/assests/navBarAdmin"
@@ -45,7 +43,7 @@ function AddAdmin() {
             return;    
         }
         if(!username.username){
-            setUsername({username:username.username,ava:true,errMsg:"please provide the new admin's userName"})
+            setUsername({username:username.username,ava:true,errMsg:"please provide the new admin's user name"})
             return;
         }
         else{
@@ -78,8 +76,8 @@ function AddAdmin() {
     return (
         <Fragment>
             <NavBarAdmin className="navBar"></NavBarAdmin>
-            <Fragment>
-            <div className="loginPrompt">
+
+            <div className="content">
                 <h1 style={{marginBottom:"20px"}}>Add Admin</h1>
                 <TextField variant="outlined" label="User Name*" sx={{marginBottom :"20px" ,width:"90%", input: { color: '#f4976c' }}} error={username.ava} helperText={username.errMsg} onChange={(change) => {setUsername({username:change.target.value,ava:false,errMsg:""})}}></TextField>
                 <br/>
@@ -92,9 +90,8 @@ function AddAdmin() {
                 <Button variant="contained" sx={{minWidth:"50%" ,marginBottom:"20px"}}onClick={handleClick} >Create Admin</Button> 
                 <br/>
                 <Button variant="outlined" sx={{minWidth:"50%" ,marginBottom:"20px"}} onClick={()=>{navigate("/homePageAdmin")}} >Cancel</Button> 
+              <Footer/>
             </div>
-            <Footer></Footer>
-            </Fragment>
         </Fragment>
     );
     } 

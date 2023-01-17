@@ -4,7 +4,7 @@ import NavBarAdmin from "../general/assests/navBarAdmin"
 import Footer from "../general/assests/footer";
 import { Button, ButtonGroup, Divider } from "@mui/material";
 import "../styling/adminPage.css";
-import "../styling/viewRating.css"
+import "../styling/viewRating.css";
 import "../styling/guestHomePage.css";
 import { Box } from "@mui/system";
 

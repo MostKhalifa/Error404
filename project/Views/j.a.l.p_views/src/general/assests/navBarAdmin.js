@@ -100,7 +100,7 @@ export default function NavBarInstructor() {
         setAnchorEl(null);
     };
     const destroy = () => {
-
+      window.location.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
     };
 
      

@@ -9,6 +9,8 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import NavBarAdmin from "../general/assests/navBarAdmin"
 import Footer from "../general/assests/footer";
+import "../styling/adminPage.css";
+import "../styling/guestHomePage.css";
 
 
 function AddInstructor() {
@@ -117,8 +119,7 @@ function AddInstructor() {
     return (
         <Fragment>
             <NavBarAdmin className="navBar"></NavBarAdmin>
-            <div>
-            <div className="loginPrompt">
+            <div className="content" >
                 <h1 style={{marginBottom:"20px"}}>Add Instructor</h1>
                 <TextField variant="outlined" label="First Name*" sx={{marginBottom :"20px",width:"42.5%",marginRight:"2.5%", input: { color: '#f4976c' }}} error={firstName.ava} helperText={firstName.errMsg} onChange={(change) => {setFirstName({firstName:change.target.value,ava:false,errMsg:""})}}></TextField>
                 <TextField variant="outlined" label="Last Name*" sx={{marginBottom :"20px",width:"42.5%",marginLeft:"2.5%", input: { color: '#f4976c' }}} error={lastName.ava} helperText={lastName.errMsg} onChange={(change) => {setLastName({lastName:change.target.value,ava:false,errMsg:""})}}></TextField>
@@ -137,8 +138,7 @@ function AddInstructor() {
                 <Button variant="contained" sx={{minWidth:"50%" ,marginBottom:"20px"}}onClick={handleClick} >Create Instructor</Button> 
                 <br/>
                 <Button variant="outlined" sx={{minWidth:"50%" ,marginBottom:"20px"}} onClick={()=>{navigate("/homePageAdmin")}} >Cancel</Button> 
-            </div>
-            <Footer></Footer>
+              <Footer/>
             </div>
         </Fragment>
     );
