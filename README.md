@@ -18,6 +18,7 @@ This is a learning experience and our first step into a bigger scale project whe
 
 <h1>Build Status</h1>
 As nearly all websites, this website is still incomplete and has bugs. It is still in it's early stages and missing items such as:
+TBH idk hnshoof fl evaluation 	:upside_down_face:
 
 
 
