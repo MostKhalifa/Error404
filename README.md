@@ -70,8 +70,13 @@ Check on reports and mark as seen or resolved
 <h1>Code Examples</h1>
 
 <h1>Installations</h1>
+in cd project --> npm install
+to run backend: in a terminal cd project --> node server
+to run frontend: into a new terminal cd into j.a.l.pViews --> npm start
+
 <h1>API reference</h1>
 <h1>Tests</h1>
+APIs and backend methods have been tested using Postman
 <h1>How to Use?</h1>
 <h1>Contribute</h1>
 <h1>License</h1>
