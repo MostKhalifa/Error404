@@ -22,6 +22,11 @@ import ReportAProblem from "./general/ReportAProblem";
 import ViewMyReports from "./general/ViewMyReports";
 import TraineeFirstPage from "./traineeViews/traineeFirstPage";
 import ITPayment from "./traineeViews/iTPayment";
+import SearchResultsPage from "./general/searchResults";
+import FilterResultsPagePrice from "./general/filterResultsPagePrice";
+import FilterResultsPagesubRate from "./general/filterResultsPagesubRate";
+import Search2 from "./general/search2";
+import Search3 from "./general/search3";
 function App() {
   return (
     <div className="App">
@@ -52,13 +57,11 @@ function App() {
               <Route  path="/" element={<GuestHomePage />} />
               <Route  path="/viewCourse" element={<SignUp/>} />
               <Route  path="/viewCourse" element={<SignUp/>} />
-
               <Route path="/homePageAdmin" element={<AdminHomePage/>}/>
               <Route path="/MakeRefundRequest" element={<RequestARefund/>}/>
               <Route path="/ReportAProblem" element={<ReportAProblem/>}/>
               <Route path="/MyReports" element={<ViewMyReports/>}/>
               <Route path="/InstructorProfile" element={<Profile />} />
-
               <Route path="/ItraineeProfile" element={<IndvidualTraineeProfile />} />
               <Route path="/CtraineeProfile" element={<CorporateTraineeProfile />} />
               <Route path="/navbarinstructor" element={<NavBarInstructor />} />
@@ -66,6 +69,11 @@ function App() {
               <Route path="/IT" element={<TraineeFirstPage />} />
               <Route path="/viewCourse" element={<CourseOverView />} />
               <Route path="/Payment" element={<ITPayment />} />
+              <Route path="/searchResults" element={<SearchResultsPage />} />
+              <Route path="/filterResultsPrice" element={<FilterResultsPagePrice />} />
+               <Route path="/filterResultssubrate" element={<FilterResultsPagesubRate />} />
+               <Route path="/search2" element={<Search2 />} />
+               <Route path="/search3" element={<Search3 />} />
             </Routes>
           </div>
         </Router>

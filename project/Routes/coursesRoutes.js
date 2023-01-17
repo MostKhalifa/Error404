@@ -22,9 +22,11 @@ router.route("/discountCourses").get(getDiscountCourses);
 router.route("/getCourseReviews").get(getCourseReviews);
 router.route("/getCourses").get(getCourses);
 router.route("/getCoursePrice/:id").get(viewCoursePrice);
-router.route("/filterCourseSubjectRating").get(filterCourseSubjectRating);
-router.route("/filterCoursePrice").get(filterCoursePrice);
-router.route("/searchForCourse").get(searchForCourse);
+
+router.route("/filterCourseSubjectRating").post(filterCourseSubjectRating);
+router.route("/filterCoursePrice").post(filterCoursePrice);
+
+router.route("/searchForCourse").post(searchForCourse);
 router.route("/rateaCourse/:id").put(rateaCourse);
 router.route("/updateCourseDescription/:id").patch(updateCourseDescription);
 router.route("/getCoursesChapter/:id").get(getCourseChapter);

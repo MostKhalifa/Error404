@@ -80,78 +80,75 @@ const viewCoursePrice = asyncHandler(async (req, res) => {
 
 //filter course by subject and/or rating
 const filterCourseSubjectRating = asyncHandler(async (req, res) => {
-  const { courseSubject } = req.body;
-  const { rating } = req.body;
+  const { courseSubject } = req.query;
+  const { rating } = req.query;
   if (!courseSubject) {
     if (!rating) {
-      const course = await Courses.find({}).select(
-        "courseTitle courseSubject chapters price discount"
-      );
-      res.send(course);
+      let courses = [];
+    (await Courses.find({},{_id:1})).forEach((id)=>{courses.push(id._id);})
+    res.send(courses);
     } else {
-      const course = await Courses.find({ "reviews.rating": rating }).select(
-        "courseTitle courseSubject chapters price discount"
-      );
-      res.send(course);
+      let courses = [];
+    (await Courses.find({"reviews.rating": rating},{_id:1})).forEach((id)=>{courses.push(id._id);})
+    res.send(courses);
     }
   } else {
     if (!rating) {
-      const course = await Courses.find({
-        courseSubject: courseSubject,
-      }).select("courseTitle courseSubject chapters price discount");
-      res.send(course);
+      let courses = [];
+    (await Courses.find({ courseSubject: courseSubject},{_id:1})).forEach((id)=>{courses.push(id._id);})
+    res.send(courses);
     } else {
-      const course = await Courses.find(
-        { courseSubject: courseSubject },
-        { "reviews.rating": rating }
-      ).select("courseTitle courseSubject chapters price discount");
-      res.send(course);
+      let courses = [];
+      (await Courses.find({ courseSubject: courseSubject },{ "reviews.rating": rating },{_id:1})).forEach((id)=>{courses.push(id._id);})
+      res.send(courses);
     }
   }
   res.status(400).json({ error: error.message });
 });
 
 const filterCoursePrice = asyncHandler(async (req, res) => {
-  const { priceTo, priceFrom } = req.body;
+  const { priceTo, priceFrom } = req.query;
   if (!priceFrom && !priceTo) {
-    const course = await Courses.find({}).select("courseTitle price");
-    res.send(course);
+    let courses = [];
+    (await Courses.find({},{_id:1})).forEach((id)=>{courses.push(id._id);})
+    res.send(courses);
   }
   if (!priceFrom || !priceTo) {
     res.status(404).send("you didnt enter both fields");
   } else {
-    const course = await Courses.find({
-      $and: [{ price: { $lte: priceTo } }, { price: { $gte: priceFrom } }],
-    }).select("courseTitle price");
-    res.status(200).json(course);
+
+    let courses = [];
+    (await Courses.find({$and: [{ price: { $lte: priceTo } }, { price: { $gte: priceFrom } }],},{_id:1})).forEach((id)=>{courses.push(id._id);})
+    res.send(courses);
   }
 });
 
 //filter course by subject and/or rating
 const searchForCourse = asyncHandler(async (req, res) => {
-  const { courseTitle, courseSubject, instructorName } = req.body;
+  const { courseTitle, courseSubject, instructorName } = req.query;
 
   if (!courseSubject) {
     if (!courseTitle) {
       if (!instructorName) {
         res.status(404).send("you didnt enter fields");
-
-        console.log(courseTitle);
       } else {
-        const course = await Courses.find({
-          "instructor.instructorName": instructorName,
-        });
-        res.send(course);
+        let courses = [];
+        (await Courses.find({"instructor.instructorName": instructorName},{_id:1})).forEach((id)=>{courses.push(id._id);})
+        res.send(courses);
       }
     } else {
-      const course = await Courses.find({ courseTitle: courseTitle });
-      res.send(course);
+      let courses = [];
+      (await Courses.find({ courseTitle: courseTitle },{_id:1})).forEach((id)=>{courses.push(id._id);})
+      res.send(courses);
     }
   } else {
-    const course = await Courses.find({ courseSubject: courseSubject });
-    res.send(course);
+    let courses = [];
+    (await Courses.find({ courseSubject: courseSubject },{_id:1})).forEach((id)=>{courses.push(id._id);})
+    res.send(courses);
   }
+  res.status(404).send("no answers");
 });
+
 
 
 

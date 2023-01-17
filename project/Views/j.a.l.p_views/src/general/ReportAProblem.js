@@ -5,10 +5,6 @@ import { Alert, Button, Collapse, IconButton, TextField} from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
 import { useNavigate } from "react-router";
 import { set } from "mongoose";
-
-  
-
-
 const ReportAProblem = () => {   
   //{client , clientType} put in bracket of reportaproblem above
     const[showAlert, setShowAlert] = useState(false);
@@ -17,9 +13,6 @@ const ReportAProblem = () => {
     const[problemType , setProblemType] = useState({problemType:null,ava:false,errMsg:""});
     const[client , setClient] = useState();
     const[clientType , setClientType] = useState();
-
-
-
     const handleClick = () => {
         if(!problem.problem){
             setProblem({problem:problem.problem,ava:true,errMsg:"please write your problem here"});
