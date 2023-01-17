@@ -90,7 +90,6 @@ exports.getClientReport = asyncHandler(async(req,res) => {
     res.send("You Do Not Have Any Reports");
     return;
   }
-
   res.send(yourReports);
 })
 
@@ -102,6 +101,7 @@ exports.getAllRefundRequest = asyncHandler(async (req, res) => {
       if(refReq[i].status == "pending"){
         theItemIWishIHave.push({
           requestID : refReq[i]._id,
+          userID : refReq[i].trainee,
           username: (await IndividualTrainee.findById(refReq[i].trainee)).username,
           coursename: (await Courses.findById(refReq[i].course)).courseTitle,
           price: (await Courses.findById(refReq[i].course)).price,
@@ -160,11 +160,16 @@ exports.getAllRequestAccess = asyncHandler(async (req, res) => {
   });
 
 
-exports.changeRefundStatus = asyncHandler(async (req, res) => {
-    
+exports.changeRefundStatus = asyncHandler(async (req, res) => {  
     await refundRequests.findByIdAndUpdate(req.params.id, {
         status: req.body.status,
       });
+      if(req.body.status == 'accepted'){
+        let adding= req.body.refundedAmount;
+        let getWallet = (await IndividualTrainee.findById(req.body.userId)).wallet;
+        adding += getWallet;
+        await IndividualTrainee.findByIdAndUpdate(req.body.userId , {wallet: adding,})
+      };
     res.send("Status Updated");
 });
 
