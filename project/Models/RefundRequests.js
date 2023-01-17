@@ -16,6 +16,12 @@ const RefundRequestsSchema = new Schema(
         required: true,
         ref: Courses,
       },
+    status:{
+      type: String,
+      required: true,
+      enum: ["pending", "rejected", "accepted"],
+      default: "pending",
+    }
      
   },
   { timestamps: true }

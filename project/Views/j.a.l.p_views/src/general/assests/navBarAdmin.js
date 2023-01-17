@@ -88,10 +88,12 @@ export default function NavBarInstructor() {
 
     const handleAddInstMenuClose = () => {
         setAnchorEl(null);
+        navigate("/addInstructor")
     };
 
     const handleAddAdminMenuClose = () => {
         setAnchorEl(null);
+        navigate("/addAdmin")
     };
 
     const handleMenuClose = () => {

@@ -1,7 +1,12 @@
 const asyncHandler = require("express-async-handler");
 const mongoose = require("mongoose");
+const CorporateTrainee = require("../Models/CorporateTrainee");
+const Courses = require("../Models/Courses");
+const IndividualTrainee = require("../Models/IndividualTrainee");
+const Instructor = require("../Models/InstructorSchema");
 const refundRequests = require("../Models/RefundRequests");
 const reports = require("../Models/reports");
+const RequestAccess = require("../Models/RequestAccess");
 const requestAccess = require("../Models/RequestAccess");
 
 exports.createRefundRequest = asyncHandler(async (req, res) => {
@@ -92,18 +97,77 @@ exports.getClientReport = asyncHandler(async(req,res) => {
 
 exports.getAllRefundRequest = asyncHandler(async (req, res) => {
     const refReq = await refundRequests.find();
-    res.send(refReq);
+    let theItemIWishIHave=[];
+    for(let i = 0; i<refReq.length; i++){
+      if(refReq[i].status == "pending"){
+        theItemIWishIHave.push({
+          requestID : refReq[i]._id,
+          username: (await IndividualTrainee.findById(refReq[i].trainee)).username,
+          coursename: (await Courses.findById(refReq[i].course)).courseTitle,
+          price: (await Courses.findById(refReq[i].course)).price,
+          status: refReq[i].status
+        });
+      };
+    }
+    res.send(theItemIWishIHave);
   });
 
 exports.getAllReport = asyncHandler(async (req, res) => {
     const reported = await reports.find();
-    res.send(reported);
+    let theItemIWishIHave=[];
+    let theUserWhoDoesNotLikeSomething = "";
+    for(let i = 0; i<reported.length; i++){
+      if(reported[i].status != "Resolved"){
+
+        if(reported[i].clientType == "Instructor"){
+          theUserWhoDoesNotLikeSomething = (await Instructor.findById(reported[i].client)).username;
+        }
+        else if(reported[i].clientType == "IndividualTrainee"){
+          theUserWhoDoesNotLikeSomething = (await IndividualTrainee.findById(reported[i].client)).username;
+        }
+        else if(reported[i].clientType == "CorporateTrainee"){
+          theUserWhoDoesNotLikeSomething = (await CorporateTrainee.findById(reported[i].client)).username;
+        }
+
+        theItemIWishIHave.push({
+          reportId : reported[i]._id,
+          problem :  reported[i].problem,
+          username: theUserWhoDoesNotLikeSomething,
+          userType: reported[i].clientType,
+          reportType: reported[i].reportType,
+          status: reported[i].status
+        });
+      };
+    }
+    res.send(theItemIWishIHave);
   });
 
 exports.getAllRequestAccess = asyncHandler(async (req, res) => {
-    const reqAcc = await requestAccess.find();
-    res.send(reqAcc);
+  const reqAcc = await RequestAccess.find();
+  let theItemIWishIHave=[];
+  console.log(reqAcc);
+  for(let i = 0; i<reqAcc.length; i++){
+    if(reqAcc[i].status == "pending"){
+      theItemIWishIHave.push({
+        accRequestID : reqAcc[i]._id,
+        username: (await CorporateTrainee.findById(reqAcc[i].trainee)).username,
+        corporate: (await CorporateTrainee.findById(reqAcc[i].trainee)).corporate,
+        coursename: (await Courses.findById(reqAcc[i].course)).courseTitle,
+        status: reqAcc[i].status
+      });
+    };
+  }
+  res.send(theItemIWishIHave);
   });
+
+
+exports.changeRefundStatus = asyncHandler(async (req, res) => {
+    
+    await refundRequests.findByIdAndUpdate(req.params.id, {
+        status: req.body.status,
+      });
+    res.send("Status Updated");
+});
 
 
 exports.changeReportStatus = asyncHandler(async (req, res) => {
@@ -113,6 +177,15 @@ exports.changeReportStatus = asyncHandler(async (req, res) => {
       });
     res.send("Status Updated");
 });
+
+exports.changeAccessRequestStatus = asyncHandler(async (req, res) => {
+    
+  await RequestAccess.findByIdAndUpdate(req.params.id, {
+      status: req.body.status,
+    });
+  res.send("Status Updated");
+});
+
 
 
 

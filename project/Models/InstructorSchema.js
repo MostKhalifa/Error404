@@ -14,7 +14,6 @@ const InstructorSchema = new Schema(
     },
     biography: {
       type: String,
-      required: true,
     },
     lastName: {
       type: String,
