@@ -34,12 +34,38 @@ JavaScript as language used to develop the frontend and backend
 Material-UI to enhance the user interface with styling components like buttons and text fields
 
 <h1>Features</h1>
-Guests with  no account
-can view popular and/or discounted courses
+
+Guests with  no account can:
+view popular and/or discounted courses
 
 Individual Trainee:
 can sign up and login right away
 can view popular and/or discounted courses
+Send refund requests to courses they did not complete over 50% of
+Edit their password and email
+
+Corporate Trainees:
+Account is made by an admin
+Has access to courses that their corporate gave accesss for them
+Send requests for courses to an admin to accept or reject
+Edit their password and email
+
+Instructor:
+Make an account and admin creates their account
+Create courses 
+Specify their price and make discounts
+Report issues
+Edit their password and email
+
+Admin:
+Create corporate trainee
+Create new admins
+Create Instructor
+Make discounts on courses
+Accept/Reject refund requests
+Accept/Reject course access requests
+Check on reports and mark as seen or resolved
+
   
 <h1>Code Examples</h1>
 
@@ -48,7 +74,6 @@ can view popular and/or discounted courses
 <h1>Tests</h1>
 <h1>How to Use?</h1>
 <h1>Contribute</h1>
-<h1>Credits</h1>
 <h1>License</h1>
 
 
