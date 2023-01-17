@@ -265,6 +265,63 @@ const getTraineeCourses = asyncHandler(async (req,res) => {
   res.send(arrayCourses);
 })
 
+
+//trigger indvidual trainee viewed course + update change progress
+const ViewedForIndividualTrainee = asyncHandler(async (req, res) => {
+  const trainee = await IndividualTrainee.findById(req.params.id);
+  const courseId = req.query.id2
+  if (!trainee) {
+    res.status(400);
+  }
+  const {chapterTitle} = req.body;
+  const newCourses = []
+  for (let i = 0; i < trainee.courses.length; i++) {
+    newCourses[i]=trainee.courses[i]
+    if(trainee.courses[i].CourseID==courseId){
+      const updatedViews =trainee.courses[i].noViewed ;
+      for(let j =0;j<trainee.courses[i].chapters.length;j++){
+        if (trainee.courses[i].chapters[j].chapterTitle == chapterTitle) {
+          if(trainee.courses[i].chapters[j].chapterNumber==(trainee.courses[i].noViewed+1))
+          updatedViews=updatedViews + 1;
+        }
+      }
+      newCourses[i].noViewed=updatedViews;
+      newCourses[i].progress=updatedViews/trainee.courses[i].chapters.length;
+    }
+   
+  }
+  const resa = await trainee.findByIdAndUpdate(
+    req.params.id,
+    { courses: newCourses },
+    {
+      new: true,
+    }
+  );
+
+  if (resa) res.status(200).send("Done");
+  else res.status(400);
+}
+
+);
+
+//get IndvTrainee Enrolled Courses
+const getIndvTrainEnrolledCourses = asyncHandler(async (req, res) => {
+  const trainee = await IndividualTrainee.findById(req.params.id);
+  if (!trainee) {
+    res.status(400);
+  }
+  res.status(200).json(trainee.courses);
+});
+
+//get IndvTrainee Enrolled Courses
+const getCopTrainEnrolledCourses = asyncHandler(async (req, res) => {
+  const trainee = await CorporateTrainee.findById(req.params.id);
+  if (!trainee) {
+    res.status(400);
+  }
+  res.status(200).json(trainee.courses);
+});
+
 module.exports = {
   setIndividualIraineeCountry,
   setCorporateTraineeCountry,
@@ -279,5 +336,7 @@ module.exports = {
   changeCopPassword,
   getIndvidualTrianeeById,
   getCorporateTrianeeById,
-  getTraineeCourses
+  getTraineeCourses,
+  getIndvTrainEnrolledCourses,
+  getCopTrainEnrolledCourses
 };

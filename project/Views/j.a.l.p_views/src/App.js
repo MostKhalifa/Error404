@@ -12,7 +12,7 @@ import GuestHomePage from "./guestViews/guestHomePage";
 import CourseOverView from "./general/assests/courseOverView";
 import NavBarTrainee from "./general/assests/navBarTrainee";
 import NavBarInstructor from "./general/assests/navBarInstructor";
-//import CourseOverView from "./guestViews/courseOverView";
+////import CourseOverView from "./guestViews/courseOverView";
 import Profile from "./instructorViews/profile"
 import IndvidualTraineeProfile from "./traineeViews/indvidualTraineeProfile";
 import CorporateTraineeProfile from "./traineeViews/corporateTraineeProfile";
@@ -24,6 +24,8 @@ import Footer from "./general/assests/footer";
 import AddCorporateTrainee from "./adminViews/addCorporateTrainee";
 import AddInstructor from "./adminViews/addInstructor";
 import AddAdmin from "./adminViews/addAdmin";
+import TraineeFirstPage from "./traineeViews/traineeFirstPage";
+import ITPayment from "./traineeViews/iTPayment";
 function App() {
   return (
     <div className="App">
@@ -69,7 +71,9 @@ function App() {
               <Route path="/CtraineeProfile" element={<CorporateTraineeProfile />} />
               <Route path="/navbarinstructor" element={<NavBarInstructor />} />
               <Route path="/navbartrainee" element={<NavBarTrainee />} />
-
+              <Route path="/IT" element={<TraineeFirstPage />} />
+              <Route path="/viewCourse" element={<CourseOverView />} />
+              <Route path="/Payment" element={<ITPayment />} />
             </Routes>
 
           </div>

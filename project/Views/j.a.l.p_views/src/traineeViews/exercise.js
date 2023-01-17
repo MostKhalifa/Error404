@@ -93,7 +93,6 @@ const Exercises = () => {
 
                         })}
 
-
                     </ul>
 
                     <button onClick ={() => retakeExercise()}> Retake exercise</button>
