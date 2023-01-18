@@ -5,13 +5,14 @@ import { Alert, Button, Collapse, IconButton, TextField} from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
 import { useNavigate } from "react-router";
 import { set } from "mongoose";
-
+import { useParams } from "react-router";
   
 
 
 const ReportAProblem = () => {   
   //{client , clientType} put in bracket of reportaproblem above
     const[showAlert, setShowAlert] = useState(false);
+    const {userId,userType} =useParams();
 
     const[problem , setProblem] = useState({problem:null,ava:false,errMsg:""});
     const[problemType , setProblemType] = useState({problemType:null,ava:false,errMsg:""});
@@ -37,14 +38,11 @@ const ReportAProblem = () => {
             setProblemType({problemType:problemType.problemType,ava:false,errMsg:""});
         }
 
-        //This does not show after a fresh start or a refresh so it will always stop the server
-        setClient("63653e09c81ff58c1c877e6d");
-        setClientType("Instructor");
 
         const looksLikeYouAreGoingToTheShadowRealmJimbo = {
             problem:problem.problem,
-            client:client,
-            clientType:clientType,
+            client:userId,
+            clientType:userType,
             reportType:problemType.problemType,
         }
         console.log(looksLikeYouAreGoingToTheShadowRealmJimbo);

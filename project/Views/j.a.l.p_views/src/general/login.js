@@ -57,7 +57,7 @@ function Login() {
                 {
                     setResMsg(null);
                     setError(false);
-                    axios.post("/",{"email":email,"password":password}).then((res)=>{if(res.data.response){navigate(res.data.route+"/"+res.data.user._id) }else{setResMsg2("incorrect password");setError2(true)}}).catch((res)=>{setResMsg(res.response.data);setError(true)})
+                    axios.post("/",{"email":email,"password":password}).then((res)=>{console.log(res.data);if(res.data.response){navigate(res.data.route+"/"+res.data.user._id) }else{setResMsg2("incorrect password");setError2(true)}}).catch((res)=>{setResMsg(res.response.data);setError(true)})
                 }
             }}
         }

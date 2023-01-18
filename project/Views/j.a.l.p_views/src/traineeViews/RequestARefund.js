@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import axios from 'axios';
 import { Button, MenuItem, TextField } from "@mui/material";
+import { useParams } from 'react-router-dom'
 
 const RequestARefund = () => {   
-    const userId = "639141b618a3b2b6d6a9a10a";
+    const {userId,courseid} =useParams();
+  //  const userId = "639141b618a3b2b6d6a9a10a";
 
     const [courses , setCourses] = useState();
     const [courseChosen , setCourseChosen] = useState({courseChosen:null, ava:false,errMsg:""});

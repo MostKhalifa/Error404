@@ -90,6 +90,10 @@ const CoursesSchema = new Schema(
     ],
     chapters: [
       {
+        chapterNumber: {
+          type: Number,
+          required: true,
+        },
         chapterTitle: {
           type: String,
           required: true,

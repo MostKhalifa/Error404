@@ -5,13 +5,15 @@ import { Alert, Button, Collapse, IconButton, TextField} from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
 import { useNavigate } from "react-router";
 import { set } from "mongoose";
+import { useParams } from "react-router";
 const ViewMyReports = ({userId}) => {   
 
     const[reports , setReports] = useState();
+    const {userid} =useParams();
 
     useEffect(() => {
 
-        axios.get("/requests/myReports/63653e09c81ff58c1c877e6d" /*+ userId*/ ) //"63653e09c81ff58c1c877e6d"
+        axios.get("/requests/myReports/"+userid) //"63653e09c81ff58c1c877e6d"
         .then((res)=>
         {
             setReports(res.data);

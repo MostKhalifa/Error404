@@ -30,7 +30,7 @@ function IndvidualTraineeProfile (){
 
     useEffect(() => {
         axios
-          .get("/trainee/IndvidualTrainee/getById/63665a860a6c1686a07f7e28")
+          .get("/trainee/IndividualTrainee/getById/63665a860a6c1686a07f7e28")
           .then(function (response) {
             console.log(response);
             settraineeInfo(response);
@@ -40,11 +40,11 @@ function IndvidualTraineeProfile (){
 
      function changePassword(){
          console.log("Mlaaaaaaaaaaaaaaaaaaaaaaak");
-         axios.put("/trainee/IndvidualTrainee/changePassword/63665a860a6c1686a07f7e28",{
+         axios.put("/trainee/IndividualTrainee/changePassword/63665a860a6c1686a07f7e28",{
           password:password
          }).then((res)=>{
           axios
-          .get("/trainee/IndvidualTrainee/getById/63665a860a6c1686a07f7e28")
+          .get("/trainee/IndividualTrainee/getById/63665a860a6c1686a07f7e28")
           .then(function (response) {
             console.log(response);
             settraineeInfo(response);

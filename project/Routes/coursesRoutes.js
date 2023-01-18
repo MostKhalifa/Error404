@@ -14,7 +14,9 @@ const {
   getCourseChapter,
   getCourseReviews,
   getDiscountCourses,
-  getPopularCourses
+  getPopularCourses,
+  CoursesNotEnrolled,
+  AddCoursesToTrainee
 } = require("../Controller/coursesController");
 router.route("/getCourse").get(getCourse);
 router.route("/popularCourses").get(getPopularCourses);
@@ -30,4 +32,6 @@ router.route("/updateCourseDescription/:id").patch(updateCourseDescription);
 router.route("/getCoursesChapter/:id").get(getCourseChapter);
 
 router.route("/getCourseDescription/:id").get(getCourseDescription);
+router.route("/notEnrolledCourses/:id").get(CoursesNotEnrolled);
+router.route("/addCourseToTrainee/:id").put(AddCoursesToTrainee);
 module.exports = router;

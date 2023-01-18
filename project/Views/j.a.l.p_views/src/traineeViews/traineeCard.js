@@ -1,9 +1,9 @@
 import { Fragment, useState, useEffect } from "react";
-import "../../styling/courseCard.css";
+import "./../styling/courseCard.css";
 import {Rating,Divider} from "@mui/material";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-function CourseCard({courseId,userType,userId}) {
+function TraineeCard({courseId,userType,userId}) {
     const [course,setCourse]=useState(null);
     const [errMsg,setErrMsg]=useState("");
     const [overAllRating, setOverAllRating] = useState(0);
@@ -25,7 +25,7 @@ function CourseCard({courseId,userType,userId}) {
     },[])
     const handleClick= ()=>{
         console.log(userType);
-            navigate("/"+(userType?userType:"guest")+"/"+userId+"/viewCourse/"+course._id);
+            navigate("/"+(userType?userType:"guest")+"/"+userId+"/traineeCourse/"+course._id);
 
     }
     return (
@@ -50,4 +50,4 @@ function CourseCard({courseId,userType,userId}) {
         </div>
     );
   }
-  export default CourseCard;
+  export default TraineeCard;

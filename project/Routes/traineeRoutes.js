@@ -14,7 +14,8 @@ const {
   changeCopPassword,
   getIndvidualTrianeeById,
   getCorporateTrianeeById,
-  getTraineeCourses
+  getTraineeCourses,
+  ViewedForIndividualTrainee
 } = require("../Controller/traineeController");
 router
   .route("/IndividualTrainee/setCountry/:id")
@@ -30,15 +31,15 @@ router
   .get(getCorporateIraineeCourseInfo);
 router.route("/setI").post(setIndvidualTrainee);
 router.route("/setC").post(setCorperateTrainee);
-router.route("/IndvidualTrainee/changePassword/:id").put(changeIndvPassword);
+router.route("/IndividualTrainee/changePassword/:id").put(changeIndvPassword);
 router.route("/CorpoarateTrainee/changePassword/:id").put(changeCopPassword);
-router.route("/IndvidualTrainee/getById/:id").get(getIndvidualTrianeeById);
+router.route("/IndividualTrainee/getById/:id").get(getIndvidualTrianeeById);
 router.route("/CorpoarateTrainee/getById/:id").get(getCorporateTrianeeById);
-router.route("/IndvidualTrainee/getById/:id").get(getIndvidualTrianeeById);
+router.route("/IndividualTrainee/getById/:id").get(getIndvidualTrianeeById);
 router.route("/CorpoarateTrainee/getById/:id").get(getCorporateTrianeeById);
 router.route("/getIndividualTrainee/:id").get(getIndividualIrainee);
 router.route("/getCorporateTrainee/:id").get(getCorporateIrainee);
 router.route("/getIndividualTraineeCourses/:id").get(getTraineeCourses);
-
+router.route("/changeProgress/:id").put( ViewedForIndividualTrainee);
 
 module.exports = router;

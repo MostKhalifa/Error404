@@ -1,18 +1,20 @@
 import { Fragment, useState, useEffect } from "react";
 import {Button,Rating} from "@mui/material";
 import axios from "axios";
-import "../../styling/courseOverView.css"
-import CourseReviews from "./courseReviews";
-import YoutubeVideo from "./youtubeVideo";
+import "./../styling/courseOverView.css"
+import YoutubeVideo from "../general/assests/youtubeVideo";
 import { useParams } from 'react-router-dom'
 import { useNavigate } from "react-router-dom";
+import jsPDF from 'jspdf';
 
-function CourseOverView() {
+function TraineeCourse() {
     const {courseid,userType,userId} =useParams();
     const [course,setCourse]=useState(null);
     const [errMsg,setErrMsg]=useState("");
     const [overAllRating, setOverAllRating] = useState(0);
-    const[requestHandle,setRequestHandle]= useState(false);
+    const[ir,setIR]=useState(null);
+    const[tr,setTR]=useState(null);
+    const[text,setText]=useState('');
     const navigate = useNavigate();
 
     useEffect(()=>{
@@ -27,29 +29,37 @@ function CourseOverView() {
                 }
              )
         .catch((res)=>{setErrMsg(res.response.data)});   
+        setText("Congratulation for completing the course . TJALP organization")
     },[])
 
     function goToChapter(){
         navigate("/"+userType+"/"+userId+"/chapters/"+course._id);
     }
-    function handleEnroll(){
-           navigate('/Payment/'+userId+'/'+courseid)
+   
+    function handleTR(){
+          axios.put('/course/rateaCourse/'+userId+"?reviewerID="+course._id,
+          {
+            rating:tr,
+            review:"ay haga"
+          })
     }
-    function handleRequest(){
-        setRequestHandle(true);
-        axios.post('/createRequestAccess',{
-            trainee: userId ,
-            course : courseid
-        })
+    function handleIR(){
+        axios.put('/instructor/rateAnInstructor/63653e09c81ff58c1c877e6d'+"?reviewerID="+course._id,
+          {
+            Rating:ir,
+            ReviewBody:"ay haga"
+          })
+    }
+    function print(){
+        const doc = new jsPDF();
+        doc.text(text,10,10);
+        doc.save(text.pdf);
     }
     return (
         
         <Fragment>
             {course&&<Fragment>
-                <div style={{display:"flex",width:"97vw",marginBottom:"1vh"}}><h1 className="courseTitle" >{course.courseTitle}
-                 </h1>{(userType=='IndividualTrainee') && <Button onClick={handleEnroll} style={{marginTop:"5px",marginRight:"10px",width:"20vw"}} variant="contained">Enroll now</Button>}
-                 {(userType=='CorporateTrainee') && <Button onClick={handleRequest} style={{marginTop:"5px",marginRight:"10px",width:"20vw"}} variant="contained">Request Access</Button>}
-                 </div>
+                <div style={{display:"flex",width:"97vw",marginBottom:"1vh"}}><h1 className="courseTitle" >{course.courseTitle} </h1></div>
                 <YoutubeVideo  src={course.courseDescriptionVideo} height={"50"} width={"97"} marginValue ={"1.5"}title={course.courseTitle+" DescriptionVideo"}/>
                 <div className="courseOverView">
                     <div className="courseDescripation">
@@ -68,8 +78,44 @@ function CourseOverView() {
                     </div>
                 </div>
               
-                <CourseReviews courseId={courseid} />
-               
+               <div>
+                <h1>
+                    Instructor Rating 
+                </h1>
+
+                <Rating
+        name="simple-controlled"
+        value={ir}
+        onChange={(event, newValue) => {
+          setIR(newValue);
+        }}
+      />
+     <button onClick={handleIR}> Done</button>
+               </div>
+               <div>
+               <h1>
+                    Course Rating 
+                </h1>
+
+                <Rating
+        name="simple-controlled"
+        value={tr}
+        onChange={(event, newValue) => {
+          setTR(newValue);
+        }}
+      />
+      <button onClick={handleTR}> Done</button>
+               </div>
+                <div>
+                    
+                        <button onClick={goToChapter} style={{marginTop:"5px",marginRight:"10px",width:"20vw"}} variant="contained"> Take my To Course Chapters  </button>
+                    
+                </div>
+                <div>
+                    
+                        <button onClick={print} style={{marginTop:"5px",marginRight:"10px",width:"20vw"}} variant="contained"> print Certificate  </button>
+                    
+                </div>
                 </Fragment>
             }
             {!course&&<h1>{errMsg} </h1>}
@@ -77,4 +123,4 @@ function CourseOverView() {
             
     );
   }
-  export default CourseOverView;
+  export default  TraineeCourse;

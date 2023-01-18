@@ -17,11 +17,14 @@ import Profile from "./instructorViews/profile"
 import IndvidualTraineeProfile from "./traineeViews/indvidualTraineeProfile";
 import CorporateTraineeProfile from "./traineeViews/corporateTraineeProfile";
 import AdminHomePage from "./adminViews/homeAdmin";
-import RequestARefund from "./traineeViews/RequestARefund";
 import ReportAProblem from "./general/ReportAProblem";
 import ViewMyReports from "./general/ViewMyReports";
 import TraineeFirstPage from "./traineeViews/traineeFirstPage";
 import ITPayment from "./traineeViews/iTPayment";
+import MyChapters from "./traineeViews/myChapters";
+import MyChapterInfo from "./traineeViews/myChapterInfo";
+import TraineeCourse from "./traineeViews/traineeCourse";
+import RequestARefund from "./traineeViews/RequestARefund";
 function App() {
   return (
     <div className="App">
@@ -50,24 +53,30 @@ function App() {
               <Route  path="/signup" element={<SignUp/>} />
               <Route path="/login" element={<Login />}></Route>
               <Route  path="/" element={<GuestHomePage />} />
-              <Route  path="/viewCourse" element={<SignUp/>} />
-              <Route  path="/viewCourse" element={<SignUp/>} />
-
               <Route path="/homePageAdmin" element={<AdminHomePage/>}/>
-              <Route path="/MakeRefundRequest" element={<RequestARefund/>}/>
-              <Route path="/ReportAProblem" element={<ReportAProblem/>}/>
-              <Route path="/MyReports" element={<ViewMyReports/>}/>
+              {/* <Route path="/MakeRefundRequest" element={<RequestARefund/>}/> */}
+              {/* <Route path="/ReportAProblem" element={<ReportAProblem/>}/> */}
+              <Route path="/:userType/:userId/reportAProblem/" element={<ReportAProblem/>}/>
+              {/* <Route path="/MyReports" element={<ViewMyReports/>}/> */}
+              <Route path="/MyReports/:userid" element={<ViewMyReports/>}/>
               <Route path="/InstructorProfile" element={<Profile />} />
 
               <Route path="/ItraineeProfile" element={<IndvidualTraineeProfile />} />
               <Route path="/CtraineeProfile" element={<CorporateTraineeProfile />} />
               <Route path="/navbarinstructor" element={<NavBarInstructor />} />
               <Route path="/navbartrainee" element={<NavBarTrainee />} />
-              <Route path="/IT" element={<TraineeFirstPage />} />
+              <Route path="/:userType/:userId/viewCourse/:courseid" element={<CourseOverView/>} />
+              
+              <Route path="/:userType/:traineeId" element={<TraineeFirstPage />} />
               <Route path="/viewCourse" element={<CourseOverView />} />
-              <Route path="/Payment" element={<ITPayment />} />
+              <Route path="/Payment/:userId/:courseid" element={<ITPayment />} />
+              <Route path="/:userType/:userId/chapters/:courseid" element={<MyChapters />} />
+              <Route path="/chapterInfo" element={<MyChapterInfo />} />
+              <Route path="/:userType/:userId/traineeCourse/:courseid" element={<TraineeCourse />} />
+              <Route path="/:userType/:userId/refund/:courseid" element={<RequestARefund />} />
             </Routes>
           </div>
+          
         </Router>
       }
     </div>
