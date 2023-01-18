@@ -37,12 +37,12 @@ function UploadCourseDescription({ handleClick }) {
   return (
     <div className="courseComponent">
       <p className="UploadCourseDescriptionP">
-        Please provide a short course description and/or youtube link to to
+        Please provide a short course description <br/>and/or youtube link to to
         course description video
       </p>
       <br />
       <TextField
-        sx={{ marginLeft: "200px", marginBottom: "10px", width: "1000px" }}
+        sx={{marginBottom :"20px" ,width:"90%", input: { color: '#f4976c' }}}
         id="courseDescription"
         label="courseDescription"
         size="small"
@@ -53,7 +53,7 @@ function UploadCourseDescription({ handleClick }) {
       />
       <br />
       <TextField
-        sx={{ marginLeft: "200px", marginBottom: "10px", width: "1000px" }}
+        sx={{marginBottom :"20px" ,width:"90%", input: { color: '#f4976c' }}}
         id="courseDescriptionVideo"
         label="courseDescriptionVideo"
         size="small"
@@ -65,14 +65,14 @@ function UploadCourseDescription({ handleClick }) {
       />
       <br />
       <Button
-        sx={{ marginBottom: "10px", marginLeft: "1200px" }}
+      sx={{minWidth:"50%" ,marginBottom:"20px"}}
         variant="contained"
         onClick={() => {
           handleClick(courseDescription, src);
-          console.log(src);
+          
         }}
       >
-        Add Description
+        Add Description and proceed
       </Button>
     </div>
   );

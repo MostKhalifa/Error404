@@ -18,7 +18,7 @@ function ViewRating({ instructorId }) {
   const [reviews, setReviews] = useState([]);
   useEffect(() => {
     axios
-      .get("instructor/getRating/" + instructorId) //6365564d5ccca85b4590cfd7-63653e09c81ff58c1c877e6d
+      .get("/instructor/getRating/"+instructorId) //6365564d5ccca85b4590cfd7-63653e09c81ff58c1c877e6d
       .then((res) => {
         let reviews = res.data[0].reviews;
         if (reviews.length == 0) {

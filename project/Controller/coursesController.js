@@ -60,11 +60,9 @@ const getCourseReviews = asyncHandler(async (req, res) => {
 )
 //view courses title along with total hours and rating ( requirement 7)
 const getCourses = asyncHandler(async (req, res) => {
-  const course = await Courses.find().select(
-    "courseTitle numberOfHours reviews"
-  );
-
-  res.status(200).json(course);
+  let courses = [];
+   (await Courses.find({},{_id:1})).forEach((course)=>{courses.push(course._id)})
+  res.status(200).send(courses);
 });
 
 //view price of each course (requirement 8)

@@ -26,20 +26,13 @@ const CoursesSchema = new Schema(
       type: Number,
       required: true,
     },
-    contract: {
-      type: String,
-      required: true,
-    },
-    certificateForm: {
-      type: String,
-    },
     courseSubject: {
       type: String,
       required: true,
       enum: ["Maths", "Tech", "Science"],
     },
     discount: {
-      avaliable: {
+      avalbiale: {
         type: Boolean,
         required: true,
       },
@@ -94,6 +87,10 @@ const CoursesSchema = new Schema(
           type: String,
           required: true,
         },
+        chapterNumber: {
+          type: Number,
+          required: true,
+        },
         chapterVideo: {
           type: String,
         },

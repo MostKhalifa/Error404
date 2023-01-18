@@ -5,11 +5,13 @@ import FilterListIcon from '@mui/icons-material/FilterList';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
-import {AppBar,Box,Toolbar,IconButton,Typography,InputBase,MenuItem,Menu,Stack,Button,Accordion,AccordionSummary,AccordionDetails,TextField} from '@mui/material';
+import {Dialog,AppBar,Box,Toolbar,IconButton,Typography,InputBase,MenuItem,Menu,Stack,Button,Accordion,AccordionSummary,AccordionDetails,TextField} from '@mui/material';
 import { useNavigate } from "react-router-dom";
 import logo from '../../resources/logo.PNG';
 import { createTheme } from '@mui/system';
 import "../../styling/navBar.css"
+import Login from '../login';
+import SignUp from '../signup';
 const theme = createTheme({
     palette: {
         paper: '#f4976c',
@@ -65,6 +67,9 @@ export default function NavBarInstructor() {
     const isMenuOpen = Boolean(anchorEl);
     const [filter, setfilter] = useState(null);
     const isFilterMenuOpen = Boolean(filter);
+    const [loginPrompt,setLoginPrompt] = useState(false);
+    const [signUpPrompt,setSignUpPrompt] = useState(false);
+   
     const handleProfileMenuOpen = (event) => {
       setAnchorEl(event.currentTarget);
     };
@@ -82,27 +87,27 @@ export default function NavBarInstructor() {
      
   const menuId = 'primary-search-account-menu';
   const filterId = 'primary-search-account-menu';
-  const renderMenu = (
-    <Menu
-      anchorEl={anchorEl}
-      anchorOrigin={{
-        vertical: 'top',
-        horizontal: 'right',
-      }}
-      id={menuId}
-      keepMounted
-      transformOrigin={{
-        vertical: 'top',
-        horizontal: 'right',
-      }}
-      open={isMenuOpen}
-      onClose={handleMenuClose}
-    >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>Edit My account</MenuItem>
-      <MenuItem onClick={handleLogOut}>Log Out</MenuItem>
-    </Menu>
-  );
+  // const renderMenu = (
+  //   <Menu
+  //     anchorEl={anchorEl}
+  //     anchorOrigin={{
+  //       vertical: 'top',
+  //       horizontal: 'right',
+  //     }}
+  //     id={menuId}
+  //     keepMounted
+  //     transformOrigin={{
+  //       vertical: 'top',
+  //       horizontal: 'right',
+  //     }}
+  //     open={isMenuOpen}
+  //     onClose={handleMenuClose}
+  //   >
+  //     <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+  //     <MenuItem onClick={handleMenuClose}>Edit My account</MenuItem>
+  //     <MenuItem onClick={handleLogOut}>Log Out</MenuItem>
+  //   </Menu>
+  // );
   const renderFilterr = (
     <Menu
       filter={filter}
@@ -142,33 +147,32 @@ export default function NavBarInstructor() {
   );  
   return (
     <Box>
+      <Dialog open={loginPrompt} onClose={()=>{setLoginPrompt(false);}}>
+        <Login></Login>
+      </Dialog>
+      <Dialog open={signUpPrompt} onClose={()=>{setSignUpPrompt(false);}}>
+        <SignUp></SignUp>
+      </Dialog>
       <AppBar>
         <Toolbar>
         <Typography variant="h6" noWrap component="div"sx={{ display: { xs: 'none', sm: 'block' } }}>
             <a href="/login"><img src={logo}  alt="JALP Logo"/></a>
         </Typography>          
-          <Stack spacing={8} direction="row">
+          <Stack spacing={14} direction="row">
           <Stack direction="row">
           <Search ><SearchIconWrapper ><SearchIcon  /></SearchIconWrapper>
             <StyledInputBase sx={{ width:500 }} placeholder="Search…" inputProps={{ 'aria-label': 'search' }}/>
           </Search>
-            < IconButton onClick={handleFiltering} size="large" edge="start" color="inherit" aria-label="open drawer" sx={{ mr: 2,paddingTop:1  }}>
-          <FilterListIcon  /> 
+          < IconButton onClick={handleFiltering} size="large" edge="start" color="inherit" aria-label="open drawer" sx={{ mr: 2,paddingTop:1  }}>
+              <FilterListIcon  /> 
           </IconButton>
           </Stack>
           <Box sx={{ flexGrow: 0.1 }} />
-         <Button  sx={{ bgcolor:theme.palette.paper }} variant="contained" onClick={()=>{navigate("/signup")}}> Join Us Now. </Button>
-         <Button  sx={{ bgcolor:"#ffffff",color:"#303c6c" }} variant="contained" onClick={()=>{navigate("/login")}}>Already one of us ?</Button>
-         
+         <Button  sx={{ bgcolor:theme.palette.paper }} variant="contained" onClick={()=>{/*setSignUpPrompt(true)*/navigate("/signup")}}> Join Us Now. </Button>
+         <Button  sx={{ bgcolor:"#ffffff",color:"#303c6c" }} variant="contained" onClick={()=>{/*setLoginPrompt(true);*/navigate("/login")}}>Already one of us ?</Button>      
     </Stack>
-          <Box sx={{ flexGrow: 1 }} />
-          <IconButton onClick={handleProfileMenuOpen} size="large" edge="start" color="inherit" aria-label="open drawer" sx={{ mr: 2 }}>
-            <MenuIcon /> 
-            </IconButton>
-            <Box sx={{ flexGrow: 0.05 }} />
         </Toolbar>
       </AppBar>
-      {renderMenu}
       {renderFilterr}
     </Box>
   );

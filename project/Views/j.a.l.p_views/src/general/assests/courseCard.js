@@ -3,7 +3,7 @@ import "../../styling/courseCard.css";
 import {Rating,Divider} from "@mui/material";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-function CourseCard({courseId}) {
+function CourseCard({courseId,userType,userId}) {
     const [course,setCourse]=useState(null);
     const [errMsg,setErrMsg]=useState("");
     const [overAllRating, setOverAllRating] = useState(0);
@@ -24,7 +24,9 @@ function CourseCard({courseId}) {
         .catch((res)=>{setErrMsg(res.response.data)});   
     },[])
     const handleClick= ()=>{
-        navigate("/viewCourse?courseId="+course._id);
+        
+            navigate("/"+(userType?userType:"guest")+"/"+userId+"/viewCourse/"+course._id);
+
     }
     return (
         <div className="cardOutline" onClick={handleClick} >
