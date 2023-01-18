@@ -268,39 +268,61 @@ const getTraineeCourses = asyncHandler(async (req,res) => {
 
 //trigger indvidual trainee viewed course + update change progress
 const ViewedForIndividualTrainee = asyncHandler(async (req, res) => {
-  const trainee = await IndividualTrainee.findById(req.params.id);
+  
+  const individuaTtrainee = await IndividualTrainee.findById(req.params.id);
   const courseId = req.query.id2
-  if (!trainee) {
-    res.status(400);
-  }
-  const {chapterTitle} = req.body;
-  const newCourses = []
-  for (let i = 0; i < trainee.courses.length; i++) {
-    newCourses[i]=trainee.courses[i]
-    if(trainee.courses[i].CourseID==courseId){
-      const updatedViews =trainee.courses[i].noViewed ;
-      for(let j =0;j<trainee.courses[i].chapters.length;j++){
-        if (trainee.courses[i].chapters[j].chapterTitle == chapterTitle) {
-          if(trainee.courses[i].chapters[j].chapterNumber==(trainee.courses[i].noViewed+1))
-          updatedViews=updatedViews + 1;
-        }
-      }
-      newCourses[i].noViewed=updatedViews;
-      newCourses[i].progress=updatedViews/trainee.courses[i].chapters.length;
-    }
-   
-  }
-  const resa = await trainee.findByIdAndUpdate(
-    req.params.id,
-    { courses: newCourses },
-    {
-      new: true,
-    }
-  );
+  const course = await Courses.findById(req.query.id2);
 
-  if (resa) res.status(200).send("Done");
-  else res.status(400);
+  const {chapterTitle} = req.body;
+  let courseExists = false;
+  console.log(individuaTtrainee);
+  //const newCourses = []
+  if(individuaTtrainee){
+    for (let i = 0; i < individuaTtrainee.courses.length; i++) {
+      if(individuaTtrainee.courses[i].CourseID==courseId){
+        individuaTtrainee.courses[i].chapters.push(chapterTitle);
+        console.log(individuaTtrainee.courses[i].chapters);
+          (await IndividualTrainee.findOneAndUpdate({_id:individuaTtrainee._id,"courses.CourseID":courseId},{$set:{"courses.$.chapters":(individuaTtrainee.courses[i].chapters)}}))
+          courseExists=true;
+          const temp = individuaTtrainee.courses[i].chapters.length/course.chapters.length;
+          if(temp==1)
+          (await IndividualTrainee.findOneAndUpdate({_id:individuaTtrainee._id,"courses.CourseID":courseId},{$set:{"courses.$.completed":true}}))
+          res.send("done");
+      }  
+    }
+    if(!courseExists)
+    {
+      res.status(404).send("the trainee is not registered in a course with the given id");
+    }
+  }
+  else{
+    const corporateTrainee = await CorporateTrainee.findById(req.params.id);
+    
+    if(corporateTrainee){
+      for (let i = 0; i < corporateTrainee.courses.length; i++) {
+        if(corporateTrainee.courses[i].CourseID==courseId){
+          corporateTrainee.courses[i].chapters.push(chapterTitle);
+          console.log(corporateTrainee.courses[i].chapters);
+            (await CorporateTrainee.findOneAndUpdate({_id:corporateTrainee._id,"courses.CourseID":courseId},{$set:{"courses.$.chapters":(corporateTrainee.courses[i].chapters)}}))
+            courseExists=true;
+            const temp = corporateTrainee.courses[i].chapters.length/course.chapters.length;
+            if(temp==1)
+            (await CorporateTrainee.findOneAndUpdate({_id:corporateTrainee._id,"courses.CourseID":courseId},{$set:{"courses.$.completed":true}}))
+            res.send("done");
+        }  
+      }
+      
+    if(!courseExists)
+    {
+      res.status(404).send("the trainee is not registered in a course with the given id");
+    }
+    }
+    else{
+      res.status(404).send("no trainee found with this id please enter a valid id")
+    }
+  }
 }
+ 
 
 );
 
@@ -338,5 +360,6 @@ module.exports = {
   getCorporateTrianeeById,
   getTraineeCourses,
   getIndvTrainEnrolledCourses,
-  getCopTrainEnrolledCourses
+  getCopTrainEnrolledCourses,
+  ViewedForIndividualTrainee
 };

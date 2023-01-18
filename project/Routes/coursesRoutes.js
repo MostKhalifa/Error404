@@ -16,7 +16,9 @@ const {
   getDiscountCourses,
   getPopularCourses,
   getCourseWithAllItsData,
-  changeDiscountOfACourse
+  changeDiscountOfACourse,
+  CoursesNotEnrolled,
+  AddCoursesToTrainee
 } = require("../Controller/coursesController");
 router.route("/getCourse").get(getCourse);
 router.route("/getCourses").get(getCourses);
@@ -35,4 +37,6 @@ router.route("/getCourseWithAllItsData").get(getCourseWithAllItsData);
 router.route("/changeDiscountOfACourse/:id").put(changeDiscountOfACourse);
 
 router.route("/getCourseDescription/:id").get(getCourseDescription);
+router.route("/notEnrolledCourses/:id").get(CoursesNotEnrolled);
+router.route("/addCourseToTrainee/:id").put(AddCoursesToTrainee);
 module.exports = router;

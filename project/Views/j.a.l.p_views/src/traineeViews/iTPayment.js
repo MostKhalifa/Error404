@@ -4,12 +4,13 @@ import axios from "axios";
 import Button from '@mui/material/Button';
 import Alert from '@mui/material/Alert';
 import TextField from '@mui/material/TextField';
+import { useParams } from 'react-router-dom'
+
 
 
 function ITPayment (){
     //const courseId =window.location.href.split("?courseId=")[1];
     //const traineeId = window.location.href.split("?traineeId=")[1];
-    let amount = 500;
     const [cardPaymentFlag, setCardPaymentFlag] = useState(true);
     const [walletPaymentFlag, setWalletPaymentFlag] = useState(true);
     const [notSuccWalletFlag, setNotSuccWalletFlag] = useState(false);
@@ -17,10 +18,11 @@ function ITPayment (){
     const [displayCardFlag, setdisplayCardFlag] = useState(false);
     const [traineeInfo, settraineeInfo] = useState(null);
     const [courseInfo, setCourseInfo] = useState(false);
+    const {courseid,userId} =useParams();
 
     useEffect(() => {
         axios
-          .get("/trainee/IndvidualTrainee/getById/63665a860a6c1686a07f7e28")
+          .get("/trainee/IndividualTrainee/getById/"+userId)
           .then(function (response) {
             console.log(response);
             settraineeInfo(response);
@@ -28,7 +30,7 @@ function ITPayment (){
       }, []);
       useEffect(() => {
         axios
-          .get("/course/getCourse?courseId=639114e227ba150662d88096")
+          .get("/course/getCourse?courseId="+courseid)
           .then(function (response) {
             console.log(response);
             setCourseInfo(response);
@@ -38,6 +40,9 @@ function ITPayment (){
     function turnOnCardPayment(){
        setWalletPaymentFlag(!walletPaymentFlag);
        setCardPaymentFlag(!cardPaymentFlag);
+       axios.put('/course/addCourseToTrainee/'+userId+'?id2='+courseid).then(function (response) {
+        console.log(response);
+      });
         
      }
      function turnOnWalletPayment(){
@@ -54,22 +59,27 @@ function ITPayment (){
         turnOnWalletPayment();
         if(traineeInfo){
           if(courseInfo){
-            if(traineeInfo.data.wallet<=courseInfo.data.price){
+            if(traineeInfo.data.wallet<=(courseInfo.data.price-(courseInfo.data.price*courseInfo.data.discount.percentage))){
             setNotSuccWalletFlag(true);
-            console.log("gowaaaa");
+            console.log("mesh kfaya");
             }
            else{
-             let newValue = traineeInfo.data.wallet-courseInfo.data.price;
-             axios.put("/trainee/IndividualTrainee/setCountry/63665a860a6c1686a07f7e28",{
-              wallet:newValue
+            console.log("kfayaa")
+             let newValue = traineeInfo.data.wallet-(courseInfo.data.price-(courseInfo.data.price*courseInfo.data.discount.percentage));
+             axios.put("/trainee/IndividualTrainee/setCountry/"+userId,{
+              wallet: newValue
             }).then((res)=>{
               axios
-              .get("/trainee/IndvidualTrainee/getById/63665a860a6c1686a07f7e28")
+              .get("/trainee/IndividualTrainee/getById/"+userId)
               .then(function (response) {
                 console.log(response);
                 settraineeInfo(response);
                 setSuccPaymentFlag(true);
                             });})
+                    
+                 axios.put('/course/addCourseToTrainee/'+userId+'?id2='+courseid).then(function (response) {
+                       console.log(response);
+                            });
          }
           }
         }
@@ -85,7 +95,7 @@ function ITPayment (){
         <>
           <div>
             {courseInfo &&
-            <h1>Amount to be paid: {courseInfo.data.price}</h1>
+            <h1>Amount to be paid: {(courseInfo.data.price-(courseInfo.data.price*courseInfo.data.discount.percentage))}</h1>
 }
           </div>
           <div>

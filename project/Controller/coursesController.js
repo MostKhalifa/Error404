@@ -322,6 +322,97 @@ const getDiscountCourses = asyncHandler(async(req,res)=>{
   }
 })
 
+const CoursesNotEnrolled = asyncHandler(async(req,res)=>{
+  const traineeID = req.params.id;
+  let coursesNotEnrolledIn = [];
+  const allCourses = await Courses.find()
+  const trainee = await IndividualTrainee.findById(req.params.id);
+  let flag = true;
+  if(trainee){
+  const traineeCourses = trainee.courses;
+  let i =0;
+  let j =0;
+  for(i = 0;i<allCourses.length;i++ ){
+     flag = true;
+      for(j =0;j<traineeCourses.length;j++){
+        if(traineeCourses[j].CourseID==allCourses[i]._id)
+           flag = false;
+      }
+      if(flag){
+        coursesNotEnrolledIn.push(allCourses[i]._id)
+      }
+    }
+  }
+
+  else  {
+    const trainee = await CorporateTrainee.findById(req.params.id);
+    if(trainee){
+    const traineeCourses = trainee.courses;
+    let i =0;
+    let j=0;
+  for( i = 0;i<allCourses.length;i++ ){
+     flag = true;
+      for(j =0;j<traineeCourses.length;j++){
+        if(traineeCourses[j].CourseID==allCourses[i]._id)
+           flag = false;
+      }
+      if(flag){
+        coursesNotEnrolledIn.push(allCourses[i]._id)
+      }
+    }
+  }
+    else
+      res.status(404).send("in valid");
+  }
+
+  res.status(200).send(coursesNotEnrolledIn);
+         
+})
+
+//add courses to trainee
+
+const AddCoursesToTrainee = asyncHandler(async(req,res)=>{
+  const traineeID = req.params.id;
+  const courseId = req.query.id2
+  const trainee = await IndividualTrainee.findById(req.params.id);
+  let updatedtrainee=null;
+  let tempCourses = [];
+  if(trainee){
+    let i=0
+    for(i=0;i<trainee.courses.length;i++)
+          tempCourses[i]=trainee.courses[i]
+      tempCourses[i]={CourseID:courseId,chapters:[],completed:false};
+     updatedtrainee = await IndividualTrainee.findByIdAndUpdate(
+      req.params.id,
+      {
+          courses : tempCourses
+      }
+    );
+
+  }
+
+  else  {
+    const trainee = await CorporateTrainee.findById(req.params.id);
+    if(trainee){
+      let i=0
+      for(i=0;i<trainee.courses.length;i++)
+            tempCourses[i]=trainee.courses[i]
+        tempCourses[i]={CourseID:courseId,chapters:[],completed:false};
+       updatedtrainee = await IndividualTrainee.findByIdAndUpdate(
+        req.params.id,
+        {
+            courses : tempCourses
+        }
+      );
+  }
+    else
+      res.status(404).send("in valid");
+  }
+
+  res.status(200).send(updatedtrainee);
+         
+})
+
 module.exports = {
   filterCourseSubjectRating,
   filterCoursePrice,
@@ -336,6 +427,8 @@ module.exports = {
   getCourseReviews,
   getPopularCourses,
   getDiscountCourses,
+  CoursesNotEnrolled,
+  AddCoursesToTrainee
   getCourseWithAllItsData,
   changeDiscountOfACourse,
 };

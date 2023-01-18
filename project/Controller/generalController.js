@@ -73,12 +73,13 @@ const forgetPassword=async (req,res)=>{
 
 }
 const login = async(req,res)=>{
+  console.log(await bcrypt.hash("karimmalak",10));
   let user = await individualTrainee.findOne({email:req.body.email})
   let route = ""; 
   if(user)
   {
     individualTrainee.findByIdAndUpdate(user._id,{ email:req.body.email})
-    route="/trainee"
+    route="/IndividualTrainee"
   }
   else
   {
@@ -86,7 +87,7 @@ const login = async(req,res)=>{
     if(user)
     {
       corporateTrainee.findByIdAndUpdate(user._id,{ email:req.body.email})
-      route="/trainee"
+      route="/CorporateTrainee"
     }
     else
     {
@@ -113,7 +114,7 @@ const login = async(req,res)=>{
       }
     }
   }
-  console.log(req.body.password)
+  console.log(await bcrypt.hash(req.body.password,10))
   console.log(user)
   console.log(route)
   console.log(await bcrypt.hash("Inst5pass",10))
