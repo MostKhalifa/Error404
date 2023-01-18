@@ -20,7 +20,6 @@ import AdminHomePage from "./adminViews/homeAdmin";
 import RequestARefund from "./traineeViews/RequestARefund";
 import ReportAProblem from "./general/ReportAProblem";
 import ViewMyReports from "./general/ViewMyReports";
-import Footer from "./general/assests/footer";
 import SearchResultsPage from "./general/searchResults";
 import FilterResultsPagePrice from "./general/filterResultsPagePrice";
 import FilterResultsPagesubRate from "./general/filterResultsPagesubRate";
@@ -32,11 +31,6 @@ import AddAdmin from "./adminViews/addAdmin";
 import TraineeFirstPage from "./traineeViews/traineeFirstPage";
 import ITPayment from "./traineeViews/iTPayment";
 import MakeDiscounts from "./adminViews/makeDiscounts";
-import NavBarTrainee from "./general/assests/navBarTrainee";
-import NavBarInstructor from "./general/assests/navBarInstructor";
-import Profile from "./instructorViews/profile"
-import IndvidualTraineeProfile from "./traineeViews/indvidualTraineeProfile";
-import CorporateTraineeProfile from "./traineeViews/corporateTraineeProfile";
 import InstructorHomePage from "./instructorViews/instructorHomePage";
 import InstructorProfile from "./instructorViews/profile";
 import InstructorAddCourse from "./instructorViews/addCourse";
@@ -75,24 +69,19 @@ function App() {
               <Route path="/Payment" element={<ITPayment />} />
               <Route path="/searchResults" element={<SearchResultsPage />} />
               <Route path="/filterResultsPrice" element={<FilterResultsPagePrice />} />
-               <Route path="/filterResultssubrate" element={<FilterResultsPagesubRate />} />
-               <Route path="/search2" element={<Search2 />} />
-               <Route path="/search3" element={<Search3 />} />
+              <Route path="/filterResultssubrate" element={<FilterResultsPagesubRate />} />
+              <Route path="/search2" element={<Search2 />} />
+              <Route path="/search3" element={<Search3 />} />
               {/* InstructorRoutes*/}
               <Route path="/:userType/:userId/viewCourse/:courseid" element={<CourseOverView/>} />
               <Route path="/instructor/:instructorId" element={<InstructorHomePage/>}/>
               <Route path="/instructor/profile/:instructorId" element={<InstructorProfile/>}/>
-              <Route path="/instructor/addCourse/termsAndCondtions" element={<TermsAndCondtions/>}/ >
+              <Route path="/instructor/addCourse/termsAndCondtions" element={<TermsAndCondtions/>}/>
               <Route path="/instructor/addCourse/:instructorId" element={<InstructorAddCourse/>}/>
               <Route  path="/" element={<GuestHomePage />} />
             </Routes>
-
-
-              
-          
           </div>
         </Router>
-        
       }
     </div>
   );
