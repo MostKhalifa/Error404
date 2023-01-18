@@ -428,7 +428,7 @@ module.exports = {
   getPopularCourses,
   getDiscountCourses,
   CoursesNotEnrolled,
-  AddCoursesToTrainee
+  AddCoursesToTrainee,
   getCourseWithAllItsData,
   changeDiscountOfACourse,
 };
