@@ -26,6 +26,7 @@ TBH idk hnshoof fl evaluation 	:upside_down_face:
 Model-View-Controller (MVC) was used where items are seperated for easier maintainance where Model contains the schema shape of items stored in database, View for the front-end methods and Controller for the back-end methods.
 
 <h1>Screenshots</h1>
+<img src="https://www.nasa.gov/webbfirstimages"><img>
 <h1>Tech/Framework used</h1>
 MongoDB as our noSQL database 
 ExpressJS
