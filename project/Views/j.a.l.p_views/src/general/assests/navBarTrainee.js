@@ -128,13 +128,6 @@ export default function NavBarTrainee() {
     }
 
   }
-
-
-
-
-  
-
-
     const handleFilterSubjectRating = () => {
       if(!subject&&!rating){
         axios.post('/course/filterCourseSubjectRating').then(response => {
@@ -172,9 +165,6 @@ export default function NavBarTrainee() {
           console.log(error.response.data);
         });
       }
-    
-      
-      
     };
   
 

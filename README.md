@@ -67,6 +67,34 @@ Accept/Reject refund requests
 Accept/Reject course access requests
 Check on reports and mark as seen or resolved
 
+<<<<<<< Updated upstream
+Send refund requests to courses they did not complete over 50% of
+Edit their password and email
+
+Corporate Trainees:
+Account is made by an admin
+Has access to courses that their corporate gave accesss for them
+Send requests for courses to an admin to accept or reject
+Edit their password and email
+
+Instructor:
+Make an account and admin creates their account
+Create courses 
+Specify their price and make discounts
+Report issues
+Edit their password and email
+
+Admin:
+Create corporate trainee
+Create new admins
+Create Instructor
+Make discounts on courses
+Accept/Reject refund requests
+Accept/Reject course access requests
+Check on reports and mark as seen or resolved
+
+=======
+>>>>>>> Stashed changes
   
 <h1>Code Examples</h1>
 
