@@ -1,18 +1,21 @@
 import { Fragment, useState, useEffect } from "react";
 import {Button,Rating} from "@mui/material";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 import "../../styling/courseOverView.css"
 import CourseReviews from "./courseReviews";
 import YoutubeVideo from "./youtubeVideo";
+import { useParams } from 'react-router-dom'
+import { useNavigate } from "react-router-dom";
 
 function CourseOverView() {
-    const courseId =window.location.href.split("?courseId=")[1];
+    const {courseid,userType,userId} =useParams();
     const [course,setCourse]=useState(null);
     const [errMsg,setErrMsg]=useState("");
     const [overAllRating, setOverAllRating] = useState(0);
+    const navigate = useNavigate();
+
     useEffect(()=>{
-        axios.get("/course/getCourse?courseId="+courseId)
+        axios.get("/course/getCourse?courseId="+courseid)
         .then(
                 (res)=>
                 {
@@ -24,12 +27,15 @@ function CourseOverView() {
              )
         .catch((res)=>{setErrMsg(res.response.data)});   
     },[])
+
+    function goToChapter(){
+        navigate("/trainee/"+userId+"/chapters/"+course._id);
+    }
     return (
         
         <Fragment>
-            
             {course&&<Fragment>
-                <div style={{display:"flex",width:"97vw",marginBottom:"1vh"}}><h1 className="courseTitle" >{course.courseTitle} </h1><Button style={{marginTop:"5px",marginRight:"10px",width:"20vw"}} variant="contained">enroll now</Button></div>
+                <div style={{display:"flex",width:"97vw",marginBottom:"1vh"}}><h1 className="courseTitle" >{course.courseTitle} </h1>{((userType!="instructor")&&(userType!="trainee")) && <Button style={{marginTop:"5px",marginRight:"10px",width:"20vw"}} variant="contained">enroll now</Button>}</div>
                 <YoutubeVideo  src={course.courseDescriptionVideo} height={"50"} width={"97"} marginValue ={"1.5"}title={course.courseTitle+" DescriptionVideo"}/>
                 <div className="courseOverView">
                     <div className="courseDescripation">
@@ -47,7 +53,14 @@ function CourseOverView() {
                         
                     </div>
                 </div>
-                <CourseReviews courseId={courseId} />
+              
+                <CourseReviews courseId={courseid} />
+                <div>
+                    {
+                        (userType=="trainee")&&
+                        <button onClick={goToChapter} style={{marginTop:"5px",marginRight:"10px",width:"20vw"}} variant="contained"> Take my To Course Chapters  </button>
+                    }
+                </div>
                 </Fragment>
             }
             {!course&&<h1>{errMsg} </h1>}

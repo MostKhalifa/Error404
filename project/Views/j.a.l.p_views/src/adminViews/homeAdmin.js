@@ -1,10 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from 'axios';
 import CourseCard from "../general/assests/courseCard";
-import { xml } from "d3";
-  
-
-
 const AdminHomePage = () => {   
     const [refundRequests , setRefundRequests] = useState({username:null , coursename:null, courseprice:null});
     const [username , setUserName] = useState(null);

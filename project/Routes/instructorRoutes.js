@@ -14,9 +14,11 @@ const {
   changePassword,
   getamountOwed,
   getInstructorById
+
 } = require("../Controller/instructorController");
 router.route("/setCountry/:id").put(setInstructorCountry);
 router.route("/ViewAllCourses/:id").get(viewAllInstructorCourses);
+router.route("/getInstructor/:id").get(getInstructorById);
 router.route("/FilterCourses/:id").get(filterInstructorCourses);
 router.route("/AddCourse/:id").post(createNewCourse);
 router.route("/viewCourseReviews/:id").get(getInstructorCourseRatings);

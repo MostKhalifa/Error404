@@ -89,7 +89,6 @@ export default function NavBarTrainee() {
       
     };
 
-
     const handleProfileMenuOpen = (event) => {
       setAnchorEl(event.currentTarget);
     };

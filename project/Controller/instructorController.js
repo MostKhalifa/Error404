@@ -7,7 +7,17 @@ const Instructor = require("../Models/InstructorSchema");
 
 
 const getInstructorById = asyncHandler(async (req, res) => {
-  const instructor = await Instructor.findById(req.params.id);
+  const instructorId = req.params.id;
+  if (!mongoose.Types.ObjectId.isValid(instructorId)) {
+    res.status(404).send("the id given is in a invalid form ");
+  }
+  let instructorFound = await Instructor.find({
+    _id: mongoose.Types.ObjectId(instructorId),
+  });
+  if (instructorFound.length != 1) {
+    res.status(404).send("the insttuctor is not found");
+  }
+  const instructor = await Instructor.findById(instructorId);
   if (!instructor) {
     res.status(400);
   }
@@ -87,17 +97,16 @@ const createNewCourse = asyncHandler(async (req, res) => {
   }
   const {
     courseTitle,
-    courseDescripation,
-    courseDescripationVideo,
+    courseDescription,
+    courseDescriptionVideo,
     price,
     numberOfHours,
-    contract,
-    certifcateForm,
     courseSubject,
     discount,
     enrolledTrainees,
     reviews,
     chapters,
+    chapterAssesment
   } = req.body;
   // check if id is valid.
   let instructorFound = await Instructor.find(
@@ -140,21 +149,20 @@ const createNewCourse = asyncHandler(async (req, res) => {
   }
   Courses.create({
     courseTitle: courseTitle,
-    courseDescripation: courseDescripation,
-    courseDescripationVideo: courseDescripationVideo,
+    courseDescription: courseDescription,
+    courseDescriptionVideo: courseDescriptionVideo,
     price: price,
     numberOfHours: numberOfHours,
-    contract: contract,
-    certifcateForm: certifcateForm,
     courseSubject: courseSubject,
     discount: discount,
     instructor: {
-      instructorId,
+      instructorId:instructorId,
       instructorName:instructorFound[0].firstName + instructorFound[0].lastName,
     },
     enrolledTrainees: enrolledTrainees,
     reviews: reviews,
     chapters: chapters,
+    chaptersAssessments:chapterAssesment
   });
   res.status(200).send("course created");
 });
@@ -176,7 +184,7 @@ const viewAllInstructorCourses = asyncHandler(async (req, res) => {
       "instructor.instructorId": mongoose.Types.ObjectId(instructorId),
     })
   ).forEach((course) => {
-    courseTitles.push(course.courseTitle);
+    courseTitles.push(course._id);
   });
   if (courseTitles.length == 0) {
     res.status(200).send("you are not currently teaching any courses ");
@@ -422,6 +430,7 @@ const getamountOwed= asyncHandler(async (req, res) => {
 
 
 module.exports = {
+  getInstructorById,
   viewAllInstructorCourses,
   filterInstructorCourses,
   searchInstructorCourses,

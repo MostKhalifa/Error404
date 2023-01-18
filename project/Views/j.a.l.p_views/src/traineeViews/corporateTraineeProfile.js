@@ -15,7 +15,6 @@ import countries from "i18n-iso-countries";
 import enLocale from "i18n-iso-countries/langs/en.json";
 import { Button, TextField,MenuItem} from "@mui/material";
 function CorporateTraineeProfile (){
-        
     const [traineeInfo, settraineeInfo] = useState(null);
     const [flag, setFlag] = useState(false);
     const [flag2, setFlag2] = useState(false);

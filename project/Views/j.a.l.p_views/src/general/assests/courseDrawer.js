@@ -1,8 +1,7 @@
 import { Fragment} from "react";
-import {Grid} from "@mui/material";
 import CourseCard from "./courseCard"
 import "../../styling/courseDrawer.css";
-function CourseDrawer({courses,title}) {
+function CourseDrawer({courses,title,userType,userId}) {
     return (
         <Fragment>      
             <div className="Title" >
@@ -10,7 +9,8 @@ function CourseDrawer({courses,title}) {
                 </div>  
             {
             (courses&&courses.length!==0)&&<div className="Drawer" >
-            {courses.map((course) => {return(<CourseCard key={course} courseId={course}></CourseCard>);})}
+           
+            {courses.map((course) => {return(<CourseCard key={course} courseId={course} userType={userType} userId={userId}></CourseCard>);})}
             </div>}
         {((!courses)||(courses&&courses.length===0))&&<h1 className="Error"> no courses avaliable</h1>}
         </Fragment>

@@ -18,8 +18,7 @@ function Login() {
     const [showPassword, setShowPassword] =useState(false);
     const [showAlert, setShowAlert] = useState(sessionStorage.getItem("loginAlert"));
     const [alertMessage, setAlertMessage] = useState(sessionStorage.getItem("alertMessage"));
-    console.log(showAlert);
-    
+
     const handleClickShowPassword = () => setShowPassword((show) => !show);
 
     const navigate = useNavigate();
@@ -32,6 +31,9 @@ function Login() {
         return false;
       };
       const handleClick=()=>{
+        console.log("hena");
+        console.log(email)
+        console.log(password);
         if(!email)
         {
             setResMsg("please provide an email address");
@@ -57,7 +59,7 @@ function Login() {
                 {
                     setResMsg(null);
                     setError(false);
-                    axios.post("/",{"email":email,"password":password}).then((res)=>{if(res.data.response){navigate(res.data.route+"/"+res.data.user._id) }else{setResMsg2("incorrect password");setError2(true)}}).catch((res)=>{setResMsg(res.response.data);setError(true)})
+                    axios.post("/",{"email":email,"password":password}).then((res)=>{if(res.data.response){ console.log(res);navigate(res.data.route+"/"+res.data.user._id) }else{setResMsg2("incorrect password");setError2(true)}}).catch((res)=>{setResMsg(res.response.data);setError(true)})
                 }
             }}
         }

@@ -35,7 +35,24 @@ function AddExercise({ handleClick }) {
         questionHead: questionHead,
         answers: [answer1, answer2, answer3, answer4],
       });
-      setResMsg("exercise added");
+      setQuestionHead("");
+      setAnswer1({
+        answerBody:"",
+        valid: true,
+      });
+      setAnswer2({
+        answerBody: "",
+        valid: false,
+      });
+      setAnswer3({
+        answerBody:"",
+        valid: false,
+      });
+      setAnswer4({
+        answerBody:"",
+        valid: false,
+      });
+      
       return;
     }
   };
@@ -71,23 +88,19 @@ function AddExercise({ handleClick }) {
         onChange={(change) => {
           setQuestionHead(change.target.value);
         }}
-        sx={{ marginLeft: "200px", marginBottom: "10px", width: "1000px" }}
+        sx={{ marginBottom: "10px", width: "90%" }}
         id="exerciseHead"
         label="Question Head"
         size="small"
+        value={questionHead}
         helperText="please provide the question Head"
       />
       <br />
-      <FormLabel
-        sx={{ marginLeft: "240px", marginBottom: "10px", width: "1000px" }}
-        id="demo-controlled-radio-buttons-group"
-      >
-        Answers
-      </FormLabel>
+        <h2>Answers</h2>
       <br />
       <div className="answerField">
         <TextField
-          sx={{ width: "1000px" }}
+          sx={{ width: "70%" }}
           onChange={(change) => {
             setAnswer1({
               answerBody: change.target.value,
@@ -97,6 +110,7 @@ function AddExercise({ handleClick }) {
           label="Answer 1"
           size="small"
           helperText="please provide the first Answer"
+          value={answer1.answerBody}
         />
         <Switch
           checked={answer1.valid}
@@ -107,7 +121,7 @@ function AddExercise({ handleClick }) {
       </div>
       <div className="answerField">
         <TextField
-          sx={{ width: "1000px" }}
+          sx={{ width: "70%" }}
           onChange={(change) => {
             setAnswer2({
               answerBody: change.target.value,
@@ -117,6 +131,7 @@ function AddExercise({ handleClick }) {
           label="Answer 2"
           size="small"
           helperText="please provide the second Answer"
+          value={answer2.answerBody}
         />
         <Switch
           checked={answer2.valid}
@@ -127,13 +142,14 @@ function AddExercise({ handleClick }) {
       </div>
       <div className="answerField">
         <TextField
-          sx={{ width: "1000px" }}
+          sx={{ width: "70%" }}
           onChange={(change) => {
             setAnswer3({
               answerBody: change.target.value,
               valid: answer3.valid,
             });
           }}
+          value={answer3.answerBody}
           label="Answer 3"
           size="small"
           helperText="please provide the third Answer"
@@ -147,7 +163,7 @@ function AddExercise({ handleClick }) {
       </div>
       <div className="answerField">
         <TextField
-          sx={{ width: "1000px" }}
+          sx={{ width: "70%" }}
           onChange={(change) => {
             setAnswer4({
               answerBody: change.target.value,
@@ -157,6 +173,7 @@ function AddExercise({ handleClick }) {
           label="Answer 4"
           size="small"
           helperText="please provide the fourth Answer"
+          value={answer4.answerBody}
         />
         <Switch
           checked={answer4.valid}
@@ -169,7 +186,7 @@ function AddExercise({ handleClick }) {
         onClick={() => {
           clickHandler();
         }}
-        sx={{ marginBottom: "10px", marginLeft: "1200px" }}
+        sx={{ minWidth:"55%",marginBottom: "10px"}}
         variant="contained"
       >
         Add Question

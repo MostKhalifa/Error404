@@ -8,20 +8,21 @@ import Box from '@mui/material/Box';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
-
 import { deepOrange, deepPurple } from '@mui/material/colors';
 import EditIcon from "@mui/icons-material/Edit";
 import SaveIcon from "@mui/icons-material/Save";
 import countries from "i18n-iso-countries";
 import enLocale from "i18n-iso-countries/langs/en.json";
 import { Button, TextField,MenuItem} from "@mui/material";
-
+import { useParams } from "react-router";
+import NavBarInstructor from "../general/assests/navBarInstructor"; 
+import "../styling/instructorHomePage.css"
+import ViewRating from "./viewRating";
 function Profile (){
-        
+    const {instructorId} = useParams();
     const [instructorInfo, setInstructorInfo] = useState(null);
     const [amountOwed, setamountOwed] = useState(null);
     const [flag, setFlag] = useState(false);
-
     const [flag2, setFlag2] = useState(false);
     const [flag3, setFlag3] = useState(false);
     const [flag4, setFlag4] = useState(false);
@@ -36,7 +37,7 @@ function Profile (){
 
     useEffect(() => {
         axios
-          .get("/instructor/getInst/6393668c6dd0bd88852031af")
+          .get("/instructor/getInst/"+instructorId)
           .then(function (response) {
             console.log(response);
             setInstructorInfo(response);
@@ -46,7 +47,7 @@ function Profile (){
 
       useEffect(() => {
         axios
-          .get("/instructor/amountOwed/6393668c6dd0bd88852031af")
+          .get("/instructor/amountOwed/"+instructorId)
           .then(function (response) {
             console.log(response);
             setamountOwed(response);
@@ -60,7 +61,7 @@ function Profile (){
 
       useEffect(() => {
         axios
-          .get("/instructor/amountOwed/6393668c6dd0bd88852031af")
+          .get("/instructor/amountOwed/"+instructorId)
           .then(function (response) {
             console.log(response);
             setamountOwed(response);
@@ -69,11 +70,11 @@ function Profile (){
 
      function changePassword(){
          console.log("Mlaaaaaaaaaaaaaaaaaaaaaaak");
-         axios.put("/instructor/changePassword/6393668c6dd0bd88852031af",{
+         axios.put("/instructor/changePassword/"+instructorId,{
           password:password
          }).then((res)=>{
           axios
-           .get("/instructor/getInst/6393668c6dd0bd88852031af")
+           .get("/instructor/getInst/"+instructorId)
            .then(function (response) {
              setInstructorInfo(response);
              changeFlag();
@@ -81,11 +82,11 @@ function Profile (){
      }
      function changeCountry(){
       console.log(country);
-      axios.put("/instructor/setCountry/6393668c6dd0bd88852031af",{
+      axios.put("/instructor/setCountry/"+instructorId,{
           country:country
         }).then((res)=>{
          axios
-          .get("/instructor/getInst/6393668c6dd0bd88852031af")
+          .get("/instructor/getInst/"+instructorId)
           .then(function (response) {
             setInstructorInfo(response);
             changeFlag2();
@@ -95,11 +96,11 @@ function Profile (){
 
    function changeBiography(){
     console.log(country);
-    axios.put("/instructor/setCountry/6393668c6dd0bd88852031af",{
+    axios.put("/instructor/setCountry/"+instructorId,{
       biography:biography
       }).then((res)=>{
        axios
-        .get("/instructor/getInst/6393668c6dd0bd88852031af")
+        .get("/instructor/getInst/"+instructorId)
         .then(function (response) {
           setInstructorInfo(response);
           changeFlag4();
@@ -108,11 +109,11 @@ function Profile (){
  }
    function changeEmail(){
     console.log(country);
-    axios.put("/instructor/setCountry/6393668c6dd0bd88852031af",{
+    axios.put("/instructor/setCountry/"+instructorId,{
         email:email
       }).then((res)=>{
        axios
-        .get("/instructor/getInst/6393668c6dd0bd88852031af")
+        .get("/instructor/getInst/"+instructorId)
         .then(function (response) {
           setInstructorInfo(response);
           changeFlag3();
@@ -136,10 +137,11 @@ function Profile (){
         <>
           <div>{
             instructorInfo &&
+            
           <Stack spacing={1}>
-
+             <div className='navBar'><NavBarInstructor instructorId ={instructorId}></NavBarInstructor></div>
+          
       {/* For other variants, adjust the size with `width` and `height` */}
-      <Avatar sx={{ bgcolor: deepPurple[500] , width:80 , height:80}}>N</Avatar>
       <List>
           <ListItem disablePadding>
               <ListItemText primary="Name: "  />
@@ -225,6 +227,7 @@ function Profile (){
         </List>
     </Stack>
     }
+    <ViewRating instructorId={instructorId}></ViewRating>
     </div>
         </>
       )

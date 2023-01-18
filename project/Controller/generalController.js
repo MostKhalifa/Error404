@@ -90,6 +90,7 @@ const login = async(req,res)=>{
     }
     else
     {
+      console.log(req.body.email)
       user = await instructor.findOne({email:req.body.email})
       if(user)
       {
@@ -114,7 +115,11 @@ const login = async(req,res)=>{
   }
   console.log(req.body.password)
   console.log(user)
-  if(req.body.password){bcrypt.compare(req.body.password,user.password,function(err, response){res.send({response,route,user})});}
+  console.log(route)
+  console.log(await bcrypt.hash("Inst5pass",10))
+
+  if(req.body.password){bcrypt.compare(req.body.password,user.password,function(err, response){res.status(201).send({ response  ,route,user})});}
+  else{res.send(404);}
 }
 const signUp= async(req,res)=>{
   let user = req.body;
