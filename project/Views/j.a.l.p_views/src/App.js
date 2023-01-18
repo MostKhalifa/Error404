@@ -51,7 +51,7 @@ function App() {
               <Route  path="/forgetPassword" element={<ForgetPassword/>} />
               <Route  path="/signup" element={<SignUp/>} />
               <Route path="/login" element={<Login />}></Route>
-              <Route path="/homePageAdmin" element={<AdminHomePage/>}/>
+              <Route path="/admin/:id" element={<AdminHomePage/>}/>
               <Route path="/addCorporateTrainee" element={<AddCorporateTrainee/>}/>
               <Route path="/addInstructor" element={<AddInstructor/>}/>
               <Route path="/addAdmin" element={<AddAdmin/>}/>

@@ -164,7 +164,7 @@ function AddCourse() {
                                                         enrolledTrainees:0,
                                                         reviews:[],
                                                         chapters:chapters,
-                                                        chapterAssesment:chapterAssesment}).then((res)=>{console.log(res)})
+                                                        chapterAssesment:chapterAssesment}).then((res)=>{navigate("/instructor/"+instructorId)}).catch((res)=>{setChapterAssesment({value:chapterAssesment.value,errMsg:res.response.data,ava:true})})
     }
 
     return (

@@ -163,8 +163,8 @@ const createNewCourse = asyncHandler(async (req, res) => {
     reviews: reviews,
     chapters: chapters,
     chaptersAssessments:chapterAssesment
-  });
-  res.status(200).send("course created");
+  }).then((response)=>{res.status(200).send("course created")}).catch((response) => {res.status(400).send("course not created")});
+  
 });
 //View all Courses given by the instructor j
 const viewAllInstructorCourses = asyncHandler(async (req, res) => {

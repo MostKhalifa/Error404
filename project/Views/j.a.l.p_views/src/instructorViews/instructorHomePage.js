@@ -13,6 +13,7 @@ function InstructorHomePage() {
     useEffect(()=>{
         axios.get("/course/getCourses").then((res)=>{
             setAllCourses(res.data);
+            console.log(res.data)
         }).catch((res)=>{
             console.log(res);
         });

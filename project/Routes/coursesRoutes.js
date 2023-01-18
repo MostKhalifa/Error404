@@ -19,6 +19,7 @@ const {
   changeDiscountOfACourse
 } = require("../Controller/coursesController");
 router.route("/getCourse").get(getCourse);
+router.route("/getCourses").get(getCourses);
 router.route("/popularCourses").get(getPopularCourses);
 router.route("/discountCourses").get(getDiscountCourses);
 router.route("/getCourseReviews").get(getCourseReviews);
